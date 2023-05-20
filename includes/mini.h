@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/19 19:32:36 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/20 17:15:16 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,8 @@ typedef struct s_pipecmd
 
 /*	error.c	*/
 void	ft_error(int err, char *msg_err);
+
+/*	builtin.c	*/
+int		ft_is_builtin(char *line);
+
 #endif

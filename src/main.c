@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/20 01:34:00 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/20 17:17:42 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	main(void)
 		if (!line)
 			(ft_printf("exit\n"), exit(EXIT_SUCCESS));
 		add_history(line);
+		if (ft_is_builtin(line))
+			printf("builtin_manager() en action\n");//ft_bultin_manager(line);
 		free(line);
 	}
 	return (EXIT_SUCCESS);
