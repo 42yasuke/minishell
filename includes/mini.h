@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/20 17:15:16 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/20 21:15:14 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 /* error's macro	*/
 # define BAD_PARAMETERS 0
 # define MALLOC_FAILED 1
+# define CD_FAILED 2
 
 typedef struct s_cmd
 {
@@ -69,5 +70,9 @@ void	ft_error(int err, char *msg_err);
 
 /*	builtin.c	*/
 int		ft_is_builtin(char *line);
+
+/*	utils.c	*/
+int		ft_is_whitespace(int c);
+void	ft_cd_no_pipe(char *line);
 
 #endif

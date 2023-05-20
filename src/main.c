@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/20 17:47:12 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/20 21:00:17 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ int	main(void)
 		line = readline("minishell$ ");
 		if (!line)
 			(ft_printf("exit\n"), exit(EXIT_SUCCESS));
+		while (line && ft_is_whitespace(*line))
+			line++;
 		if (!ft_strncmp(line, "", 1))
-			continue;
+			continue ;
 		add_history(line);
-		if (ft_is_builtin(line))
-			printf("builtin_manager() en action\n");//ft_bultin_manager(line);
+		if (!ft_strncmp(line, "cd", 2))
+			ft_cd_no_pipe(line);
 		else
-			printf("exec_manager() en action\n");//ft_exec_manager(line);
+			printf("exec_manager() en action\n");
 		free(line);
 	}
 	return (EXIT_SUCCESS);

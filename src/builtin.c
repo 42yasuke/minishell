@@ -6,16 +6,25 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/05/20 17:31:08 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/20 20:14:45 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+void	ft_cd(char *line)
+{
+	int	i;
+
+	i = 0;
+	while(line)
+		i++;
+}
+
 int	ft_is_builtin(char *line)
 {
 	if (!ft_strncmp(line, "cd", 2))
-		return (true);
+		return (ft_cd(line), true);
 	if (!ft_strncmp(line, "echo", 4))
 		return (true);
 	if (!ft_strncmp(line, "pwd", 3))
