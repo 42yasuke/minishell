@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 12:16:16 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 13:51:07 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,44 @@ pid_t	ft_fork(void)
 	return (pid);
 }
 
-int	ft_peek(char **ps, char *es, char *toks)
+static void	ft_gettoken_suite(char **ps, char *es, char **s, char **eq)
+{
+	char	*g;
+
+	g = *s;
+	if (!ft_strchr("><|", *g))
+	{
+		ret = 'a';
+		while(g < es && !ft_is_whitespace(*g) && !ft_strchr("><|", *g))
+			g++;
+	}
+	if (eq)
+		*eq = g;
+	g = ft_rm_ws_until_es(g, es);
+	*ps = g;
+}
+
+int	ft_gettoken(char **ps, char *es, char **q, char **eq)
 {
 	char	*s;
+	int		ret;
 
 	s = *ps;
-	while (s < es && ft_is_whitespace(*s))
+	s = ft_rm_ws_until_es(s, es);
+	if (q)
+		*q = s;
+	ret = *s;
+	if (*s && (*s == '|' || *s == '<'))
 		s++;
-	*ps = s;
-	return (*s && ft_strchr(toks, *s));
+	else if (*s && *s == '>')
+	{
+		s++;
+		if (*s == '>')
+		{
+			ret = '+';
+			s++;
+		}
+	}
+	ft_gettoken_suite(ps, es, &s, eq);
+	return (ret);
 }

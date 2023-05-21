@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 12:31:20 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 13:51:27 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ int		ft_is_builtin(char *line);
 int		ft_is_whitespace(int c);
 void	ft_cd_no_pipe(char *line);
 pid_t	ft_fork(void);
+int		ft_gettoken(char **ps, char *es, char **q, char **eq);
+
+/*	utils2.c	*/
+char	*ft_rm_ws_until_es(char *s, char *es);
 int		ft_peek(char **ps, char *es, char *toks);
 
 /*	exec.c	*/
