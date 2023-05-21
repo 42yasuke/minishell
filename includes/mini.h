@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 20:26:11 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 20:37:41 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,8 @@ t_cmd	*ft_redircmd(t_cmd *subcmd, char **file, int mode, int fd);
 
 /*	path.c	*/
 void	ft_getpath_n_builtin(t_ecmd *ecmd);
+
+/*	free.c	*/
+void	ft_free_all(char **str);
 
 #endif
