@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 18:41:33 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 20:23:07 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,21 @@ t_cmd	*ft_parseredir(t_cmd *cmd, char **ps, char *es)
 	int		tok;
 	char	*q;
 	char	*eq;
+	char	*file[2];
 
 	while (ft_peek(ps, es, "<>"))
 	{
 		tok = ft_gettoken(ps, es, 0, 0);
 		if (ft_gettoken(ps, es, &q, &eq)! = 'a')
 			ft_error(BAD_REDIR, "missing file redirection");
+		file[0] = q;
+		file[1] = eq;
 		if (tok == '<')
-			cmd = ft_redircmd(cmd, q, eq, O_RDONLY, STDIN_FILENO);
+			cmd = ft_redircmd(cmd, file, O_RDONLY, STDIN_FILENO);
 		else if (tok == '>')
-			cmd = ft_redircmd(cmd, q, eq, O_WRONLY | O_CREAT | O_TRUNC, STDOUT_FILENO);
+			cmd = ft_redircmd(cmd, file, O_WRONLY | O_CREAT | O_TRUNC, STDOUT_FILENO);
 		else
-			cmd = ft_redircmd(cmd, q, eq, O_WRONLY | O_CREAT | O_APPEND, STDOUT_FILENO);
+			cmd = ft_redircmd(cmd, file, O_WRONLY | O_CREAT | O_APPEND, STDOUT_FILENO);
 	}
 	return (cmd);
 }
@@ -82,6 +85,7 @@ t_cmd	*ft_parseexec(char **ps, char *es)
 			ft_error(SYNTAX_ERROR, "bad syntax");
 		ecmd->argv[argc] = q;
 		ecmd->eargv[argc] = eq;
+		ft_getpath_n_builtin(ecmd);
 		argc++;
 		ret = ft_parseredir(ret, ps, es);
 	}

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 18:42:13 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 20:26:11 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,13 @@ t_cmd	*ft_parseexec(char **ps, char *es);
 
 /*	nulterminate.c	*/
 t_cmd	*ft_nulterminate(t_cmd *cmd);
+
+/*	init.c	*/
+t_cmd	*ft_pipecmd(t_cmd *left, t_cmd *right);
+t_cmd	*ft_execcmd(void);
+t_cmd	*ft_redircmd(t_cmd *subcmd, char **file, int mode, int fd);
+
+/*	path.c	*/
+void	ft_getpath_n_builtin(t_ecmd *ecmd);
 
 #endif
