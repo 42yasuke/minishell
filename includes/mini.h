@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 13:51:27 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 14:32:54 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 #define OPEN_FAILED 4
 #define PIPE_FAILED 5
 #define EXECVE_FAILED 6
+#define SYNTAX_ERROR 7
 
 typedef struct s_cmd
 {
@@ -93,6 +94,6 @@ void	ft_exec_manager(char *line);
 
 /*	parse.c	*/
 t_cmd	*ft_parsecmd(char *line);
-
+t_cmd	*ft_parsepipe(char **ps, char *es);
 
 #endif
