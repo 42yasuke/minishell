@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/20 21:00:17 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 00:12:27 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(void)
 		if (!ft_strncmp(line, "cd", 2))
 			ft_cd_no_pipe(line);
 		else
-			printf("exec_manager() en action\n");
+			ft_exec_manager(line);
 		free(line);
 	}
 	return (EXIT_SUCCESS);

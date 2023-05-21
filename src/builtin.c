@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/05/20 20:14:45 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 05:23:29 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_cd(char *line)
 int	ft_is_builtin(char *line)
 {
 	if (!ft_strncmp(line, "cd", 2))
-		return (ft_cd(line), true);
+		return (true);
 	if (!ft_strncmp(line, "echo", 4))
 		return (true);
 	if (!ft_strncmp(line, "pwd", 3))
@@ -38,4 +38,10 @@ int	ft_is_builtin(char *line)
 	if (!ft_strncmp(line, "exit", 4))
 		return (true);
 	return (false);
+}
+
+void	ft_builtin_manager(char *line)
+{
+	(void)line;
+	ft_printf(">>> builtin_manager <<<\n");
 }

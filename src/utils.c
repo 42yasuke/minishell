@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/20 21:31:34 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 12:16:16 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,25 @@ void	ft_cd_no_pipe(char *line)
 		}
 		ft_error(CD_FAILED, "bro, seriously ?");
 	}
+}
+
+pid_t	ft_fork(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		ft_error(FORK_FAILED, strerror(errno));
+	return (pid);
+}
+
+int	ft_peek(char **ps, char *es, char *toks)
+{
+	char	*s;
+
+	s = *ps;
+	while (s < es && ft_is_whitespace(*s))
+		s++;
+	*ps = s;
+	return (*s && ft_strchr(toks, *s));
 }
