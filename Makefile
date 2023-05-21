@@ -6,7 +6,7 @@
 #    By: jose <jose@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/28 20:06:58 by jose              #+#    #+#              #
-#    Updated: 2023/05/21 13:36:57 by jose             ###   ########.fr        #
+#    Updated: 2023/05/21 14:59:59 by jose             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ C_FILES =	main.c \
 			utils.c \
 			utils2.c \
 			exec.c \
-			parse.c
+			parse.c \
+			nulterminate.c
 
 SRC = $(addprefix src/, $(C_FILES))
 
