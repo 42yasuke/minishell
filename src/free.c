@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 16:50:40 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 21:29:55 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_free_lst(t_lenv *lst_env)
 	while (lst_env)
 	{
 		tmp = lst_env->next;
+		free(lst_env->env_name);
 		free(lst_env);
 		lst_env = tmp;
 	}

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 17:53:25 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 23:17:21 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define BAD_REDIR 8
 # define ECHO_FAILED 9
 # define PWD_FAILED 10
+# define EXPORT_FAILED 11
 
 /*	builtin's macro	*/
 # define CD 1
@@ -52,9 +53,6 @@
 # define UNSET 5
 # define ENV 6
 # define EXIT 7
-
-/*	variable d'env	*/
-extern char	**environ;
 
 typedef struct s_lenv
 {
@@ -107,12 +105,19 @@ void	ft_echo(t_cmd *ecmd);
 void	ft_pwd(t_ecmd *ecmd);
 
 /*	builtin2.c	*/
-void	ft_();
+void	ft_export(t_ecmd *ecmd);
+void	ft_unset(t_ecmd *ecmd);
+void	ft_env(t_ecmd *ecmd);
+void	ft_exit(t_ecmd *t_ecmd);
 
 /*	node_env.c	*/
 t_lenv	*ft_get_node(t_lenv *lst_env, int id);
-void	ft_init_lst(t_lenv *lst_env);
+void	ft_init_lst(t_lenv *lst_env, char **envp);
+t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp, char *name);
 
+/*	node_env2.c	*/
+void	ft_export_with_args(t_ecmd *ecmd);
+void	ft_unset_with_args(t_ecmd *ecmd);
 
 /*	utils.c	*/
 int		ft_is_whitespace(int c);
@@ -123,6 +128,8 @@ int		ft_gettoken(char **ps, char *es, char **q, char **eq);
 /*	utils2.c	*/
 char	*ft_rm_ws_until_es(char *s, char *es);
 int		ft_peek(char **ps, char *es, char *toks);
+char	**ft_cpy_envp(char **envp);
+int		ft_nb_str(char **envp);
 
 /*	exec.c	*/
 void	ft_exec_manager(char *line, char **envp);

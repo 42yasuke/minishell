@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 19:19:48 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 17:50:43 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 18:24:35 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ t_cmd	*ft_execcmd(char **envp)
 	cmd->eargv = NULL;
 	cmd->path = NULL;
 	cmd->is_builtin = false;
-	cmd->env = malloc(sizeof(*cmd->env));
-	if (!cmd)
-		ft_error(MALLOC_FAILED, strerror(errno));
-	*cmd->env = NULL;
+	cmd->env = envp;
 	return ((t_cmd*)cmd);
 }
 

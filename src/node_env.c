@@ -6,19 +6,19 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:04 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 16:47:31 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 23:17:08 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	*ft_range_lst(t_lenv *lst_env)
+static void	*ft_range_lst(t_lenv *lst_env, char **envp)
 {
 	int		i;
 	t_lenv	*tmp;
 	t_lenv	*save;
 
-	while (environ[i])
+	while (envp[i])
 	{
 		tmp = lst_env;
 		save = tmp;
@@ -34,29 +34,32 @@ static void	*ft_range_lst(t_lenv *lst_env)
 	}
 }
 
-static t_lenv	*ft_add_nenv(t_lenv *lst_env, int i)
+t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp, char *name)
 {
 	t_lenv	*tmp;
 
 	tmp = malloc(sieof(*tmp));
 	if (tmp)
 		(ft_free_lst(lst), ft_error(MALLOC_FAILED, strerror(errno)));
-	tmp->env_name = environ[i];
+	if (!name)
+		tmp->env_name = ft_strdup(envp[i]);
+	else
+		tmp->env_name = ft_strdup(name);
 	tmp->id = -1;
 	tmp->next = NULL;
-	retunr (tmp);
+	return (tmp);
 }
 
-static void	ft_make_lst(t_lenv *lst_env)
+static void	ft_make_lst(t_lenv *lst_env, char **envp)
 {
 	t_lenv	*tmp;
 	int		i;
 
 	i = 1;
 	tmp = lst_env;
-	while (environ[i])
+	while (envp[i])
 	{
-		tmp->next = ft_add_nenv(lst_env, i);
+		tmp->next = ft_add_nenv(lst_env, i, envp, NULL);
 		tmp = tmp->next;
 		i++;
 	}
@@ -76,11 +79,11 @@ t_lenv	*ft_get_node(t_lenv *lst_env, int id)
 	return (NULL);
 }
 
-void	ft_init_lst(t_lenv *lst_env)
+void	ft_init_lst(t_lenv *lst_env, char **envp)
 {
-	lst_env->env_name = environ[0];
+	lst_env->env_name = envp[0];
 	lst_env->id = -1;
 	lst_env->next = NULL;
-	if (environ[0])
-		(ft_make_lst(lst_env), ft_range_lst(lst_env));
+	if (envp[0])
+		(ft_make_lst(lst_env, envp), ft_range_lst(lst_env, envp));
 }
