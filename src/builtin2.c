@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 23:16:41 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 23:24:36 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,24 @@ void	ft_env(t_ecmd *ecmd)
 	exit(EXIT_SUCCESS);
 }
 
-void	ft_exit(t_ecmd *t_ecmd)
+void	ft_exit(t_ecmd *ecmd)
 {
-	
+	int	i;
+
+	i = -1;
+	if (ecmd->argv[1])
+	{
+		if (ecmd->argv[1][0] == '-')
+			ft_error(EXPORT_FAILED, "export : invalid option");
+		else
+		{
+			while (ecmd->argv[1][++i])
+			{
+				if (!ft_isdigit(ecmd->argv[1][++i]))
+					ft_error(EXIT_FAILED, "exit : invalid argument");
+			}
+			
+		}
+	}
+	exit(EXIT_SUCCESS);
 }

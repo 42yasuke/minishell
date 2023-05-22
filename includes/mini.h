@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 23:17:21 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 23:25:06 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define ECHO_FAILED 9
 # define PWD_FAILED 10
 # define EXPORT_FAILED 11
+# define EXIT_FAILED 12
 
 /*	builtin's macro	*/
 # define CD 1
