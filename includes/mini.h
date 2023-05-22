@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 20:37:41 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 16:53:33 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,34 @@
 # define BAD_PARAMETERS 0
 # define MALLOC_FAILED 1
 # define CD_FAILED 2
-#define FORK_FAILED 3
-#define OPEN_FAILED 4
-#define PIPE_FAILED 5
-#define EXECVE_FAILED 6
-#define SYNTAX_ERROR 7
-#define BAD_REDIR 8
+# define FORK_FAILED 3
+# define OPEN_FAILED 4
+# define PIPE_FAILED 5
+# define EXECVE_FAILED 6
+# define SYNTAX_ERROR 7
+# define BAD_REDIR 8
+# define ECHO_FAILED 9
+# define PWD_FAILED 10
+
+/*	builtin's macro	*/
+# define CD 1
+# define PWD 2
+# define ECHO 3
+# define EXPORT 4
+# define UNSET 5
+# define ENV 6
+# define EXIT 7
+
+/*	variable d'env	*/
+extern char	**environ;
+
+typedef struct s_lenv
+{
+	char			*env_name;
+	int				id;
+	struct s_lenv	*next;
+}	t_lenv;
+
 
 typedef struct s_cmd
 {
@@ -79,6 +101,18 @@ void	ft_error(int err, char *msg_err);
 
 /*	builtin.c	*/
 int		ft_is_builtin(char *line);
+void	ft_built_it(t_cmd *ecmd);
+void	ft_cd(t_ecmd *ecmd);
+void	ft_echo(t_cmd *ecmd);
+void	ft_pwd(t_ecmd *ecmd);
+
+/*	builtin2.c	*/
+void	ft_();
+
+/*	node_env.c	*/
+t_lenv	*ft_get_node(t_lenv *lst_env, int id);
+void	ft_init_lst(t_lenv *lst_env);
+
 
 /*	utils.c	*/
 int		ft_is_whitespace(int c);
@@ -112,5 +146,6 @@ void	ft_getpath_n_builtin(t_ecmd *ecmd);
 
 /*	free.c	*/
 void	ft_free_all(char **str);
+void	ft_free_lst(t_lenv *lst_env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 05:43:07 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/21 20:49:49 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_exec(t_ecmd *ecmd)
 {
 	if (ecmd->is_builtin)
-		ft_builtin_manager(ecmd);
+		ft_built_it(ecmd);
 	else
 		execve(ecmd->path, ecmd->argv, ecmd->env);
 	ft_error(EXECVE_FAILED, sterror(errno));
