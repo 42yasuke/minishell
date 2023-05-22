@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 13:24:14 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 23:46:34 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	ft_cd(t_ecmd *ecmd)
 {
-	if (!ecmd->argv[1])
+	if (ecmd->argv[1])
 	{
+		if(ecmd->argv[2])
+			ft_error(CD_FAILED, "cd : invalid argument");
 		if (chdir(ecmd->argv[1]))
 			ft_error(CD_FAILED, strerror(errno));
 		else
@@ -31,6 +33,8 @@ void	ft_echo(t_cmd *ecmd)
 	is_n = false;
 	if(ecmd->argv[1])
 	{
+		if(ecmd->argv[2])
+			ft_error(ECHO_FAILED, "echo : invalid argument");
 		if (ecmd->argv[1][0] == '-')
 		{
 			if (ft_strncmp(ecmd->argv[1], "-n", ft_strlen(ecmd->argv[1])))
@@ -48,8 +52,13 @@ void	ft_pwd(t_ecmd *ecmd)
 {
 	char	path;
 
-	if(ecmd->argv[1] && ecmd->argv[1][0] == '-')
-			ft_error(PWD_FAILED, "echo : option unknown");
+	if(ecmd->argv[1])
+	{
+		if(ecmd->argv[2])
+			ft_error(PWD_FAILED, "pwd : invalid argument");
+		if (ecmd->argv[1][0] == '-')
+			ft_error(PWD_FAILED, "pwd : option unknown");
+	}
 	path = getcwd(NULL, 0);
 	if (!path)
 		ft_error(PWD_FAILED, strerror(errno));

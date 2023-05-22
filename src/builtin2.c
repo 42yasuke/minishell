@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 23:24:36 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 23:41:35 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	ft_export(t_ecmd *ecmd)
 {
 	if (ecmd->argv[1])
 	{
+		if (ecmd->argv[2])
+			ft_error(EXPORT_FAILED, "export : invalid argument");
 		if (ecmd->argv[1][0] == '-')
 			ft_error(EXPORT_FAILED, "export : invalid option");
 		else
@@ -47,8 +49,10 @@ void	ft_unset(t_ecmd *ecmd)
 {
 	if (ecmd->argv[1])
 	{
+		if (ecmd->argv[2])
+			ft_error(EXPORT_FAILED, "unset : invalid argument");
 		if (ecmd->argv[1][0] == '-')
-			ft_error(EXPORT_FAILED, "export : invalid option");
+			ft_error(EXPORT_FAILED, "unset : invalid option");
 		else
 			ft_unset_with_args(ecmd);
 	}
@@ -72,8 +76,10 @@ void	ft_exit(t_ecmd *ecmd)
 	i = -1;
 	if (ecmd->argv[1])
 	{
+		if (ecmd->argv[2])
+			ft_error(EXIT_FAILED, "exit : invalid argument");
 		if (ecmd->argv[1][0] == '-')
-			ft_error(EXPORT_FAILED, "export : invalid option");
+			ft_error(EXIT_FAILED, "exit : invalid option");
 		else
 		{
 			while (ecmd->argv[1][++i])
@@ -81,7 +87,9 @@ void	ft_exit(t_ecmd *ecmd)
 				if (!ft_isdigit(ecmd->argv[1][++i]))
 					ft_error(EXIT_FAILED, "exit : invalid argument");
 			}
-			
+			if (ft_strlen(ecmd->argv[1]) > 3 || ft_atoi(ecmd->argv[1]) > 255)
+				ft_error(EXIT_FAILED, "exit : invalid argument");
+			exit(ft_atoi(ecmd->argv));
 		}
 	}
 	exit(EXIT_SUCCESS);
