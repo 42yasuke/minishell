@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 17:11:38 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 17:33:56 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_export_no_args(t_ecmd *ecmd)
 void	ft_export(t_ecmd *ecmd)
 {
 	if (ecmd->argv[1])
-
+		
 	else
 		ft_export_no_args(ecmd);
 }

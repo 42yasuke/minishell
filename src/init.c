@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 19:19:48 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 19:46:58 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 17:50:43 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_cmd	*ft_pipecmd(t_cmd *left, t_cmd *right)
 	return ((t_cmd*)cmd);
 }
 
-t_cmd	*ft_execcmd(void)
+t_cmd	*ft_execcmd(char **envp)
 {
 	t_ecmd	*cmd;
 

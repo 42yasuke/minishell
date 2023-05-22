@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 16:53:33 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 17:53:25 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,20 +125,20 @@ char	*ft_rm_ws_until_es(char *s, char *es);
 int		ft_peek(char **ps, char *es, char *toks);
 
 /*	exec.c	*/
-void	ft_exec_manager(char *line);
+void	ft_exec_manager(char *line, char **envp);
 
 /*	parse.c	*/
-t_cmd	*ft_parsecmd(char *line);
-t_cmd	*ft_parsepipe(char **ps, char *es);
+t_cmd	*ft_parsecmd(char *line, char **envp);
+t_cmd	*ft_parsepipe(char **ps, char *es, char **envp);
 t_cmd	*ft_parseredir(t_cmd *cmd, char **ps, char *es);
-t_cmd	*ft_parseexec(char **ps, char *es);
+t_cmd	*ft_parseexec(char **ps, char *es, char **envp);
 
 /*	nulterminate.c	*/
 t_cmd	*ft_nulterminate(t_cmd *cmd);
 
 /*	init.c	*/
 t_cmd	*ft_pipecmd(t_cmd *left, t_cmd *right);
-t_cmd	*ft_execcmd(void);
+t_cmd	*ft_execcmd(char **envp);
 t_cmd	*ft_redircmd(t_cmd *subcmd, char **file, int mode, int fd);
 
 /*	path.c	*/

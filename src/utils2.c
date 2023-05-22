@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:19:59 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 14:27:03 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 17:56:52 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,12 @@ int	ft_peek(char **ps, char *es, char *toks)
 		s++;
 	*ps = s;
 	return (*s && ft_strchr(toks, *s));
+}
+
+char	**ft_cpy_envp(char **envp)
+{
+	int	i;
+
+	i = 0;
+	
 }

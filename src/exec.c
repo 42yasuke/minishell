@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 20:49:49 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/22 17:54:51 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,17 @@ static void	ft_runcmd(t_cmd *cmd)
 		ft_pipe((t_pcmd*)cmd);
 }
 
-void	ft_exec_manager(char *line)
+void	ft_exec_manager(char *line, char **envp)
 {
 	int		status;
+	t_cmd	*cmd;
 	pid_t	pid;
 
 	pid = ft_fork();
 	if (!pid)
-		ft_runcmd(ft_parsecmd(line));
+	{
+		cmd = ft_parsecmd(line, ft_cpy_envp(envp));
+		ft_runcmd(cmd);
+	}
 	waitpid(pid, &status, 0);
 }
