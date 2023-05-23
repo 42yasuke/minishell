@@ -6,11 +6,13 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 17:38:15 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 00:43:28 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+t_cmd	*g_cmd = NULL;
 
 void	ft_sigint_handler(int sig)
 {

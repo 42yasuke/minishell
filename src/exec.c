@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 17:54:51 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 00:31:18 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_exec_manager(char *line, char **envp)
 	if (!pid)
 	{
 		cmd = ft_parsecmd(line, ft_cpy_envp(envp));
+		g_cmd = cmd;
 		ft_runcmd(cmd);
 	}
 	waitpid(pid, &status, 0);

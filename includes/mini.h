@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 23:25:06 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 00:39:35 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-#include <fcntl.h>
+# include <fcntl.h>
 
 /*	node type's macros	*/
 # define EXEC 1
@@ -62,7 +62,6 @@ typedef struct s_lenv
 	struct s_lenv	*next;
 }	t_lenv;
 
-
 typedef struct s_cmd
 {
 	int		type;
@@ -90,10 +89,13 @@ typedef struct s_redircmd
 
 typedef struct s_pipecmd
 {
-	int		type;
+	int				type;
 	struct s_cmd	*left;
 	struct s_cmd	*right;
 }	t_pcmd;
+
+/*	ptr on execution tree	*/
+extern t_cmd	*g_cmd;
 
 /*	error.c	*/
 void	ft_error(int err, char *msg_err);
