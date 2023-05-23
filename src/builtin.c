@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 03:08:58 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 23:28:04 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ void	ft_built_it(t_ecmd *ecmd)
 	built_in[4] = &ft_unset;
 	built_in[5] = &ft_env;
 	built_in[6] = &ft_exit;
-	built_in[ft_is_builtin(ecmd->argv[0])](ecmd);
+	built_in[ft_is_builtin(ecmd->argv[0]) - 1](ecmd);
 }
