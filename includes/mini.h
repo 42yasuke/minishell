@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 00:39:35 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 02:39:30 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,5 +157,6 @@ void	ft_getpath_n_builtin(t_ecmd *ecmd);
 /*	free.c	*/
 void	ft_free_all(char **str);
 void	ft_free_lst(t_lenv *lst_env);
+void	ft_free_cmd(t_cmd *cmd);
 
 #endif
