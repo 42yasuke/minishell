@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:19:59 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 11:05:01 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 15:31:18 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ char	*ft_rm_ws_until_es(char *s, char *es)
 	return (s);
 }
 
-int	ft_peek(char **ps, char *es, char *toks)
+void	ft_peek(char **ps)
 {
 	char	*s;
 
 	s = *ps;
-	while (s < es && ft_is_whitespace(*s))
+	while (*s && ft_is_whitespace(*s))
 		s++;
 	*ps = s;
-	return (*s && ft_strchr(toks, *s));
 }
 
 int	ft_nb_str(char **envp)

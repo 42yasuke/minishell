@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 11:23:34 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 19:59:41 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define PWD_FAILED 10
 # define EXPORT_FAILED 11
 # define EXIT_FAILED 12
+# define NO_TYPE 13
 
 /*	builtin's macro	*/
 # define CD 1
@@ -73,7 +74,6 @@ typedef struct s_execcmd
 {
 	int		type;
 	char	**argv;
-	char	**eargv;
 	char	*path;
 	char	**env;
 	int		is_builtin;
@@ -132,7 +132,7 @@ int		ft_gettoken(char **ps, char *es, char **q, char **eq);
 
 /*	utils2.c	*/
 char	*ft_rm_ws_until_es(char *s, char *es);
-int		ft_peek(char **ps, char *es, char *toks);
+void	ft_peek(char **ps);
 char	**ft_cpy_envp(char **envp);
 int		ft_nb_str(char **envp);
 
@@ -142,17 +142,14 @@ void	ft_runcmd(t_cmd *cmd);
 
 /*	parse.c	*/
 t_cmd	*ft_parsecmd(char *line, char **envp);
-t_cmd	*ft_parsepipe(char **ps, char *es, char **envp);
-t_cmd	*ft_parseredir(t_cmd *cmd, char **ps, char *es);
-t_cmd	*ft_parseexec(char **ps, char *es, char **envp);
-
-/*	nulterminate.c	*/
-t_cmd	*ft_nulterminate(t_cmd *cmd);
+t_cmd	*ft_parsepipe(char **ps, char **envp);
+t_cmd	*ft_parseredir(t_cmd *cmd, char **ps);
+t_cmd	*ft_parseexec(char **ps, char **envp);
 
 /*	init.c	*/
 t_cmd	*ft_pipecmd(t_cmd *left, t_cmd *right);
 t_cmd	*ft_execcmd(char **envp);
-t_cmd	*ft_redircmd(t_cmd *subcmd, char **file, int mode, int fd);
+t_cmd	*ft_redircmd(t_cmd *subcmd, char *file, int mode, int fd);
 
 /*	path.c	*/
 void	ft_getpath_n_builtin(t_ecmd *ecmd);

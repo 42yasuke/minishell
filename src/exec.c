@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 11:08:05 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 19:59:46 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ static void ft_pipe(t_pcmd *pcmd)
 
 void	ft_runcmd(t_cmd *cmd)
 {
-	if (cmd->type == EXEC)
-		ft_exec((t_ecmd*)cmd);
+	if (cmd->type == PIPE)
+		ft_pipe((t_pcmd*)cmd);
 	else if(cmd->type == REDIR)
 		ft_redir((t_rcmd*)cmd);
+	else if(cmd->type == EXEC)
+		ft_exec((t_ecmd*)cmd);
 	else
-		ft_pipe((t_pcmd*)cmd);
+		ft_error(NO_TYPE, "command type not recognize");
 }
 
 void	ft_exec_manager(char *line, char **envp)

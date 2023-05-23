@@ -6,7 +6,7 @@
 #    By: jose <jose@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/28 20:06:58 by jose              #+#    #+#              #
-#    Updated: 2023/05/22 19:28:22 by jose             ###   ########.fr        #
+#    Updated: 2023/05/23 16:48:06 by jose             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ C_FILES =	main.c \
 			utils2.c \
 			exec.c \
 			parse.c \
-			nulterminate.c \
 			init.c \
 			path.c \
 			free.c \
