@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 17:53:06 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:13:18 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_cmd	*ft_parsecmd(char *line, char **envp)
 	t_cmd	*cmd;
 
 	es = line + ft_strlen(line);
-	cmd = ft_parsepipe(&s, es, envp);
-	ft_peek(&s, es, "");
-	if (s != es)
+	cmd = ft_parsepipe(&line, es, envp);
+	ft_peek(&line, es, "");
+	if (line != es)
 		ft_error(SYNTAX_ERROR, "syntax error");
 	ft_nulterminate(cmd);
 	return (cmd);
@@ -31,7 +31,7 @@ t_cmd	*ft_parsepipe(char **ps, char *es, char **envp)
 	t_cmd	*cmd;
 
 	cmd = ft_parseexec(ps, es, envp);
-	if (peek(ps,es, "|"))
+	if (ft_peek(ps,es, "|"))
 	{
 		ft_gettoken(ps, es, 0, 0);
 		cmd = ft_pipecmd(cmd, ft_parsepipe(ps, es, envp));
@@ -49,7 +49,7 @@ t_cmd	*ft_parseredir(t_cmd *cmd, char **ps, char *es)
 	while (ft_peek(ps, es, "<>"))
 	{
 		tok = ft_gettoken(ps, es, 0, 0);
-		if (ft_gettoken(ps, es, &q, &eq)! = 'a')
+		if (ft_gettoken(ps, es, &q, &eq) != 'a')
 			ft_error(BAD_REDIR, "missing file redirection");
 		file[0] = q;
 		file[1] = eq;

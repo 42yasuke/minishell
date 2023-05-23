@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 02:39:30 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:23:34 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 /*	node type's macros	*/
 # define EXEC 1
@@ -102,9 +104,9 @@ void	ft_error(int err, char *msg_err);
 
 /*	builtin.c	*/
 int		ft_is_builtin(char *line);
-void	ft_built_it(t_cmd *ecmd);
+void	ft_built_it(t_ecmd *ecmd);
 void	ft_cd(t_ecmd *ecmd);
-void	ft_echo(t_cmd *ecmd);
+void	ft_echo(t_ecmd *ecmd);
 void	ft_pwd(t_ecmd *ecmd);
 
 /*	builtin2.c	*/
@@ -116,7 +118,7 @@ void	ft_exit(t_ecmd *t_ecmd);
 /*	node_env.c	*/
 t_lenv	*ft_get_node(t_lenv *lst_env, int id);
 void	ft_init_lst(t_lenv *lst_env, char **envp);
-t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp, char *name);
+t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp);
 
 /*	node_env2.c	*/
 void	ft_export_with_args(t_ecmd *ecmd);
@@ -136,6 +138,7 @@ int		ft_nb_str(char **envp);
 
 /*	exec.c	*/
 void	ft_exec_manager(char *line, char **envp);
+void	ft_runcmd(t_cmd *cmd);
 
 /*	parse.c	*/
 t_cmd	*ft_parsecmd(char *line, char **envp);

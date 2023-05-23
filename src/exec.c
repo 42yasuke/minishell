@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 00:31:18 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:08:05 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,26 @@ static void	ft_exec(t_ecmd *ecmd)
 		ft_built_it(ecmd);
 	else
 		execve(ecmd->path, ecmd->argv, ecmd->env);
-	ft_error(EXECVE_FAILED, sterror(errno));
+	ft_error(EXECVE_FAILED, strerror(errno));
 }
 
 static void	ft_redir(t_rcmd *rcmd)
 {
 	close(rcmd->fd);
 	if (open(rcmd->file, rcmd->mode) < 0)
-		ft_error(OPEN_FAILED, strerror(errno))
+		ft_error(OPEN_FAILED, strerror(errno));
 	ft_runcmd(rcmd->cmd);
 }
 
 static void ft_pipe(t_pcmd *pcmd)
 {
 	int		p[2];
-	int		i;
 	int		sta;
 	pid_t	pid1;
 	pid_t	pid2;
 
-	i = 0;
 	if (pipe(p) < 0)
-		ft_error(PIPE_FAILED, sterror(errno));
+		ft_error(PIPE_FAILED, strerror(errno));
 	pid1 = ft_fork();
 	if (!pid1)
 	{
@@ -56,7 +54,7 @@ static void ft_pipe(t_pcmd *pcmd)
 	(waitpid(pid1, &sta, 0), waitpid(pid2, &sta, 0));
 }
 
-static void	ft_runcmd(t_cmd *cmd)
+void	ft_runcmd(t_cmd *cmd)
 {
 	if (cmd->type == EXEC)
 		ft_exec((t_ecmd*)cmd);

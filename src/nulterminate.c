@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 14:43:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 17:53:12 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:17:01 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	ft_exec(t_cmd *cmd)
 
 	i = -1;
 	ecmd = (t_ecmd*)cmd;
-	while(++i < ecmd->argv[i])
-		ecmd->eargv[i] = '\0';
+	while(ecmd->argv[++i])
+		*ecmd->eargv[i] = '\0';
 }
 
 static void	ft_pipe(t_cmd *cmd)
@@ -49,6 +49,7 @@ t_cmd	*ft_nulterminate(t_cmd *cmd)
 		ft_exec(cmd);
 	else if (cmd->type == PIPE)
 		ft_pipe(cmd);
-	else if (cmd->thype == REDIR)
+	else if (cmd->type == REDIR)
 		ft_redir(cmd);
+	return (cmd);
 }

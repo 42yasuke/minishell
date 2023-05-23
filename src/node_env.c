@@ -6,13 +6,13 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:04 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 23:17:08 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:27:43 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	*ft_range_lst(t_lenv *lst_env, char **envp)
+static void	ft_range_lst(t_lenv *lst_env, char **envp)
 {
 	int		i;
 	t_lenv	*tmp;
@@ -34,17 +34,14 @@ static void	*ft_range_lst(t_lenv *lst_env, char **envp)
 	}
 }
 
-t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp, char *name)
+t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp)
 {
 	t_lenv	*tmp;
 
-	tmp = malloc(sieof(*tmp));
+	tmp = malloc(sizeof(*tmp));
 	if (tmp)
-		(ft_free_lst(lst), ft_error(MALLOC_FAILED, strerror(errno)));
-	if (!name)
-		tmp->env_name = ft_strdup(envp[i]);
-	else
-		tmp->env_name = ft_strdup(name);
+		(ft_free_lst(lst_env), ft_error(MALLOC_FAILED, strerror(errno)));
+	tmp->env_name = envp[i];
 	tmp->id = -1;
 	tmp->next = NULL;
 	return (tmp);
@@ -59,7 +56,7 @@ static void	ft_make_lst(t_lenv *lst_env, char **envp)
 	tmp = lst_env;
 	while (envp[i])
 	{
-		tmp->next = ft_add_nenv(lst_env, i, envp, NULL);
+		tmp->next = ft_add_nenv(lst_env, i, envp);
 		tmp = tmp->next;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 02:54:17 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:26:18 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_free_lst(t_lenv *lst_env)
 	while (lst_env)
 	{
 		tmp = lst_env->next;
-		free(lst_env->env_name);
 		free(lst_env);
 		lst_env = tmp;
 	}
@@ -49,8 +48,8 @@ void	ft_free_cmd(t_cmd *cmd)
 	{
 		ecmd = (t_ecmd*)cmd;
 		ft_free_all(ecmd->argv);
-		if (!access(tmp->path, X_OK))
-			free(tmp->path);
+		if (!access(ecmd->path, X_OK))
+			free(ecmd->path);
 		free(cmd);
 	}
 	else if(cmd->type == REDIR)

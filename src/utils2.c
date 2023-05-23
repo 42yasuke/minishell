@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:19:59 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 21:38:33 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:05:01 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ char	**ft_cpy_envp(char **envp)
 		if (!env[i])
 			(ft_free_all(env), ft_error(MALLOC_FAILED, "env : malloc failed durinf copy"));
 	}
+	return (env);
 }

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/21 13:51:07 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:01:12 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,18 @@ pid_t	ft_fork(void)
 	return (pid);
 }
 
-static void	ft_gettoken_suite(char **ps, char *es, char **s, char **eq)
+static int	ft_gettoken_suite(char **ps, char *es, char **s, char **eq)
 {
 	char	*g;
 
 	g = *s;
-	if (!ft_strchr("><|", *g))
-	{
-		ret = 'a';
-		while(g < es && !ft_is_whitespace(*g) && !ft_strchr("><|", *g))
-			g++;
-	}
+	while(g < es && !ft_is_whitespace(*g) && !ft_strchr("><|", *g))
+		g++;
 	if (eq)
 		*eq = g;
 	g = ft_rm_ws_until_es(g, es);
 	*ps = g;
+	return ('a');
 }
 
 int	ft_gettoken(char **ps, char *es, char **q, char **eq)
@@ -95,6 +92,7 @@ int	ft_gettoken(char **ps, char *es, char **q, char **eq)
 			s++;
 		}
 	}
-	ft_gettoken_suite(ps, es, &s, eq);
+	else
+		return (ft_gettoken_suite(ps, es, &s, eq));
 	return (ret);
 }

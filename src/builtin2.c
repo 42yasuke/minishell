@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 23:41:35 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 03:09:37 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_exit(t_ecmd *ecmd)
 			}
 			if (ft_strlen(ecmd->argv[1]) > 3 || ft_atoi(ecmd->argv[1]) > 255)
 				ft_error(EXIT_FAILED, "exit : invalid argument");
-			exit(ft_atoi(ecmd->argv));
+			exit(ft_atoi(ecmd->argv[1]));
 		}
 	}
 	exit(EXIT_SUCCESS);

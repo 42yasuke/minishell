@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:20:31 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 00:47:24 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 11:28:19 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_export_with_args(t_ecmd *ecmd)
 	size_t	diff;
 	int		i;
 
-	i = -1:
+	i = -1;
 	while (ecmd->env[++i])
 	{
 		diff = ecmd->env[i] + ft_strlen(ecmd->env[i]) - ft_strchr(ecmd->env[i], '=');
