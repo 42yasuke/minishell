@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 11:13:18 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/23 12:42:31 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_cmd	*ft_parseexec(char **ps, char *es, char **envp)
 		tok = ft_gettoken(ps, es, &q, &eq);
 		if (!tok)
 			break ;
-		if (tok == 'a')
+		if (tok != 'a')
 			ft_error(SYNTAX_ERROR, "bad syntax");
 		ecmd->argv[argc] = q;
 		ecmd->eargv[argc] = eq;
