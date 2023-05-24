@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 11:41:42 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 20:55:09 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ void	ft_exit(t_ecmd *ecmd)
 		{
 			while (ecmd->argv[1][++i])
 			{
-				if (!ft_isdigit(ecmd->argv[1][++i]))
+				if (!ft_isdigit(ecmd->argv[1][i]))
 					ft_error(EXIT_FAILED, "exit : invalid argument");
 			}
 			if (ft_strlen(ecmd->argv[1]) > 3 || ft_atoi(ecmd->argv[1]) > 255)
 				ft_error(EXIT_FAILED, "exit : invalid argument");
-			exit(ft_atoi(ecmd->argv[1]));
+			(ft_printf("exit\n"), exit(ft_atoi(ecmd->argv[1])));
 		}
 	}
-	exit(EXIT_SUCCESS);
+	(ft_printf("exit\n"), exit(EXIT_SUCCESS));
 }

@@ -6,7 +6,7 @@
 #    By: jose <jose@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/28 20:06:58 by jose              #+#    #+#              #
-#    Updated: 2023/05/24 05:10:46 by jose             ###   ########.fr        #
+#    Updated: 2023/05/24 20:13:09 by jose             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ C_FILES =	main.c \
 			builtin.c \
 			builtin2.c \
 			builtin3.c \
+			builtin4.c \
 			utils.c \
 			utils2.c \
 			exec.c \
