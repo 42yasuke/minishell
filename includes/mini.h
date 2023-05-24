@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 19:59:41 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 05:09:44 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void	ft_export(t_ecmd *ecmd);
 void	ft_unset(t_ecmd *ecmd);
 void	ft_env(t_ecmd *ecmd);
 void	ft_exit(t_ecmd *t_ecmd);
+
+/*	buitin3.c	*/
 
 /*	node_env.c	*/
 t_lenv	*ft_get_node(t_lenv *lst_env, int id);

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:04 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 11:27:43 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 04:59:40 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@ static void	ft_range_lst(t_lenv *lst_env, char **envp)
 	t_lenv	*tmp;
 	t_lenv	*save;
 
-	while (envp[i])
+	i = -1;
+	while (envp[++i])
 	{
 		tmp = lst_env;
-		save = tmp;
+		save = NULL;
 		while (tmp)
 		{
-			if(ft_strncmp(save->env_name, tmp->env_name, \
-			ft_strlen(save->env_name)) > 0)
+			if (!save && tmp->id == -1)
+				save = tmp;
+			else if(tmp->id == -1 && ft_strncmp(save->env_name, tmp->env_name, ft_strlen(save->env_name)) > 0)
 				save = tmp;
 			tmp = tmp->next;
 		}
 		save->id = i;
-		i++;
 	}
 }
 
@@ -39,7 +40,7 @@ t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp)
 	t_lenv	*tmp;
 
 	tmp = malloc(sizeof(*tmp));
-	if (tmp)
+	if (!tmp)
 		(ft_free_lst(lst_env), ft_error(MALLOC_FAILED, strerror(errno)));
 	tmp->env_name = envp[i];
 	tmp->id = -1;
