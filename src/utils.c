@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 12:34:08 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 16:10:53 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,23 @@ pid_t	ft_fork(void)
 
 static void	ft_unset_no_pipe_with_args(char **var, char **envp)
 {
-	char	**new_env;
 	size_t	diff;
 	int		i;
-	int		j;
+	int		take_next;
 
-	i = ft_nb_str(envp);
-	new_env = malloc(sizeof(*new_env) * i);
-	if (!new_env)
-		ft_error(MALLOC_FAILED, "new_env : malloc failed");
+	take_next = false;
 	i = -1;
-	j = 0;
 	while (envp[++i])
 	{
 		diff = envp[i] + ft_strlen(envp[i]) - ft_strchr(envp[i], '=');
-		if (!ft_strncmp(var[1], envp[i], diff))
+		if (!ft_strncmp(var[1], envp[i], diff))	
+		{
 			free(envp[i]);
-		else
-			new_env[j++] = envp[i];
+			take_next = true;
+		}
+		if (take_next)
+			envp[i] = envp[i + 1];
 	}
-	new_env[j] = NULL;
-	*envp = *new_env;
-	free(new_env);
 }
 
 void	ft_unset_no_pipe(char *line, char **envp)

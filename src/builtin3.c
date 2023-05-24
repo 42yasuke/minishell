@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 05:09:01 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 12:51:17 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 16:00:47 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,15 @@
 
 static void	ft_another_one_env(char **var, char **envp)
 {
-	char	**new_env;
 	int		i;
 
-	i = ft_nb_str(envp);
-	new_env = malloc(sizeof(*new_env) * (i + 2));
-	if (!new_env)
-		ft_error(MALLOC_FAILED, "new_env : malloc failed");
-	i = -1;
-	while (envp[++i])
-		new_env[i] = envp[i];
-	new_env[i] = ft_strdup(var[1]);
-	new_env[i + 1] = NULL;
-	*envp = *new_env;
-	free(new_env);
+	i = 0;
+	while (envp[i])
+		i++;
+	if (i < MAXARG)
+		envp[i] = ft_strdup(var[1]);
+	else
+		ft_error(EXPORT_FAILED, "export : max variable reached");
 }
 
 static void	ft_export_no_pipe_args(char **var, char **envp)

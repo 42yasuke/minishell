@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:20:31 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 11:28:19 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 16:27:45 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,15 @@
 
 static void	ft_another_one_env(t_ecmd *ecmd)
 {
-	char	**new_env;
 	int		i;
 
-	i = ft_nb_str(ecmd->env);
-	new_env = malloc(sizeof(*new_env) * (i + 2));
-	if (!new_env)
-		ft_error(MALLOC_FAILED, "new_env : malloc failed");
-	i = -1;
-	while (ecmd->env[++i])
-		new_env[i] = ecmd->env[i];
-	new_env[i] = ft_strdup(ecmd->argv[1]);
-	new_env[i + 1] = NULL;
-	*ecmd->env = *new_env;
-	free(new_env);
+	i = 0;
+	while (ecmd->env[i])
+		i++;
+	if (i < MAXARG)
+		ecmd->env[i] = ft_strdup(ecmd->argv[1]);
+	else
+		ft_error(EXPORT_FAILED, "export : max variable reached");
 }
 
 void	ft_export_with_args(t_ecmd *ecmd)
@@ -55,26 +50,21 @@ void	ft_export_with_args(t_ecmd *ecmd)
 
 void	ft_unset_with_args(t_ecmd *ecmd)
 {
-	char	**new_env;
 	size_t	diff;
 	int		i;
-	int		j;
+	int		take_next;
 
-	i = ft_nb_str(ecmd->env);
-	new_env = malloc(sizeof(*new_env) * i);
-	if (!new_env)
-		ft_error(MALLOC_FAILED, "new_env : malloc failed");
+	take_next = false;
 	i = -1;
-	j = 0;
 	while (ecmd->env[++i])
 	{
 		diff = ecmd->env[i] + ft_strlen(ecmd->env[i]) - ft_strchr(ecmd->env[i], '=');
-		if (!ft_strncmp(ecmd->argv[1], ecmd->env[i], diff))
+		if (!ft_strncmp(ecmd->argv[1], ecmd->env[i], diff))	
+		{
 			free(ecmd->env[i]);
-		else
-			new_env[j++] = ecmd->env[i];
+			take_next = true;
+		}
+		if (take_next)
+			ecmd->env[i] = ecmd->env[i + 1];
 	}
-	new_env[j] = NULL;
-	*ecmd->env = *new_env;
-	free(new_env);
 }

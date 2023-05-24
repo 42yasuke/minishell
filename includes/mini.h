@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 12:29:32 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 15:50:42 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define PIPE 2
 # define REDIR 3
 
-# define MAXCHAR 100
+# define MAXARG 100
 
 /* error's macro	*/
 # define BAD_PARAMETERS 0
