@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 05:09:44 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 12:29:32 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define EXPORT_FAILED 11
 # define EXIT_FAILED 12
 # define NO_TYPE 13
+# define UNSET_FAILED 14
 
 /*	builtin's macro	*/
 # define CD 1
@@ -116,6 +117,8 @@ void	ft_env(t_ecmd *ecmd);
 void	ft_exit(t_ecmd *t_ecmd);
 
 /*	buitin3.c	*/
+int		ft_builtin_no_pipe(char *line, char **envp);
+void	ft_export_no_pipe(char *line, char **envp);
 
 /*	node_env.c	*/
 t_lenv	*ft_get_node(t_lenv *lst_env, int id);
@@ -130,7 +133,7 @@ void	ft_unset_with_args(t_ecmd *ecmd);
 int		ft_is_whitespace(int c);
 void	ft_cd_no_pipe(char *line);
 pid_t	ft_fork(void);
-int		ft_gettoken(char **ps, char *es, char **q, char **eq);
+void	ft_unset_no_pipe(char *line, char **envp);
 
 /*	utils2.c	*/
 char	*ft_rm_ws_until_es(char *s, char *es);

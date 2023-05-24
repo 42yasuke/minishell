@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 03:09:37 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/24 11:41:42 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ void	ft_export(t_ecmd *ecmd)
 		if (ecmd->argv[1][0] == '-')
 			ft_error(EXPORT_FAILED, "export : invalid option");
 		else
+		{
+			if (!ft_strchr(ecmd->argv[1], '='))
+				ft_error(EXPORT_FAILED, "export : variable : need an affectation");
 			ft_export_with_args(ecmd);
+		}
 	}
 	ft_export_no_args(ecmd);
 }
