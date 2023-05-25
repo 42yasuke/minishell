@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:11:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 20:59:11 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/25 12:42:15 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,13 @@ void	ft_exit_no_pipe(char *line, char **envp)
 		}
 	}
 	(ft_printf("exit\n"), ft_free_all(tmp), ft_free_all(envp), free(line), exit(EXIT_SUCCESS));
+}
+
+int	ft_is_builtin_no_pipe(char *line)
+{
+	int	is_builtin;
+
+	is_builtin = (!ft_strncmp(line, "cd", 2) || !ft_strncmp(line, "export", 6) \
+	|| !ft_strncmp(line, "unset", 5));
+	return (is_builtin);
 }

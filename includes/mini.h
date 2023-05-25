@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 20:14:13 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/25 15:36:06 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,15 @@ typedef struct s_pipecmd
 	struct s_cmd	*right;
 }	t_pcmd;
 
+typedef struct s_ginf
+{
+	t_cmd	*top;
+	int		exit_code;
+	char	*line;
+}	t_ginf;
+
 /*	ptr on execution tree	*/
-extern t_cmd	*g_cmd;
+extern t_ginf	*g_inf;
 
 /*	error.c	*/
 void	ft_error(int err, char *msg_err);
@@ -117,11 +124,12 @@ void	ft_env(t_ecmd *ecmd);
 void	ft_exit(t_ecmd *t_ecmd);
 
 /*	buitin3.c	*/
-int		ft_builtin_no_pipe(char *line, char **envp);
+void	ft_builtin_no_pipe(char *line, char **envp);
 void	ft_export_no_pipe(char *line, char **envp);
 
 /*	builtin4.c	*/
 void	ft_exit_no_pipe(char *line, char **envp);
+int		ft_is_builtin_no_pipe(char *line);
 
 /*	node_env.c	*/
 t_lenv	*ft_get_node(t_lenv *lst_env, int id);

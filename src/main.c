@@ -6,13 +6,13 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 06:02:13 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/25 15:55:50 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-t_cmd	*g_cmd = NULL;
+t_ginf	*g_inf = NULL;
 
 void	ft_sigint_handler(int sig)
 {
@@ -40,6 +40,12 @@ int	main(int ac, char **av, char **envp)
 		ft_error(BAD_PARAMETERS, "minishell : bad usage");
 	signal(SIGINT, ft_sigint_handler);
 	signal(SIGQUIT, ft_sigquit_handler);
+	g_inf = malloc(sizeof(*g_inf)); //initialisation
+	if (!g_inf)
+		ft_error(MALLOC_FAILED, "g_inf : malloc failed");
+	g_inf->exit_code = 0;
+	g_inf->line = NULL;
+	g_inf->top = NULL;
 	env = ft_cpy_envp(envp);
 	while (true)
 	{
@@ -51,7 +57,11 @@ int	main(int ac, char **av, char **envp)
 		if (!ft_strncmp(line, "", 1))
 			continue ;
 		add_history(line);
-		if(!ft_builtin_no_pipe(line, env))
+		/* ici les guillemets et variable de merde */
+		g_inf->line = line;
+		if(ft_is_builtin_no_pipe(line))
+			ft_builtin_no_pipe(line, env);
+		else
 			ft_exec_manager(line, env);
 		free(line);
 	}

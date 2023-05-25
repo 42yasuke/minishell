@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 05:54:24 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/25 15:40:58 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ static void ft_pipe(t_pcmd *pcmd)
 	}
 	(close(p[0]), close(p[1]));
 	(waitpid(pid1, &sta, 0), waitpid(pid2, &sta, 0));
+	if (!g_inf->exit_code)
+	{
+		if (WIFEXITED(sta))
+			g_inf->exit_code = WEXITSTATUS(sta);
+		else if (WIFSIGNALED(sta))
+			g_inf->exit_code = 128 + WTERMSIG(sta);
+	}
 }
 
 void	ft_runcmd(t_cmd *cmd)
@@ -62,13 +69,11 @@ void	ft_runcmd(t_cmd *cmd)
 		ft_redir((t_rcmd*)cmd);
 	else if(cmd->type == EXEC)
 		ft_exec((t_ecmd*)cmd);
-	else
-		ft_error(NO_TYPE, "command type not recognize");
 }
 
 void	ft_exec_manager(char *line, char **envp)
 {
-	int		status;
+	int		sta;
 	t_cmd	*cmd;
 	pid_t	pid;
 
@@ -76,8 +81,15 @@ void	ft_exec_manager(char *line, char **envp)
 	if (!pid)
 	{
 		cmd = ft_parsecmd(line, envp);
-		g_cmd = cmd;
+		g_inf->top = cmd;
 		ft_runcmd(cmd);
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &sta, 0);
+	if (!g_inf->exit_code)
+	{
+		if (WIFEXITED(sta))
+			g_inf->exit_code = WEXITSTATUS(sta);
+		else if (WIFSIGNALED(sta))
+			g_inf->exit_code = 128 + WTERMSIG(sta);
+	}
 }
