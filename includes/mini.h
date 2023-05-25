@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/25 15:36:06 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/25 17:03:43 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@
 # define UNSET 5
 # define ENV 6
 # define EXIT 7
+# define SQUAOTE 39
+# define DQUAOTE 34
 
 typedef struct s_lenv
 {
@@ -152,6 +154,9 @@ void	ft_peek(char **ps);
 char	**ft_cpy_envp(char **envp);
 int		ft_nb_str(char **envp);
 
+/*	utils3.c	*/
+void	ft_init_ginf(int ac, char **av);
+
 /*	exec.c	*/
 void	ft_exec_manager(char *line, char **envp);
 void	ft_runcmd(t_cmd *cmd);
@@ -174,5 +179,11 @@ void	ft_getpath_n_builtin(t_ecmd *ecmd);
 void	ft_free_all(char **str);
 void	ft_free_lst(t_lenv *lst_env);
 void	ft_free_cmd(t_cmd *cmd);
+void	ft_free_ginf(void);
+
+/*	sdquote.c	*/
+int		ft_there_is_sdquote(char *line);
+int		ft_who_englobe(char *line);
+int		ft_is_closed(char *line);
 
 #endif

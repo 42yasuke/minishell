@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/25 15:55:50 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/25 16:36:07 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,25 @@ void	ft_sigquit_handler(int sig)
 	(ft_printf("\nexit\n"), exit(EXIT_SUCCESS));
 }
 
+static void	ft_main_suite(char *line, char **env)
+{
+	/* ici les guillemets et variable de merde */
+	g_inf->line = line;
+	if(ft_is_builtin_no_pipe(line))
+		ft_builtin_no_pipe(line, env);
+	else
+		ft_exec_manager(line, env);
+	ft_free_ginf();
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
 	char	**env;
 
-	(void)av;
-	if (ac > 1)
-		ft_error(BAD_PARAMETERS, "minishell : bad usage");
+	ft_init_ginf(ac, av);
 	signal(SIGINT, ft_sigint_handler);
 	signal(SIGQUIT, ft_sigquit_handler);
-	g_inf = malloc(sizeof(*g_inf)); //initialisation
-	if (!g_inf)
-		ft_error(MALLOC_FAILED, "g_inf : malloc failed");
-	g_inf->exit_code = 0;
-	g_inf->line = NULL;
-	g_inf->top = NULL;
 	env = ft_cpy_envp(envp);
 	while (true)
 	{
@@ -57,13 +60,7 @@ int	main(int ac, char **av, char **envp)
 		if (!ft_strncmp(line, "", 1))
 			continue ;
 		add_history(line);
-		/* ici les guillemets et variable de merde */
-		g_inf->line = line;
-		if(ft_is_builtin_no_pipe(line))
-			ft_builtin_no_pipe(line, env);
-		else
-			ft_exec_manager(line, env);
-		free(line);
+		ft_main_suite(line, env);
 	}
 	return (ft_free_all(env), EXIT_SUCCESS);
 }

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 16:56:02 by jose              #+#    #+#             */
-/*   Updated: 2023/05/25 16:37:43 by jose             ###   ########.fr       */
+/*   Created: 2023/05/25 15:58:14 by jose              #+#    #+#             */
+/*   Updated: 2023/05/25 16:28:01 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	ft_error(int err, char *msg_err)
+void	ft_init_ginf(int ac, char **av)
 {
-	if (err == BAD_PARAMETERS)
-		ft_printf("Error : %s\n", msg_err);
-	else
-		ft_printf("Error : %s\n", msg_err);
-	ft_free_ginf();
-	exit(EXIT_FAILURE);
+	(void)av;
+	if (ac > 1)
+		ft_error(BAD_PARAMETERS, "minishell : bad usage");
+	g_inf = malloc(sizeof(*g_inf)); //initialisation
+	if (!g_inf)
+		ft_error(MALLOC_FAILED, "g_inf : malloc failed");
+	g_inf->exit_code = 0;
+	g_inf->line = NULL;
+	g_inf->top = NULL;
 }
