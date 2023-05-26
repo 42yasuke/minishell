@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:43:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/26 20:09:45 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/26 20:21:37 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static void	ft_update_value(char **tab, int i)
 
 void	ft_replace_env(char **tab)
 {
-	char	*tmp;
 	int		i;
 
 	i = -1;

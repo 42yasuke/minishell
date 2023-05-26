@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:45:33 by jose              #+#    #+#             */
-/*   Updated: 2023/05/26 19:44:09 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/26 20:22:00 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static char	*ft_nenv_str(char **tab, int i, int *j2)
 static char	*ft_af_str(char **tab, int i, int j2)
 {
 	char	*af;
-	int		j;
 
 	af = ft_strchr(tab[i], '$') + 1;
 	af = ft_strdup(af);
