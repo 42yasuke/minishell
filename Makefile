@@ -6,7 +6,7 @@
 #    By: jose <jose@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/28 20:06:58 by jose              #+#    #+#              #
-#    Updated: 2023/05/25 16:44:13 by jose             ###   ########.fr        #
+#    Updated: 2023/05/26 19:52:25 by jose             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ C_FILES =	main.c \
 			free.c \
 			node_env.c \
 			node_env2.c \
-			sdquote.c
+			sdquote.c \
+			sdquote2.c \
+			sdquote3.c
 
 SRC = $(addprefix src/, $(C_FILES))
 

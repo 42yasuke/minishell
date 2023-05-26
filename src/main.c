@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/25 16:36:07 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/26 20:19:42 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_sigquit_handler(int sig)
 
 static void	ft_main_suite(char *line, char **env)
 {
-	/* ici les guillemets et variable de merde */
+	line = ft_sd_quote_manager(line);
 	g_inf->line = line;
 	if(ft_is_builtin_no_pipe(line))
 		ft_builtin_no_pipe(line, env);

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:43:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/25 17:03:08 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/26 20:09:45 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,43 @@ int	ft_is_closed(char *line)
 	if (scount % 2 || dcount % 2)
 		return (false);
 	return (true);
+}
+
+static void	ft_update_value(char **tab, int i)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (ft_strncmp(tab[i], "$?", ft_strlen(tab[i])))
+	{
+		tmp = tab[i];
+		tab[i] = ft_itoa(g_inf->exit_code);
+	}
+	else
+	{
+		tmp = tab[i];
+		tab[i] = ft_strdup(getenv(tab[i] + 1));
+	}
+	free(tmp);
+}
+
+void	ft_replace_env(char **tab)
+{
+	char	*tmp;
+	int		i;
+
+	i = -1;
+	if (!tab)
+		return ;
+	while (tab[++i])
+	{
+		if (ft_strchr(tab[i], '$'))
+			ft_update_tab(tab, i);
+	}
+	i = -1;
+	while (tab[++i])
+	{
+		if (ft_strchr(tab[i], '$'))
+			ft_update_value(tab, i);
+	}
 }

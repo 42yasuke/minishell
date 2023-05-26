@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/25 17:03:43 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/26 20:11:45 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define EXIT_FAILED 12
 # define NO_TYPE 13
 # define UNSET_FAILED 14
+# define SDQUOTE_FAILED 15
 
 /*	builtin's macro	*/
 # define CD 1
@@ -185,5 +186,13 @@ void	ft_free_ginf(void);
 int		ft_there_is_sdquote(char *line);
 int		ft_who_englobe(char *line);
 int		ft_is_closed(char *line);
+void	ft_replace_env(char **tab);
+
+/*	sdquote2.c	*/
+void	ft_update_tab(char **tab, int i);
+char	*ft_merge_tab(char **tab);
+
+/*	sdquote3.c	*/
+char	*ft_sd_quote_manager(char *line);
 
 #endif
