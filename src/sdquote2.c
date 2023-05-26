@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:45:33 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 00:05:28 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 00:37:07 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char	*ft_merge_tab(char **tab)
 	i = -1;
 	nbr_char = 0;
 	while (tab[++i])
-		nbr_char = ft_strlen(tab[i]);
+		nbr_char += ft_strlen(tab[i]);
 	line = malloc(sizeof(*line) * (nbr_char + i));
 	if (!line)
 		ft_error(MALLOC_FAILED, "ft_merge_tab : line : malloc failed");

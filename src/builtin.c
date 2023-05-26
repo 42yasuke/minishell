@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 23:41:31 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 00:31:30 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_cd(t_ecmd *ecmd)
 		if (chdir(ecmd->argv[1]))
 			ft_error(CD_FAILED, strerror(errno));
 		else
-			exit(EXIT_SUCCESS) ;
+			exit(EXIT_SUCCESS);
 	}
 	ft_error(CD_FAILED, "cd : only relative or absolu path");
 }
@@ -46,6 +46,7 @@ void	ft_echo(t_ecmd *ecmd)
 	}
 	if (!is_n)
 		ft_printf("\n");
+	exit(EXIT_SUCCESS);
 }
 
 void	ft_pwd(t_ecmd *ecmd)
@@ -63,8 +64,7 @@ void	ft_pwd(t_ecmd *ecmd)
 	if (!path)
 		ft_error(PWD_FAILED, strerror(errno));
 	ft_printf("%s\n", path);
-	free(path);
-	exit(EXIT_SUCCESS);
+	(free(path), exit(EXIT_SUCCESS));
 }
 
 int	ft_is_builtin(char *line)
