@@ -6,13 +6,13 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:45:33 by jose              #+#    #+#             */
-/*   Updated: 2023/05/26 20:22:00 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 00:05:28 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	ft_replace_str_in_tab(char **tab, char *str, int i)
+static void	ft_replace_str_in_tab(char **tab, char *str, int *i)
 {
 	int		j;
 	int		stop;
@@ -25,32 +25,41 @@ static void	ft_replace_str_in_tab(char **tab, char *str, int i)
 	stop = ft_nb_str(tab) + 1;
 	while (++j < stop)
 	{
-		if (j == i)
+		if (j == *i)
 		{
 			tmp = tab[j];
 			tab[j] = str;
 		}
-		else if (j > i)
+		else if (j > *i)
 		{
 			tmp2 = tab[j];
 			tab[j] = tmp;
 			tmp = tmp2;
 		}
 	}
+	*i = *i + 2;
 }
 
 static char	*ft_bf_str(char **tab, int i)
 {
 	char	*bf;
 	int		j;
+	int		is_d;
 
 	j = -1;
+	is_d = false;
 	bf = ft_strdup(tab[i]);
 	if (!bf)
 		ft_error(MALLOC_FAILED, "bf : malloc failed");
 	while (bf[++j])
 	{
-		if (j >= i)
+		if (bf[j] == '$')
+		{
+			if (!j)
+				return (free(bf), NULL);
+			is_d = true;
+		}
+		if (is_d)
 			bf[j] = '\0';
 	}
 	return (bf);
@@ -61,7 +70,7 @@ static char	*ft_nenv_str(char **tab, int i, int *j2)
 	char	*name_env;
 	int		j;
 
-	name_env = ft_strchr(tab[i], '$') + 1;
+	name_env = ft_strchr(tab[i], '$');
 	name_env = ft_strdup(name_env);
 	if (!name_env)
 		ft_error(MALLOC_FAILED, "name_env : malloc failed");
@@ -103,9 +112,10 @@ void	ft_update_tab(char **tab, int i)
 	bf = ft_bf_str(tab, i);
 	name_env = ft_nenv_str(tab, i, &j2);
 	af = ft_af_str(tab, i, j2);
-	ft_replace_str_in_tab(tab, bf, i);
-	ft_replace_str_in_tab(tab, name_env, i + 1);
-	ft_replace_str_in_tab(tab, af, i + 2);
+	free(tab[i]);
+	tab[i] = name_env;
+	ft_replace_str_in_tab(tab, bf, &i);
+	ft_replace_str_in_tab(tab, af, &i);
 }
 
 char	*ft_merge_tab(char **tab)
@@ -120,15 +130,17 @@ char	*ft_merge_tab(char **tab)
 	nbr_char = 0;
 	while (tab[++i])
 		nbr_char = ft_strlen(tab[i]);
-	line = malloc(sizeof(*line) * (nbr_char + 1));
+	line = malloc(sizeof(*line) * (nbr_char + i));
 	if (!line)
 		ft_error(MALLOC_FAILED, "ft_merge_tab : line : malloc failed");
 	nbr_char = -1;
+	i = -1;
 	while (tab[++i])
 	{
 		j = -1;
 		while (tab[i][++j])
 			line[++nbr_char] = tab[i][j];
+		line[++nbr_char] = ' ';
 	}
 	return (line[nbr_char] = '\0', line);
 }
