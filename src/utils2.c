@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:19:59 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 16:31:36 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 13:59:15 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ char	**ft_cpy_envp(char **envp)
 	if (!env)
 		ft_error(MALLOC_FAILED, "env : malloc failed");
 	i = -1;
-	while (++i < MAXARG)
+	while (++i < MAXARG + 1)
 		env[i] = NULL;
-	env[i] = NULL;
 	i = -1;
 	while (envp[++i])
 	{

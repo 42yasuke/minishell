@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:20:31 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 16:58:52 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 13:17:45 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_export_with_args(t_ecmd *ecmd)
 	}
 	if (!ecmd->env[i])
 		ft_another_one_env(ecmd);
-	exit(EXIT_SUCCESS);
+	(ft_free_ginf(), exit(EXIT_SUCCESS));
 }
 
 void	ft_unset_with_args(t_ecmd *ecmd)

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/05/25 16:37:57 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 14:08:30 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	ft_free_cmd(t_cmd *cmd)
 	{
 		ecmd = (t_ecmd*)cmd;
 		ft_free_all(ecmd->argv);
-		if (!access(ecmd->path, X_OK))
-			free(ecmd->path);
+		if (ecmd->path)
+			if (!access(ecmd->path, X_OK))
+				free(ecmd->path);
 		free(cmd);
 	}
 	else if(cmd->type == REDIR)
@@ -72,6 +73,7 @@ void	ft_free_ginf(void)
 		free(g_inf->line);
 		if (g_inf->top)
 			ft_free_cmd(g_inf->top);
+		ft_free_all(g_inf->env);
 		free(g_inf);
 		g_inf = NULL;
 	}

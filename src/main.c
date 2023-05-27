@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 12:55:38 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 14:01:55 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,27 @@ void	ft_sigquit_handler(int sig)
 	(ft_printf("\nexit\n"), exit(EXIT_SUCCESS));
 }
 
-static void	ft_main_suite(char *line, char **env)
+static void	ft_main_suite(char *line, char **envp)
 {
 	line = ft_sd_quote_manager(line);
-	ft_init_ginf();
+	ft_init_ginf(envp);
 	g_inf->line = line;
 	if(ft_is_builtin_no_pipe(line))
-		ft_builtin_no_pipe(line, env);
+		ft_builtin_no_pipe(line, g_inf->env);
 	else
-		ft_exec_manager(line, env);
+		ft_exec_manager(line, g_inf->env);
 	ft_free_ginf();
 }
 
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
-	char	**env;
 
 	(void)av;
 	if (ac > 1)
 		ft_error(BAD_PARAMETERS, "minishell : bad usage");
 	signal(SIGINT, ft_sigint_handler);
 	signal(SIGQUIT, ft_sigquit_handler);
-	env = ft_cpy_envp(envp);
 	while (true)
 	{
 		line = readline("minishell$ ");
@@ -63,8 +61,7 @@ int	main(int ac, char **av, char **envp)
 		if (!ft_strncmp(line, "", 1))
 			continue ;
 		add_history(line);
-		ft_main_suite(line, env);
-		break ; // test
+		ft_main_suite(line, envp);
 	}
-	return (ft_free_all(env), EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

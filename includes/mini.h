@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 00:44:03 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 13:41:34 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_ginf
 	t_cmd	*top;
 	int		exit_code;
 	char	*line;
+	char	**env;
 }	t_ginf;
 
 /*	ptr on execution tree	*/
@@ -156,7 +157,7 @@ char	**ft_cpy_envp(char **envp);
 int		ft_nb_str(char **envp);
 
 /*	utils3.c	*/
-void	ft_init_ginf(void);
+void	ft_init_ginf(char **envp);
 
 /*	exec.c	*/
 void	ft_exec_manager(char *line, char **envp);
