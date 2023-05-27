@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 16:59:12 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 16:43:41 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_cd_no_pipe(char *line)
 	i = 2;
 	while (line[i] && ft_is_whitespace(line[i]))
 		i++;
-	if (!line[i])
+	if (line[i])
 	{
-		if (chdir(line + 2))
+		if (chdir(line + i))
 			ft_error(CD_FAILED, strerror(errno));
 	}
 }

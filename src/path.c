@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:23:18 by jose              #+#    #+#             */
-/*   Updated: 2023/05/22 18:25:55 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 22:22:22 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*ft_get_path(char *cmd)
 		if (!access(ret, X_OK))
 			break ;
 		free(ret);
-		ret = NULL;
+		ret = cmd;
 	}
 	return (free(cmd_to_test), ft_free_all(mypaths), ret);
 }

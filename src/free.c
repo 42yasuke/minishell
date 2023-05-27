@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 14:08:30 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 22:20:27 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	ft_free_cmd(t_cmd *cmd)
 	if (cmd->type == EXEC)
 	{
 		ecmd = (t_ecmd*)cmd;
-		ft_free_all(ecmd->argv);
 		if (ecmd->path)
 			if (!access(ecmd->path, X_OK))
 				free(ecmd->path);
+		ft_free_all(ecmd->argv);
 		free(cmd);
 	}
 	else if(cmd->type == REDIR)
