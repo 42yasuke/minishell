@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 13:41:34 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 01:40:28 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	ft_builtin_no_pipe(char *line, char **envp);
 void	ft_export_no_pipe(char *line, char **envp);
 
 /*	builtin4.c	*/
-void	ft_exit_no_pipe(char *line, char **envp);
+void	ft_exit_no_pipe(char *line);
 int		ft_is_builtin_no_pipe(char *line);
 
 /*	node_env.c	*/

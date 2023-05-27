@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 05:09:01 by jose              #+#    #+#             */
-/*   Updated: 2023/05/25 13:12:49 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 01:39:40 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ void	ft_builtin_no_pipe(char *line, char **envp)
 		else if (!ft_strncmp(line, "unset", 5))
 			ft_unset_no_pipe(line, envp);
 		else if (!ft_strncmp(line, "exit", 4))
-			ft_exit_no_pipe(line, envp);
+			ft_exit_no_pipe(line);
 	}
 }
