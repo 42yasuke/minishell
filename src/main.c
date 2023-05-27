@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 00:43:51 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 12:55:38 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		add_history(line);
 		ft_main_suite(line, env);
+		break ; // test
 	}
 	return (ft_free_all(env), EXIT_SUCCESS);
 }

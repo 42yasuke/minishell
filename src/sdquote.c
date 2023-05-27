@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:43:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/26 23:54:44 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 12:30:21 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,18 @@ int	ft_there_is_sdquote(char *line)
 
 int	ft_who_englobe(char *line)
 {
-	if (ft_strchr(line, '\'') < ft_strchr(line, '"'))
+	char	*sq;
+	char	*dq;
+
+	sq = ft_strchr(line, SQUAOTE);
+	dq = ft_strchr(line, DQUAOTE);
+	if (sq && dq)
+	{
+		if (ft_strchr(line, SQUAOTE) < ft_strchr(line, DQUAOTE))
+			return (SQUAOTE);
+		return (DQUAOTE);
+	}
+	else if (sq)
 		return (SQUAOTE);
 	return (DQUAOTE);
 }

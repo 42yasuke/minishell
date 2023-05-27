@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/05/26 20:46:54 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/27 12:46:41 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ static void	ft_cpy_str(char **tab, char **tab2)
 
 	i = -1;
 	while (tab2[++i])
-		tab[i] = tab2[i];
+	{
+		tab[i] = ft_strdup(tab2[i]);
+		if (!tab[i])
+			(ft_free_all(tab2), ft_free_all(tab), ft_error(MALLOC_FAILED, "tab[i] : malloc failed"));
+	}
 }
 
 static void ft_no_quote(char *line, char **tab)
@@ -27,6 +31,7 @@ static void ft_no_quote(char *line, char **tab)
 
 	tab2 = ft_split(line, ' ');
 	ft_cpy_str(tab, tab2);
+	ft_free_all(tab2);
 	ft_replace_env(tab);
 }
 
@@ -50,6 +55,7 @@ static void	ft_quote(char *line, char **tab)
 			ft_replace_env(tab);
 		}
 	}
+	ft_free_all(tab2);
 }
 
 char	*ft_sd_quote_manager(char *line)
