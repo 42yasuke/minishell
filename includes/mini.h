@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 01:40:28 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 18:22:49 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ void	ft_replace_env(char **tab);
 
 /*	sdquote2.c	*/
 void	ft_update_tab(char **tab, int i);
-char	*ft_merge_tab(char **tab);
+char	*ft_merge_tab(char **tab, int spaced);
 
 /*	sdquote3.c	*/
 char	*ft_sd_quote_manager(char *line);
