@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 13:00:59 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 21:44:16 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd	*ft_parsecmd(char *line, char **envp)
 {
 	t_cmd	*cmd;
 
-	if (ft_strchr(line, '|'))
+	if (ft_strchr(line, '|') && g_inf->interpret)
 		cmd = ft_parsepipe(&line, envp);
 	else
 	{
@@ -52,7 +52,7 @@ t_cmd	*ft_parseredir(t_cmd *cmd, char **ps)
 	char	*tmp;
 
 	tmp = ft_strchr(*ps, '<');
-	if (tmp)
+	if (tmp && g_inf->interpret)
 	{
 		tmp++;
 		ft_peek(&tmp);
@@ -68,7 +68,7 @@ t_cmd	*ft_parseredir(t_cmd *cmd, char **ps)
 		cmd = ft_redircmd(cmd, file, O_RDONLY, STDIN_FILENO);
 	}
 	tmp = ft_strchr(*ps, '>');
-	if (tmp)
+	if (tmp && g_inf->interpret)
 	{
 		*tmp = '\0';
 		tmp++;

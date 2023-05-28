@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:43:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 12:30:21 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 18:47:30 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ int	ft_is_closed(char *line)
 		if (line[i] == DQUAOTE)
 			dcount++;
 	}
-	if (scount % 2 || dcount % 2)
+	if (scount % 2 && ft_who_englobe(line) == SQUAOTE)
+		return (false);
+	else if (dcount % 2 && ft_who_englobe(line) == DQUAOTE)
 		return (false);
 	return (true);
 }

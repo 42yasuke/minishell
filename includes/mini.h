@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 18:22:49 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 21:45:31 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_ginf
 	int		exit_code;
 	char	*line;
 	char	**env;
+	int		interpret;
 }	t_ginf;
 
 /*	ptr on execution tree	*/

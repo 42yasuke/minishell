@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:58:14 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 13:41:01 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 21:41:27 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	ft_init_ginf(char **envp)
 	g_inf->exit_code = 0;
 	g_inf->line = NULL;
 	g_inf->top = NULL;
+	g_inf->interpret = true;
 }

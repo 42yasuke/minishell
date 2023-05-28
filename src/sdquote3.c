@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 18:23:58 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 21:40:21 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	*ft_sd_quote_manager(char *line)
 		ft_quote(line, tab);
 	else
 		ft_no_quote(line, tab);
+	g_inf->interpret = !ft_there_is_sdquote(line);
 	new_line = ft_merge_tab(tab, !ft_there_is_sdquote(line));
 	return (free(line), ft_free_all(tab), new_line);
 }
