@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 13:35:31 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 14:24:52 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static void ft_pipe(t_pcmd *pcmd)
 	pid1 = ft_fork();
 	if (!pid1)
 	{
-		(close(STDOUT_FILENO), dup(p[1]), close(p[0]), close(p[1]));
+		(close(p[0]), dup2(p[1], STDOUT_FILENO), close(p[1]));
 		ft_runcmd(pcmd->left);
 	}
 	pid2 = ft_fork();
 	if (!pid2)
 	{
-		(close(STDIN_FILENO), dup(p[0]), close(p[0]), close(p[1]));
+		(close(p[1]), dup2(p[0], STDIN_FILENO), close(p[0]));
 		ft_runcmd(pcmd->right);
 	}
 	(close(p[0]), close(p[1]));
@@ -60,6 +60,8 @@ static void ft_pipe(t_pcmd *pcmd)
 		else if (WIFSIGNALED(sta))
 			g_inf->exit_code = 128 + WTERMSIG(sta);
 	}
+	sta = g_inf->exit_code;
+	(ft_free_ginf(), exit(sta));
 }
 
 void	ft_runcmd(t_cmd *cmd)
