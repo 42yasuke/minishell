@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 00:12:17 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 17:50:04 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	ft_cd(t_ecmd *ecmd)
 void	ft_echo(t_ecmd *ecmd)
 {
 	int	is_n;
+	int	i;
 
+	i = 1;
 	is_n = false;
 	if(ecmd->argv[1])
 	{
-		if(ecmd->argv[2])
-			ft_error(ECHO_FAILED, "echo : invalid argument");
 		if (ecmd->argv[1][0] == '-')
 		{
 			if (ft_strncmp(ecmd->argv[1], "-n", ft_strlen(ecmd->argv[1])))
@@ -43,6 +43,8 @@ void	ft_echo(t_ecmd *ecmd)
 				ft_error(ECHO_FAILED, "echo : option unknown");
 		}
 		ft_printf("%s", ecmd->argv[1]);
+		while (ecmd->argv[++i])
+			ft_printf(" %s", ecmd->argv[i]);
 	}
 	if (!is_n)
 		ft_printf("\n");
