@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 17:56:00 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 13:25:36 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	ft_sigquit_handler(int sig)
 
 static void	ft_main_suite(char *line, char **envp)
 {
-	line = ft_sd_quote_manager(line);
 	ft_init_ginf(envp);
+	line = ft_sd_quote_manager(line);
 	g_inf->line = line;
 	if(ft_is_builtin_no_pipe(line))
 		ft_builtin_no_pipe(line, g_inf->env);

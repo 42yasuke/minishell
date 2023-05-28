@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 20:06:15 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 13:00:59 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_cmd	*ft_parsepipe(char **ps, char **envp)
 		ft_peek(&tmp);
 		cmd = ft_pipecmd(cmd, ft_parsepipe(&tmp, envp));
 	}
+	else
+		cmd = ft_parseexec(ps, envp);
 	return (cmd);
 }
 

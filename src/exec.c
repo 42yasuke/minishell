@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 00:09:39 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 13:16:57 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	ft_exec_manager(char *line, char **envp)
 	t_cmd	*cmd;
 	pid_t	pid;
 
+	sta = 0;
 	pid = ft_fork();
 	if (!pid)
 	{
