@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 13:16:57 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/28 13:35:31 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void ft_pipe(t_pcmd *pcmd)
 	pid_t	pid1;
 	pid_t	pid2;
 
+	sta = 0;
 	if (pipe(p) < 0)
 		ft_error(PIPE_FAILED, strerror(errno));
 	pid1 = ft_fork();
