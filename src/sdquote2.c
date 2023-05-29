@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:45:33 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 17:58:23 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 18:02:35 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ char	*ft_merge_tab(char **tab, int spaced)
 	int		nbr_char;
 	int		i;
 	int		j;
-	
 
 	i = -1;
 	nbr_char = 0;
