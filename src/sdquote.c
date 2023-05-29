@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:43:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 12:49:30 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 17:24:25 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,6 @@ int	ft_is_closed(char *line)
 	return (true);
 }
 
-static void	ft_update_value(char **tab, int i)
-{
-	char	*tmp;
-
-	tmp = NULL;
-	if (ft_strlen(tab[i]) <= 1)
-		return ;
-	if (!ft_strncmp(tab[i], "$?", ft_strlen(tab[i])))
-	{
-		tmp = tab[i];
-		tab[i] = ft_itoa(g_inf->exit_code);
-	}
-	else
-	{
-		tmp = tab[i];
-		tab[i] = ft_strdup(getenv(ft_strchr(tab[i], '$') + 1));
-	}
-	free(tmp);
-}
-
 void	ft_replace_env(char **tab)
 {
 	int		i;
@@ -96,11 +76,5 @@ void	ft_replace_env(char **tab)
 	{
 		if (ft_strchr(tab[i], '$'))
 			ft_update_tab(tab, i);
-	}
-	i = -1;
-	while (tab[++i])
-	{
-		if (ft_strchr(tab[i], '$'))
-			ft_update_value(tab, i);
 	}
 }
