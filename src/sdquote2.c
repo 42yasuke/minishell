@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:45:33 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 18:33:45 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 12:56:59 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static char	*ft_nenv_str(char **tab, int i, int *j2)
 	{
 		if (*j2 == -1 && ft_is_whitespace(name_env[j]))
 			*j2 = j;
-		else if (*j2 != -1)
+		if (*j2 != -1 && j >= *j2)
 			name_env[j] = '\0';
 	}
 	return (name_env);
@@ -90,10 +90,10 @@ static char	*ft_af_str(char **tab, int i, int j2)
 {
 	char	*af;
 
-	af = ft_strchr(tab[i], '$') + 1;
+	af = ft_strchr(tab[i], '$');
 	af = ft_strdup(af);
 	if (j2 != -1)
-		af = ft_memmove(af, af + j2 + 1, ft_strlen(af + j2));
+		af = ft_memmove(af, af + j2, ft_strlen(af + j2) + 1);
 	else
 	{
 		free(af);
