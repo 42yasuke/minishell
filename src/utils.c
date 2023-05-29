@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/27 16:43:41 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 23:28:47 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ pid_t	ft_fork(void)
 	return (pid);
 }
 
-static void	ft_unset_no_pipe_with_args(char **var, char **envp)
+static void	ft_unset_no_pipe_with_args(char *str, char **envp)
 {
 	size_t	diff;
 	int		i;
@@ -61,7 +61,7 @@ static void	ft_unset_no_pipe_with_args(char **var, char **envp)
 	while (envp[++i])
 	{
 		diff = ft_strlen(envp[i]) - ft_strlen(ft_strchr(envp[i], '='));
-		if (!ft_strncmp(var[1], envp[i], diff))	
+		if (!ft_strncmp(str, envp[i], diff))	
 		{
 			free(envp[i]);
 			take_next = true;
@@ -74,16 +74,13 @@ static void	ft_unset_no_pipe_with_args(char **var, char **envp)
 void	ft_unset_no_pipe(char *line, char **envp)
 {
 	char	**tmp;
+	int		i;
 
+	i = -1;
 	tmp = ft_split(line, ' ');
-	if (tmp[1])
-	{
-		if (tmp[2])
-			ft_error(UNSET_FAILED, "unset : invalid argument");
-		if (tmp[1][0] == '-')
-			ft_error(UNSET_FAILED, "unset : invalid option");
-		else
-			ft_unset_no_pipe_with_args(tmp, envp);
-	}
+	if (tmp[1][0] == '-')
+		ft_error2("unset : invalid option", 2);
+	while (tmp[++i])
+		ft_unset_no_pipe_with_args(tmp[i], envp);
 	ft_free_all(tmp);
 }
