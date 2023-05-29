@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 13:25:36 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 21:41:14 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	ft_sigquit_handler(int sig)
 
 static void	ft_main_suite(char *line, char **envp)
 {
-	ft_init_ginf(envp);
+	ft_init_ginf(envp, false);
 	line = ft_sd_quote_manager(line);
 	g_inf->line = line;
 	if(ft_is_builtin_no_pipe(line))
 		ft_builtin_no_pipe(line, g_inf->env);
 	else
 		ft_exec_manager(line, g_inf->env);
-	ft_free_ginf();
+	ft_free_ginf(false);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -51,6 +51,7 @@ int	main(int ac, char **av, char **envp)
 		ft_error(BAD_PARAMETERS, "minishell : bad usage");
 	signal(SIGINT, ft_sigint_handler);
 	signal(SIGQUIT, ft_sigquit_handler);
+	ft_init_ginf(envp, true);
 	while (true)
 	{
 		line = readline("minishell$ ");
@@ -60,8 +61,7 @@ int	main(int ac, char **av, char **envp)
 			line++;
 		if (!ft_strncmp(line, "", 1))
 			continue ;
-		add_history(line);
-		ft_main_suite(line, envp);
+		(add_history(line), ft_main_suite(line, envp));
 	}
 	return (EXIT_SUCCESS);
 }

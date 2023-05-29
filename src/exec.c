@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 14:24:52 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 22:22:44 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,12 @@ static void ft_pipe(t_pcmd *pcmd)
 	}
 	(close(p[0]), close(p[1]));
 	(waitpid(pid1, &sta, 0), waitpid(pid2, &sta, 0));
-	if (!g_inf->exit_code)
-	{
-		if (WIFEXITED(sta))
-			g_inf->exit_code = WEXITSTATUS(sta);
-		else if (WIFSIGNALED(sta))
-			g_inf->exit_code = 128 + WTERMSIG(sta);
-	}
+	if (WIFEXITED(sta))
+		g_inf->exit_code = WEXITSTATUS(sta);
+	else if (WIFSIGNALED(sta))
+		g_inf->exit_code = 128 + WTERMSIG(sta);
 	sta = g_inf->exit_code;
-	(ft_free_ginf(), exit(sta));
+	(ft_free_ginf(true), exit(sta));
 }
 
 void	ft_runcmd(t_cmd *cmd)
@@ -89,11 +86,8 @@ void	ft_exec_manager(char *line, char **envp)
 		ft_runcmd(cmd);
 	}
 	waitpid(pid, &sta, 0);
-	if (!g_inf->exit_code)
-	{
-		if (WIFEXITED(sta))
-			g_inf->exit_code = WEXITSTATUS(sta);
-		else if (WIFSIGNALED(sta))
-			g_inf->exit_code = 128 + WTERMSIG(sta);
-	}
+	if (WIFEXITED(sta))
+		g_inf->exit_code = WEXITSTATUS(sta);
+	else if (WIFSIGNALED(sta))
+		g_inf->exit_code = 128 + WTERMSIG(sta);
 }

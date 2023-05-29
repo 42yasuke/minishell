@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 21:45:31 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 21:45:10 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ extern t_ginf	*g_inf;
 
 /*	error.c	*/
 void	ft_error(int err, char *msg_err);
+void	ft_error2(char *msg_err, int err);
 
 /*	builtin.c	*/
 int		ft_is_builtin(char *line);
@@ -158,7 +159,7 @@ char	**ft_cpy_envp(char **envp);
 int		ft_nb_str(char **envp);
 
 /*	utils3.c	*/
-void	ft_init_ginf(char **envp);
+void	ft_init_ginf(char **envp, int init_all);
 
 /*	exec.c	*/
 void	ft_exec_manager(char *line, char **envp);
@@ -182,7 +183,7 @@ void	ft_getpath_n_builtin(t_ecmd *ecmd);
 void	ft_free_all(char **str);
 void	ft_free_lst(t_lenv *lst_env);
 void	ft_free_cmd(t_cmd *cmd);
-void	ft_free_ginf(void);
+void	ft_free_ginf(int free_all);
 
 /*	sdquote.c	*/
 int		ft_there_is_sdquote(char *line);
@@ -196,5 +197,8 @@ char	*ft_merge_tab(char **tab, int spaced);
 
 /*	sdquote3.c	*/
 char	*ft_sd_quote_manager(char *line);
+
+/*	export.c	*/
+int		ft_analyse(char *str);
 
 #endif

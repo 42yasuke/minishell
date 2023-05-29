@@ -6,13 +6,13 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 05:09:01 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 01:39:40 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 21:05:09 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	ft_another_one_env(char **var, char **envp)
+static void	ft_another_one_env(char *str, char **envp)
 {
 	int		i;
 
@@ -20,12 +20,12 @@ static void	ft_another_one_env(char **var, char **envp)
 	while (envp[i])
 		i++;
 	if (i < MAXARG)
-		envp[i] = ft_strdup(var[1]);
+		envp[i] = ft_strdup(str);
 	else
 		ft_error(EXPORT_FAILED, "export : max variable reached");
 }
 
-static void	ft_export_no_pipe_args(char **var, char **envp)
+static void	ft_export_no_pipe_args(char *str, char **envp)
 {
 	char	*tmp;
 	size_t	diff;
@@ -35,16 +35,16 @@ static void	ft_export_no_pipe_args(char **var, char **envp)
 	while (envp[++i])
 	{
 		diff = ft_strlen(envp[i]) - ft_strlen(ft_strchr(envp[i], '='));
-		if (!ft_strncmp(var[1], envp[i], diff))
+		if (!ft_strncmp(str, envp[i], diff))
 		{
 			tmp = envp[i];
-			envp[i] = ft_strdup(var[1]);
+			envp[i] = ft_strdup(str);
 			free(tmp);
 			break ;
 		}
 	}
 	if (!envp[i])
-		ft_another_one_env(var, envp);
+		ft_another_one_env(str, envp);
 }
 
 static void	ft_export_no_args(char **envp)
@@ -69,19 +69,16 @@ static void	ft_export_no_args(char **envp)
 void	ft_export_no_pipe(char *line, char **envp)
 {
 	char	**tmp;
+	int		i;
 
 	tmp = ft_split(line, ' ');
 	if (tmp[1])
 	{
-		if (tmp[2])
-			ft_error(EXPORT_FAILED, "export : invalid argument");
-		if (tmp[1][0] == '-')
-			ft_error(EXPORT_FAILED, "export : invalid option");
-		else
+		i = 0;
+		while (tmp[++i])
 		{
-			if (!ft_strchr(tmp[1], '='))
-				ft_error(EXPORT_FAILED, "export : variable : need an affectation");
-			ft_export_no_pipe_args(tmp, envp);
+			if (ft_analyse(tmp[i]))
+				ft_export_no_pipe_args(tmp[i], envp);
 		}
 	}
 	else

@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 15:58:14 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 22:12:50 by jose             ###   ########.fr       */
+/*   Created: 2023/05/29 20:02:12 by jose              #+#    #+#             */
+/*   Updated: 2023/05/29 22:55:17 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	ft_init_ginf(char **envp, int init_all)
+int	ft_analyse(char *str)
 {
-	if (init_all)
+	int		i;
+
+	i = -1;
+	if (!ft_isalpha(str[0]))
+		return (ft_error2("exoprt: invalid arg\n", 1), false);
+	if (!ft_strchr(str, '='))
 	{
-		g_inf = malloc(sizeof(*g_inf));
-		if (!g_inf)
-			ft_error(MALLOC_FAILED, "g_inf : malloc failed");
-		g_inf->env = ft_cpy_envp(envp);
-		g_inf->exit_code = 0;
+		while (str[++i])
+			if (!ft_isalnum(str[i]))
+				return (ft_error2("exoprt: invalid arg\n", 1), false);
 	}
-	g_inf->line = NULL;
-	g_inf->top = NULL;
-	g_inf->interpret = true;
+	else
+	{
+		while (str[++i] != '=')
+		{
+			if (!ft_isalnum(str[i]))
+				return (ft_error2("exoprt: invalid arg\n", 1), false);
+		}
+	}
+	return (true);
 }

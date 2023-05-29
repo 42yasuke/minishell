@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 01:44:37 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/29 21:46:08 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_export_no_args(t_ecmd *ecmd)
 		tmp = ft_get_node(lst_env, i);
 		ft_printf("export %s\n", tmp->env_name);
 	}
-	(ft_free_ginf(), ft_free_lst(lst_env), exit(EXIT_SUCCESS));
+	(ft_free_ginf(true), ft_free_lst(lst_env), exit(EXIT_SUCCESS));
 }
 
 void	ft_export(t_ecmd *ecmd)
@@ -60,7 +60,7 @@ void	ft_unset(t_ecmd *ecmd)
 		else
 			ft_unset_with_args(ecmd);
 	}
-	(ft_free_ginf(), exit(EXIT_SUCCESS));
+	(ft_free_ginf(true), exit(EXIT_SUCCESS));
 }
 
 void	ft_env(t_ecmd *ecmd)
@@ -70,7 +70,7 @@ void	ft_env(t_ecmd *ecmd)
 	i = -1;
 	while (ecmd->env[++i])
 		ft_printf("%s\n", ecmd->env[i]);
-	(ft_free_ginf(), exit(EXIT_SUCCESS));
+	(ft_free_ginf(true), exit(EXIT_SUCCESS));
 }
 
 void	ft_exit(t_ecmd *ecmd)
@@ -94,8 +94,8 @@ void	ft_exit(t_ecmd *ecmd)
 			if (ft_strlen(ecmd->argv[1]) > 3 || ft_atoi(ecmd->argv[1]) > 255)
 				ft_error(EXIT_FAILED, "exit : invalid argument");
 			i = ft_atoi(ecmd->argv[1]);
-			(ft_free_ginf(), ft_printf("exit\n"), exit(i));
+			(ft_free_ginf(true), ft_printf("exit\n"), exit(i));
 		}
 	}
-	(ft_free_ginf(), ft_printf("exit\n"), exit(EXIT_SUCCESS));
+	(ft_free_ginf(true), ft_printf("exit\n"), exit(EXIT_SUCCESS));
 }
