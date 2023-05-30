@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 23:28:47 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 02:33:12 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,23 @@ int	ft_is_whitespace(int c)
 
 void	ft_cd_no_pipe(char *line)
 {
-	int	i;
+	int		i;
+	char	**tmp;
 
 	i = 2;
-	while (line[i] && ft_is_whitespace(line[i]))
-		i++;
-	if (line[i])
+	tmp = ft_split(line, ' ');
+	if (tmp[1])
 	{
-		if (chdir(line + i))
-			ft_error(CD_FAILED, strerror(errno));
+		if (tmp[2])
+			ft_error2("cd: too many arguments\n", 1);
+		else
+		{
+			if (chdir(line + i))
+				ft_error2("cd : No such file or directory\n", 1);
+		}
 	}
+	else
+		ft_error2("cd: too few arguments\n", 1);
 }
 
 pid_t	ft_fork(void)
