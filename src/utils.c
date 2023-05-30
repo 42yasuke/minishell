@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/30 02:33:12 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 02:37:02 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_unset_no_pipe(char *line, char **envp)
 
 	i = -1;
 	tmp = ft_split(line, ' ');
-	if (tmp[1][0] == '-')
+	if (tmp[1] && tmp[1][0] == '-')
 		ft_error2("unset : invalid option", 2);
 	while (tmp[++i])
 		ft_unset_no_pipe_with_args(tmp[i], envp);
