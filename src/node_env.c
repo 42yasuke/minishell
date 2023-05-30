@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:04 by jose              #+#    #+#             */
-/*   Updated: 2023/05/24 04:59:40 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 13:20:21 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp)
 
 	tmp = malloc(sizeof(*tmp));
 	if (!tmp)
-		(ft_free_lst(lst_env), ft_error(MALLOC_FAILED, strerror(errno)));
+		(ft_free_lst(lst_env), ft_error(MALLOC_FAILED, "tmp", "malloc failed"));
 	tmp->env_name = envp[i];
 	tmp->id = -1;
 	tmp->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:23:18 by jose              #+#    #+#             */
-/*   Updated: 2023/05/28 00:12:02 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 02:44:56 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ static char	*ft_get_path(char *cmd)
 void	ft_getpath_n_builtin(t_ecmd *ecmd)
 {
 	ecmd->is_builtin = ft_is_builtin(ecmd->argv[0]);
-	//if (!ecmd->is_builtin)
 	ecmd->path = ft_get_path(ecmd->argv[0]);
 }

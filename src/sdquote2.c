@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 22:45:33 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 18:02:35 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 13:24:33 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*ft_bf_str(char **tab, int i)
 	is_d = false;
 	bf = ft_strdup(tab[i]);
 	if (!bf)
-		ft_error(MALLOC_FAILED, "bf : malloc failed");
+		ft_error(MALLOC_FAILED, "bf", "malloc failed");
 	while (bf[++j])
 	{
 		if (bf[j] == '$')
@@ -67,7 +67,7 @@ static char	*ft_nenv_str(char **tab, int i, int *j2)
 	if (name_env[1] == '?')
 		return (name_env[2] = '\0', *j2 = 2, name_env);
 	if (!name_env)
-		ft_error(MALLOC_FAILED, "name_env : malloc failed");
+		ft_error(MALLOC_FAILED, "name_env", "malloc failed");
 	j = -1;
 	*j2 = -1;
 	while (name_env[++j])
@@ -138,7 +138,7 @@ char	*ft_merge_tab(char **tab, int spaced)
 		nbr_char += ft_strlen(tab[i]);
 	line = malloc(sizeof(*line) * (nbr_char + i));
 	if (!line)
-		ft_error(MALLOC_FAILED, "ft_merge_tab : line : malloc failed");
+		ft_error(MALLOC_FAILED, "line", "malloc failed");
 	nbr_char = 0;
 	i = -1;
 	while (tab[++i])

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:20:31 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 21:47:02 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 13:20:42 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_another_one_env(t_ecmd *ecmd)
 	if (i < MAXARG)
 		ecmd->env[i] = ft_strdup(ecmd->argv[1]);
 	else
-		ft_error(EXPORT_FAILED, "export : max variable reached");
+		ft_error(EXPORT_FAILED, "export", "max variable reached");
 }
 
 void	ft_export_with_args(t_ecmd *ecmd)

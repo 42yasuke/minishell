@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 21:41:14 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 13:19:36 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)av;
 	if (ac > 1)
-		ft_error(BAD_PARAMETERS, "minishell : bad usage");
+		ft_error(BAD_PARAMETERS, "parameters", "bad usage");
 	signal(SIGINT, ft_sigint_handler);
 	signal(SIGQUIT, ft_sigquit_handler);
 	ft_init_ginf(envp, true);

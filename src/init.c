@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 19:19:48 by jose              #+#    #+#             */
-/*   Updated: 2023/05/23 16:41:53 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 13:18:58 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_cmd	*ft_pipecmd(t_cmd *left, t_cmd *right)
 
 	cmd = malloc(sizeof(*cmd));
 	if (!cmd)
-		ft_error(MALLOC_FAILED, strerror(errno));
+		ft_error(MALLOC_FAILED, "execve", strerror(errno));
 	cmd->type = PIPE;
 	cmd->left = left;
 	cmd->right = right;
@@ -31,7 +31,7 @@ t_cmd	*ft_execcmd(char **envp)
 
 	cmd = malloc(sizeof(*cmd));
 	if (!cmd)
-		ft_error(MALLOC_FAILED, strerror(errno));
+		ft_error(MALLOC_FAILED, "execve", strerror(errno));
 	cmd->type = EXEC;
 	cmd->argv = NULL;
 	cmd->path = NULL;
@@ -46,7 +46,7 @@ t_cmd	*ft_redircmd(t_cmd *subcmd, char *file, int mode, int fd)
 
 	cmd = malloc(sizeof(*cmd));
 	if (!cmd)
-		ft_error(MALLOC_FAILED, strerror(errno));
+		ft_error(MALLOC_FAILED, "execve", strerror(errno));
 	cmd->type = REDIR;
 	cmd->cmd = subcmd;
 	cmd->file = file;

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 21:45:10 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 01:26:48 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,14 @@ typedef struct s_ginf
 	int		interpret;
 }	t_ginf;
 
+typedef long long int	t_ll;
+
 /*	ptr on execution tree	*/
 extern t_ginf	*g_inf;
 
 /*	error.c	*/
-void	ft_error(int err, char *msg_err);
-void	ft_error2(char *msg_err, int err);
+void	ft_error(int err, char *cmd, char *msg_err);
+void	ft_error2(char *cmd, char *msg_err, int err);
 
 /*	builtin.c	*/
 int		ft_is_builtin(char *line);
@@ -160,6 +162,9 @@ int		ft_nb_str(char **envp);
 
 /*	utils3.c	*/
 void	ft_init_ginf(char **envp, int init_all);
+t_ll	ft_atoll(const char *nptr);
+int		ft_compare_to_llmax_and_llmin(char *nbr);
+int		ft_rest_of_div(t_ll dd, int d);
 
 /*	exec.c	*/
 void	ft_exec_manager(char *line, char **envp);
@@ -200,5 +205,8 @@ char	*ft_sd_quote_manager(char *line);
 
 /*	export.c	*/
 int		ft_analyse(char *str);
+
+/*	ft_illtoa.c	*/
+char	*ft_illtoa(t_ll n);
 
 #endif

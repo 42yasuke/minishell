@@ -6,39 +6,65 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:11:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 21:46:28 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 01:26:09 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+static int	ft_verif_numeric_arg(char **tmp)
+{
+	int	i;
+
+	i = -1;
+	if (tmp[2])
+		return (ft_error2("exit", "too many arguments", 1), false);
+	if (tmp[1][0] == '-' && !ft_isdigit(tmp[1][1]))
+		(ft_free_all(tmp), ft_error(EXIT_FAILED, "exit", "numeric argument required"));
+	if (tmp[1][0] == '+' && !ft_isdigit(tmp[1][1]))
+		(ft_free_all(tmp), ft_error(EXIT_FAILED, "exit", "numeric argument required"));
+	while (tmp[1][++i])
+	{
+		if (!ft_isdigit(tmp[1][i]))
+		{
+			if (i || (tmp[1][i] != '+' && tmp[1][i] != '-'))
+				(ft_free_all(tmp), ft_error(EXIT_FAILED, "exit", "numeric argument required"));
+		}
+	}
+	return (true);
+}
+
+static int	ft_verif_numeric_arg2(char **tmp)
+{
+	t_ll	d;
+
+	if (!ft_compare_to_llmax_and_llmin(tmp[1]))
+		(ft_free_all(tmp), ft_error(EXIT_FAILED, "exit", "numeric argument required"));
+	d = ft_atoll(tmp[1]);
+	d = ft_rest_of_div(d, 256);
+	return ((int)d);
+}
+
 void	ft_exit_no_pipe(char *line)
 {
 	char	**tmp;
 	int		i;
+	int		quit;
 
-	i = -1;
 	tmp = ft_split(line, ' ');
 	if (tmp[1])
 	{
-		if (tmp[2])
-			ft_error(EXIT_FAILED, "exit : invalid argument");
-		if (tmp[1][0] == '-')
-			ft_error(EXIT_FAILED, "exit : invalid option");
-		else
+		quit = ft_verif_numeric_arg(tmp);
+		if (quit)
 		{
-			while (tmp[1][++i])
-			{
-				if (!ft_isdigit(tmp[1][i]))
-					ft_error(EXIT_FAILED, "exit : invalid argument");
-			}
-			if (ft_strlen(tmp[1]) > 3 || ft_atoi(tmp[1]) > 255)
-				ft_error(EXIT_FAILED, "exit : invalid argument");
-			i = ft_atoi(tmp[1]);
-			(ft_printf("exit\n"), ft_free_all(tmp), ft_free_ginf(true), exit(i));
+			i = ft_verif_numeric_arg2(tmp);
+			(ft_free_all(tmp), ft_free_ginf(true));
+			(ft_printf("exit\n"), exit(i));
 		}
 	}
-	(ft_printf("exit\n"), ft_free_all(tmp), ft_free_ginf(true), exit(EXIT_SUCCESS));
+	ft_free_all(tmp);
+	if (quit)
+		(ft_free_ginf(true), ft_printf("exit\n"), exit(EXIT_SUCCESS));
 }
 
 int	ft_is_builtin_no_pipe(char *line)

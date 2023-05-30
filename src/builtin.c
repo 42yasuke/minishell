@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 21:45:32 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 13:12:13 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_cd(t_ecmd *ecmd)
 	if (ecmd->argv[1])
 	{
 		if(ecmd->argv[2])
-			ft_error(CD_FAILED, "cd : invalid argument");
+			ft_error(CD_FAILED, "cd", "invalid argument");
 		if (chdir(ecmd->argv[1]))
-			ft_error(CD_FAILED, strerror(errno));
+			ft_error(CD_FAILED, "cd",strerror(errno));
 		else
-			(ft_free_ginf(true),exit(EXIT_SUCCESS));
+			(ft_free_ginf(true), exit(EXIT_SUCCESS));
 	}
-	ft_error(CD_FAILED, "cd : only relative or absolu path");
+	ft_error(CD_FAILED, "cd", "only relative or absolu path");
 }
 
 void	ft_echo(t_ecmd *ecmd)
@@ -40,7 +40,7 @@ void	ft_echo(t_ecmd *ecmd)
 			if (ft_strncmp(ecmd->argv[1], "-n", ft_strlen(ecmd->argv[1])))
 				is_n = true;
 			else
-				ft_error(ECHO_FAILED, "echo : option unknown");
+				ft_error(ECHO_FAILED, "echo", "option unknown");
 		}
 		ft_printf("%s", ecmd->argv[1]);
 		while (ecmd->argv[++i])
@@ -58,13 +58,13 @@ void	ft_pwd(t_ecmd *ecmd)
 	if(ecmd->argv[1])
 	{
 		if(ecmd->argv[2])
-			ft_error(PWD_FAILED, "pwd : invalid argument");
+			ft_error(PWD_FAILED, "pwd", "invalid argument");
 		if (ecmd->argv[1][0] == '-')
-			ft_error(PWD_FAILED, "pwd : option unknown");
+			ft_error(PWD_FAILED, "pwd", "option unknown");
 	}
 	path = getcwd(NULL, 0);
 	if (!path)
-		ft_error(PWD_FAILED, strerror(errno));
+		ft_error(PWD_FAILED, "pwd",strerror(errno));
 	ft_printf("%s\n", path);
 	(ft_free_ginf(true), free(path), exit(EXIT_SUCCESS));
 }

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 21:46:08 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 13:15:25 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_export_no_args(t_ecmd *ecmd)
 	i = -1;
 	lst_env = malloc(sizeof(*lst_env));
 	if (!lst_env)
-		ft_error(MALLOC_FAILED, "lst_env : malloc failded");
+		ft_error(MALLOC_FAILED, "lst_env", "malloc failded");
 	ft_init_lst(lst_env, ecmd->env);
 	while (ecmd->env[++i])
 	{
@@ -31,18 +31,18 @@ static void	ft_export_no_args(t_ecmd *ecmd)
 	(ft_free_ginf(true), ft_free_lst(lst_env), exit(EXIT_SUCCESS));
 }
 
-void	ft_export(t_ecmd *ecmd)
+void	ft_export(t_ecmd *ecmd)//maj
 {
 	if (ecmd->argv[1])
 	{
 		if (ecmd->argv[2])
-			ft_error(EXPORT_FAILED, "export : invalid argument");
+			ft_error(EXPORT_FAILED, "export", "invalid argument");
 		if (ecmd->argv[1][0] == '-')
-			ft_error(EXPORT_FAILED, "export : invalid option");
+			ft_error(EXPORT_FAILED, "export","invalid option");
 		else
 		{
 			if (!ft_strchr(ecmd->argv[1], '='))
-				ft_error(EXPORT_FAILED, "export : variable : need an affectation");
+				ft_error(EXPORT_FAILED, "export", "variable : need an affectation");
 			ft_export_with_args(ecmd);
 		}
 	}
@@ -54,9 +54,9 @@ void	ft_unset(t_ecmd *ecmd)
 	if (ecmd->argv[1])
 	{
 		if (ecmd->argv[2])
-			ft_error(EXPORT_FAILED, "unset : invalid argument");
+			ft_error(EXPORT_FAILED, "unset", "invalid argument");
 		if (ecmd->argv[1][0] == '-')
-			ft_error(EXPORT_FAILED, "unset : invalid option");
+			ft_error(EXPORT_FAILED, "unset", "invalid option");
 		else
 			ft_unset_with_args(ecmd);
 	}
@@ -81,18 +81,18 @@ void	ft_exit(t_ecmd *ecmd)
 	if (ecmd->argv[1])
 	{
 		if (ecmd->argv[2])
-			ft_error(EXIT_FAILED, "exit : invalid argument");
+			ft_error(EXIT_FAILED, "exit", "invalid argument");
 		if (ecmd->argv[1][0] == '-')
-			ft_error(EXIT_FAILED, "exit : invalid option");
+			ft_error(EXIT_FAILED, "exit", "invalid option");
 		else
 		{
 			while (ecmd->argv[1][++i])
 			{
 				if (!ft_isdigit(ecmd->argv[1][i]))
-					ft_error(EXIT_FAILED, "exit : invalid argument");
+					ft_error(EXIT_FAILED, "exit", "invalid argument");
 			}
 			if (ft_strlen(ecmd->argv[1]) > 3 || ft_atoi(ecmd->argv[1]) > 255)
-				ft_error(EXIT_FAILED, "exit : invalid argument");
+				ft_error(EXIT_FAILED, "exit", "invalid argument");
 			i = ft_atoi(ecmd->argv[1]);
 			(ft_free_ginf(true), ft_printf("exit\n"), exit(i));
 		}

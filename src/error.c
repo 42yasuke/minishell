@@ -6,26 +6,51 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:56:02 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 22:47:16 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/30 22:21:10 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	ft_error(int err, char *msg_err)
+static char	*ft_make_msg_err(char *cmd, char *msg_err)
 {
-	int	exit_code;
+	char	*tmp;
+	char	*ret;
+
+	ret = ft_strjoin("minishel : ", cmd);
+	tmp = ret;
+	ret = ft_strjoin(ret, ": ");
+	free(tmp);
+	tmp = ret;
+	ret = ft_strjoin(ret, msg_err);
+	free(tmp);
+	tmp = ret;
+	ret = ft_strjoin(ret, "\n");
+	return (free(tmp), ret);
+}
+
+void	ft_error(int err, char *cmd, char *msg_err)
+{
+	int		exit_code;
+	char	*str;
 
 	exit_code = EXIT_FAILURE;
-	ft_printf("Error : %s\n", msg_err);
+	str = ft_make_msg_err(cmd, msg_err);
+	write (STDERR_FILENO, str, ft_strlen(str));
+	(free(str), ft_free_ginf(true));
 	if (err == EXECVE_FAILED)
 		exit_code = 127;
-	ft_free_ginf(true);
+	else if (err == EXIT_FAILED)
+		exit_code = 2;
 	exit(exit_code);
 }
 
-void	ft_error2(char *msg_err, int err)
+void	ft_error2(char *cmd, char *msg_err, int err)
 {
-	write (2, msg_err, ft_strlen(msg_err));
+	char	*tmp;
+
+	tmp = ft_make_msg_err(cmd, msg_err);
+	write (STDERR_FILENO, tmp, ft_strlen(tmp));
+	free(tmp);
 	g_inf->exit_code = err;
 }
