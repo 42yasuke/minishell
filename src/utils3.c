@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:58:14 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 01:27:00 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 02:13:20 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,15 @@ static int	ft_helph_to_compare(char *nbr, char *llm)
 	int		i_nbr;
 	int		i_llm;
 
-	i_nbr = ft_strlen(nbr);
-	i_llm = ft_strlen(llm);
-	if (i_nbr > i_llm)
+	i_nbr = 0;
+	i_llm = 0;
+	if (ft_strlen(nbr) > ft_strlen(llm))
 		return (false);
-	while (i_nbr > 0)
+	if (ft_strlen(nbr) < ft_strlen(llm))
+		return (true);
+	while (nbr[i_nbr])
 	{
-		if (nbr[--i_nbr] > llm[--i_llm])
+		if (nbr[i_nbr++] > llm[i_llm++])
 			return (false);
 	}
 	return (true);
