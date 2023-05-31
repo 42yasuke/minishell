@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 19:59:34 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 23:55:47 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define NO_TYPE 13
 # define UNSET_FAILED 14
 # define SDQUOTE_FAILED 15
+# define ENV_FAILED 16
 
 /*	builtin's macro	*/
 # define CD 1
@@ -122,7 +123,6 @@ void	ft_error2(char *cmd, char *msg_err, int err);
 int		ft_is_builtin(char *line);
 void	ft_built_it(t_ecmd *ecmd);
 void	ft_cd(t_ecmd *ecmd);
-void	ft_echo(t_ecmd *ecmd);
 void	ft_pwd(t_ecmd *ecmd);
 
 /*	builtin2.c	*/
@@ -136,6 +136,8 @@ void	ft_builtin_no_pipe(char *line, char **envp);
 void	ft_export_no_pipe(char *line, char **envp);
 
 /*	builtin4.c	*/
+int		ft_verif_numeric_arg(char **tmp);
+int		ft_verif_numeric_arg2(char **tmp);
 void	ft_exit_no_pipe(char *line);
 int		ft_is_builtin_no_pipe(char *line);
 
@@ -145,7 +147,7 @@ void	ft_init_lst(t_lenv *lst_env, char **envp);
 t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp);
 
 /*	node_env2.c	*/
-void	ft_export_with_args(t_ecmd *ecmd);
+void	ft_export_with_args(char *str, char **envp);
 void	ft_unset_with_args(t_ecmd *ecmd);
 
 /*	utils.c	*/
@@ -212,5 +214,8 @@ char	*ft_illtoa(t_ll n);
 /*	redir.c	*/
 void	ft_infile_red(t_cmd **cmd, char **ps);
 void	ft_outfile_red(t_cmd **cmd, char **ps);
+
+/*	echo.c	*/
+void	ft_echo(t_ecmd *ecmd);
 
 #endif

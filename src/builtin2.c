@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:24:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/30 13:15:25 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 23:57:37 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,22 @@ static void	ft_export_no_args(t_ecmd *ecmd)
 	(ft_free_ginf(true), ft_free_lst(lst_env), exit(EXIT_SUCCESS));
 }
 
-void	ft_export(t_ecmd *ecmd)//maj
+void	ft_export(t_ecmd *ecmd)
 {
+	int	i;
+
+	i = 0;
 	if (ecmd->argv[1])
 	{
-		if (ecmd->argv[2])
-			ft_error(EXPORT_FAILED, "export", "invalid argument");
-		if (ecmd->argv[1][0] == '-')
-			ft_error(EXPORT_FAILED, "export","invalid option");
-		else
+		while (ecmd->argv[++i])
 		{
-			if (!ft_strchr(ecmd->argv[1], '='))
-				ft_error(EXPORT_FAILED, "export", "variable : need an affectation");
-			ft_export_with_args(ecmd);
+			if (ft_analyse(ecmd->argv[i]))
+				ft_export_with_args(ecmd->argv[i], ecmd->env);
+			else
+			{
+				i = g_inf->exit_code;
+				(ft_free_ginf(true), exit(i));
+			}
 		}
 	}
 	ft_export_no_args(ecmd);
@@ -53,10 +56,8 @@ void	ft_unset(t_ecmd *ecmd)
 {
 	if (ecmd->argv[1])
 	{
-		if (ecmd->argv[2])
-			ft_error(EXPORT_FAILED, "unset", "invalid argument");
 		if (ecmd->argv[1][0] == '-')
-			ft_error(EXPORT_FAILED, "unset", "invalid option");
+			ft_error(UNSET_FAILED, "unset", "invalid option");
 		else
 			ft_unset_with_args(ecmd);
 	}
@@ -68,6 +69,13 @@ void	ft_env(t_ecmd *ecmd)
 	int	i;
 
 	i = -1;
+	if (ecmd->argv[1])
+	{
+		if (ecmd->argv[1][0] == '-')
+			ft_error(ENV_FAILED, "env", "invalid option");
+		else
+			ft_error(EXECVE_FAILED, "env", "No such file or directory");
+	}
 	while (ecmd->env[++i])
 		ft_printf("%s\n", ecmd->env[i]);
 	(ft_free_ginf(true), exit(EXIT_SUCCESS));
@@ -75,27 +83,20 @@ void	ft_env(t_ecmd *ecmd)
 
 void	ft_exit(t_ecmd *ecmd)
 {
-	int	i;
+	int		i;
+	int		quit;
 
-	i = -1;
 	if (ecmd->argv[1])
 	{
-		if (ecmd->argv[2])
-			ft_error(EXIT_FAILED, "exit", "invalid argument");
-		if (ecmd->argv[1][0] == '-')
-			ft_error(EXIT_FAILED, "exit", "invalid option");
-		else
+		quit = ft_verif_numeric_arg(ecmd->argv);
+		if (quit)
 		{
-			while (ecmd->argv[1][++i])
-			{
-				if (!ft_isdigit(ecmd->argv[1][i]))
-					ft_error(EXIT_FAILED, "exit", "invalid argument");
-			}
-			if (ft_strlen(ecmd->argv[1]) > 3 || ft_atoi(ecmd->argv[1]) > 255)
-				ft_error(EXIT_FAILED, "exit", "invalid argument");
-			i = ft_atoi(ecmd->argv[1]);
-			(ft_free_ginf(true), ft_printf("exit\n"), exit(i));
+			i = ft_verif_numeric_arg2(ecmd->argv);
+			ft_free_ginf(true);
+			(ft_printf("exit\n"), exit(i));
 		}
+		i = g_inf->exit_code;
+		(ft_free_ginf(true), exit(i));
 	}
 	(ft_free_ginf(true), ft_printf("exit\n"), exit(EXIT_SUCCESS));
 }

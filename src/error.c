@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:56:02 by jose              #+#    #+#             */
-/*   Updated: 2023/05/30 22:21:10 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 23:35:25 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	ft_error(int err, char *cmd, char *msg_err)
 	if (err == EXECVE_FAILED)
 		exit_code = 127;
 	else if (err == EXIT_FAILED)
+		exit_code = 2;
+	else if (err == ENV_FAILED)
+		exit_code = 125;
+	else if (err == UNSET_FAILED)
 		exit_code = 2;
 	exit(exit_code);
 }

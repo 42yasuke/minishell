@@ -6,13 +6,13 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:11:51 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 01:26:09 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 23:27:10 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static int	ft_verif_numeric_arg(char **tmp)
+int	ft_verif_numeric_arg(char **tmp)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ static int	ft_verif_numeric_arg(char **tmp)
 	return (true);
 }
 
-static int	ft_verif_numeric_arg2(char **tmp)
+int	ft_verif_numeric_arg2(char **tmp)
 {
 	t_ll	d;
 

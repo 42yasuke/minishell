@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 02:20:40 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 22:29:40 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_cd_no_pipe(char *line)
 		}
 	}
 	else
-		ft_error2("cd", "too few arguments", 1);
+		ft_error2("cd", "only relative or absolu path", 1);
 }
 
 pid_t	ft_fork(void)

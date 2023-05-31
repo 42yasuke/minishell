@@ -6,7 +6,7 @@
 #    By: jose <jose@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/28 20:06:58 by jose              #+#    #+#              #
-#    Updated: 2023/05/31 19:45:32 by jose             ###   ########.fr        #
+#    Updated: 2023/05/31 22:58:53 by jose             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ C_FILES =	main.c \
 			sdquote3.c \
 			export.c \
 			ft_illtoa.c \
-			redir.c
+			redir.c \
+			echo.c
 
 SRC = $(addprefix src/, $(C_FILES))
 
