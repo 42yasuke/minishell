@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/30 13:37:41 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 02:20:40 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ int	ft_is_whitespace(int c)
 
 void	ft_cd_no_pipe(char *line)
 {
-	int		i;
 	char	**tmp;
 
-	i = 2;
 	tmp = ft_split(line, ' ');
 	if (tmp[1])
 	{
@@ -39,7 +37,7 @@ void	ft_cd_no_pipe(char *line)
 			ft_error2("cd", "too many arguments", 1);
 		else
 		{
-			if (chdir(line + i))
+			if (chdir(tmp[1]))
 				ft_error2("cd", "No such file or directory", 1);
 		}
 	}
