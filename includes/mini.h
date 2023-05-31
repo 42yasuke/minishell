@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 18:41:17 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 19:59:34 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ int		ft_analyse(char *str);
 char	*ft_illtoa(t_ll n);
 
 /*	redir.c	*/
-
+void	ft_infile_red(t_cmd **cmd, char **ps);
+void	ft_outfile_red(t_cmd **cmd, char **ps);
 
 #endif

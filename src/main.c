@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/30 13:19:36 by jose             ###   ########.fr       */
+/*   Updated: 2023/05/31 20:25:21 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	ft_main_suite(char *line, char **envp)
 	ft_init_ginf(envp, false);
 	line = ft_sd_quote_manager(line);
 	g_inf->line = line;
-	if(ft_is_builtin_no_pipe(line))
+	if (ft_is_builtin_no_pipe(line))
 		ft_builtin_no_pipe(line, g_inf->env);
 	else
 		ft_exec_manager(line, g_inf->env);
@@ -56,12 +56,12 @@ int	main(int ac, char **av, char **envp)
 	{
 		line = readline("minishell$ ");
 		if (!line)
-			(ft_printf("exit\n"), exit(EXIT_SUCCESS));
+			break ;
 		while (line && ft_is_whitespace(*line))
 			line++;
 		if (!ft_strncmp(line, "", 1))
 			continue ;
 		(add_history(line), ft_main_suite(line, envp));
 	}
-	return (EXIT_SUCCESS);
+	return (ft_printf("exit\n"), ft_free_ginf(true), EXIT_SUCCESS);
 }
