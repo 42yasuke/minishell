@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 22:29:40 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:00:33 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	ft_unset_no_pipe_with_args(char *str, char **envp)
 	while (envp[++i])
 	{
 		diff = ft_strlen(envp[i]) - ft_strlen(ft_strchr(envp[i], '='));
-		if (!ft_strncmp(str, envp[i], diff))	
+		if (!ft_strncmp(str, envp[i], diff))
 		{
 			free(envp[i]);
 			take_next = true;

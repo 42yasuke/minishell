@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 19:19:48 by jose              #+#    #+#             */
-/*   Updated: 2023/05/30 13:18:58 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:17:06 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cmd	*ft_pipecmd(t_cmd *left, t_cmd *right)
 	cmd->type = PIPE;
 	cmd->left = left;
 	cmd->right = right;
-	return ((t_cmd*)cmd);
+	return ((t_cmd *)cmd);
 }
 
 t_cmd	*ft_execcmd(char **envp)
@@ -37,7 +37,7 @@ t_cmd	*ft_execcmd(char **envp)
 	cmd->path = NULL;
 	cmd->is_builtin = false;
 	cmd->env = envp;
-	return ((t_cmd*)cmd);
+	return ((t_cmd *)cmd);
 }
 
 t_cmd	*ft_redircmd(t_cmd *subcmd, char *file, int mode, int fd)
@@ -52,5 +52,5 @@ t_cmd	*ft_redircmd(t_cmd *subcmd, char *file, int mode, int fd)
 	cmd->file = file;
 	cmd->mode = mode;
 	cmd->fd = fd;
-	return ((t_cmd*)cmd);
+	return ((t_cmd *)cmd);
 }

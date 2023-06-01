@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 22:56:58 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:07:02 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_cd(t_ecmd *ecmd)
 {
 	if (ecmd->argv[1])
 	{
-		if(ecmd->argv[2])
+		if (ecmd->argv[2])
 			ft_error(CD_FAILED, "cd", "too many arguments");
 		if (chdir(ecmd->argv[1]))
 			ft_error(CD_FAILED, "cd", strerror(errno));
@@ -30,16 +30,16 @@ void	ft_pwd(t_ecmd *ecmd)
 {
 	char	*path;
 
-	if(ecmd->argv[1])
+	if (ecmd->argv[1])
 	{
-		if(ecmd->argv[2])
+		if (ecmd->argv[2])
 			ft_error(PWD_FAILED, "pwd", "invalid argument");
 		if (ecmd->argv[1][0] == '-')
 			ft_error(PWD_FAILED, "pwd", "option unknown");
 	}
 	path = getcwd(NULL, 0);
 	if (!path)
-		ft_error(PWD_FAILED, "pwd",strerror(errno));
+		ft_error(PWD_FAILED, "pwd", strerror(errno));
 	ft_printf("%s\n", path);
 	(ft_free_ginf(true), free(path), exit(EXIT_SUCCESS));
 }
@@ -65,7 +65,7 @@ int	ft_is_builtin(char *line)
 
 void	ft_built_it(t_ecmd *ecmd)
 {
-	void	(*built_in[7])(t_ecmd*);
+	void	(*built_in[7])(t_ecmd *);
 
 	built_in[0] = &ft_cd;
 	built_in[1] = &ft_pwd;

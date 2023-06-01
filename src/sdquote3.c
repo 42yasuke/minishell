@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/05/30 13:25:14 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:05:41 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ static void	ft_cpy_str(char **tab, char **tab2)
 	{
 		tab[i] = ft_strdup(tab2[i]);
 		if (!tab[i])
-			(ft_free_all(tab2), ft_free_all(tab), ft_error(MALLOC_FAILED, "tab[i]", "malloc failed"));
+			(ft_free_all(tab2), ft_free_all(tab), ft_error(MALLOC_FAILED,
+					"tab[i]", "malloc failed"));
 	}
 }
 
-static void ft_no_quote(char *line, char **tab)
+static void	ft_no_quote(char *line, char **tab)
 {
 	char	**tab2;
 

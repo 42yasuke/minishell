@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/05/29 22:18:15 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:16:24 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,28 @@ void	ft_free_cmd(t_cmd *cmd)
 		return ;
 	if (cmd->type == EXEC)
 	{
-		ecmd = (t_ecmd*)cmd;
+		ecmd = (t_ecmd *)cmd;
 		if (ecmd->path)
 			if (!access(ecmd->path, X_OK))
 				free(ecmd->path);
 		ft_free_all(ecmd->argv);
 		free(cmd);
 	}
-	else if(cmd->type == REDIR)
+	else if (cmd->type == REDIR)
 	{
-		rcmd = (t_rcmd*)cmd;
+		rcmd = (t_rcmd *)cmd;
 		(ft_free_cmd(rcmd->cmd), free(cmd));
 	}
 	else
 	{
-		pcmd = (t_pcmd*)cmd;
+		pcmd = (t_pcmd *)cmd;
 		(ft_free_cmd(pcmd->left), ft_free_cmd(pcmd->right), free(cmd));
 	}
 }
 
 void	ft_free_ginf(int free_all)
 {
-	if(g_inf)
+	if (g_inf)
 	{
 		free(g_inf->line);
 		if (g_inf->top)

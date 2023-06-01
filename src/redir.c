@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:39:15 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 21:32:17 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:21:44 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	ft_outfile_red(t_cmd **cmd, char **ps)
 				outfile++;
 			if (*outfile)
 				*outfile = '\0';
-			*cmd = ft_redircmd(*cmd, file, O_WRONLY | O_CREAT | O_APPEND, STDOUT_FILENO);
+			*cmd = ft_redircmd(*cmd, file, O_WRONLY | \
+			O_CREAT | O_APPEND, STDOUT_FILENO);
 		}
 		else
 			ft_outfile_red_else(cmd, &outfile);

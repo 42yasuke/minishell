@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 19:20:31 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 23:57:20 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:20:10 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,15 @@ void	ft_unset_with_args(t_ecmd *ecmd)
 	size_t	diff;
 	int		i;
 	int		take_next;
+	char	*tmp;
 
 	take_next = false;
 	i = -1;
 	while (ecmd->env[++i])
 	{
-		diff = ft_strlen(ecmd->env[i]) - ft_strlen(ft_strchr(ecmd->env[i], '='));
-		if (!ft_strncmp(ecmd->argv[1], ecmd->env[i], diff))	
+		tmp = ft_strchr(ecmd->env[i], '=');
+		diff = ft_strlen(ecmd->env[i]) - ft_strlen(tmp);
+		if (!ft_strncmp(ecmd->argv[1], ecmd->env[i], diff))
 		{
 			free(ecmd->env[i]);
 			take_next = true;

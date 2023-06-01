@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:04 by jose              #+#    #+#             */
-/*   Updated: 2023/05/30 13:20:21 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:17:38 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	ft_range_lst(t_lenv *lst_env, char **envp)
 		{
 			if (!save && tmp->id == -1)
 				save = tmp;
-			else if(tmp->id == -1 && ft_strncmp(save->env_name, tmp->env_name, ft_strlen(save->env_name)) > 0)
+			else if (tmp->id == -1 && ft_strncmp(save->env_name, tmp->env_name,
+					ft_strlen(save->env_name)) > 0)
 				save = tmp;
 			tmp = tmp->next;
 		}

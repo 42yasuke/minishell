@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 19:59:13 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 01:20:52 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_cmd	*ft_parseexec(char **ps, char **envp)
 	t_cmd	*ret;
 
 	ret = ft_execcmd(envp);
-	ecmd = (t_ecmd*)ret;
+	ecmd = (t_ecmd *)ret;
 	ret = ft_parseredir(ret, ps);
 	ecmd->argv = ft_split(*ps, ' ');
 	ft_getpath_n_builtin(ecmd);
