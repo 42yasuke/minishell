@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 02:00:26 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 02:11:04 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/01 02:20:34 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,20 @@ static void	ft_pipe_suite(int **pi, int pid1, int pid2)
 	else if (WIFSIGNALED(sta))
 		g_inf->exit_code = 128 + WTERMSIG(sta);
 	sta = g_inf->exit_code;
-	(ft_free_ginf(true), exit(sta));
+	(free(p), ft_free_ginf(true), exit(sta));
 }
 
 void	ft_pipe(t_pcmd *pcmd)
 {
-	int		p[2];
+	int		*p;
 	pid_t	pid1;
 	pid_t	pid2;
 
+	p = malloc(sizeof(*p) * 2);
+	if (!p)
+		ft_error(MALLOC_FAILED, "p", strerror(errno));
 	if (pipe(p) < 0)
-		ft_error(PIPE_FAILED, "execve", strerror(errno));
+		ft_error(PIPE_FAILED, "pipe", strerror(errno));
 	pid1 = ft_fork();
 	if (!pid1)
 	{
