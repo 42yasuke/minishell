@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:11:51 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:14:36 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/05 19:27:29 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_exit_no_pipe(char *line)
 	int		i;
 	int		quit;
 
+	quit = true;
 	tmp = ft_split(line, ' ');
 	if (tmp[1])
 	{

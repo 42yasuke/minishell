@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:16:24 by jose             ###   ########.fr       */
+/*   Updated: 2023/06/05 19:22:58 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_free_ginf(int free_all)
 	if (g_inf)
 	{
 		free(g_inf->line);
+		g_inf->line = NULL;
 		if (g_inf->top)
 			ft_free_cmd(g_inf->top);
 		if (free_all)
