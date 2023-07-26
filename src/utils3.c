@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 15:58:14 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:01:16 by jose             ###   ########.fr       */
+/*   Updated: 2023/07/25 20:22:30 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	ft_init_ginf(char **envp, int init_all)
 	g_inf->line = NULL;
 	g_inf->top = NULL;
 	g_inf->interpret = true;
+	g_inf->is_child_process = false;
+	g_inf->here_doc_quit = false;
+	g_inf->here_doc = false;
+	g_inf->tmp_stdin = -1;
 }
 
 t_ll	ft_atoll(const char *nptr)

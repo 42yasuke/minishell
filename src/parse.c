@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:20:52 by jose             ###   ########.fr       */
+/*   Updated: 2023/07/26 14:30:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,16 @@ t_cmd	*ft_parsepipe(char **ps, char **envp)
 
 t_cmd	*ft_parseredir(t_cmd *cmd, char **ps)
 {
-	ft_infile_red(&cmd, ps);
+	char	*infile;
+
+	infile = ft_strchr(*ps, '<');
+	if (infile)
+	{
+		if (infile[1] == '<')
+			ft_here_doc(&cmd, ps);
+		else
+			ft_infile_red(&cmd, ps);
+	}
 	ft_outfile_red(&cmd, ps);
 	return (cmd);
 }

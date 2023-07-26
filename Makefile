@@ -6,7 +6,7 @@
 #    By: jose <jose@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/28 20:06:58 by jose              #+#    #+#              #
-#    Updated: 2023/06/01 02:04:34 by jose             ###   ########.fr        #
+#    Updated: 2023/07/26 13:12:16 by jose             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ C_FILES =	main.c \
 			utils.c \
 			utils2.c \
 			utils3.c \
+			utils4.c \
 			exec.c \
 			parse.c \
 			init.c \
@@ -40,6 +41,7 @@ C_FILES =	main.c \
 			export.c \
 			ft_illtoa.c \
 			redir.c \
+			here_doc.c \
 			echo.c \
 			ft_pipe.c
 

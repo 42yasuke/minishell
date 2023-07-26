@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 02:01:52 by jose             ###   ########.fr       */
+/*   Updated: 2023/07/26 14:29:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define REDIR 3
 
 # define MAXARG 100
+# define TCHAO "Au revoir, à la revoyure, bon voyage, arrivederci, sayonara"
 
 /* error's macro	*/
 # define BAD_PARAMETERS 0
@@ -107,6 +108,10 @@ typedef struct s_ginf
 	char				*line;
 	char				**env;
 	int					interpret;
+	int					is_child_process;
+	int					here_doc_quit;
+	int					here_doc;
+	int					tmp_stdin;
 }						t_ginf;
 
 typedef long long int	t_ll;
@@ -167,6 +172,9 @@ t_ll					ft_atoll(const char *nptr);
 int						ft_compare_to_llmax_and_llmin(char *nbr);
 int						ft_rest_of_div(t_ll dd, int d);
 
+/*	utils4.c	*/
+int						ft_verif_cmd(char *line);
+
 /*	exec.c	*/
 void					ft_exec_manager(char *line, char **envp);
 void					ft_runcmd(t_cmd *cmd);
@@ -214,6 +222,9 @@ char					*ft_illtoa(t_ll n);
 /*	redir.c	*/
 void					ft_infile_red(t_cmd **cmd, char **ps);
 void					ft_outfile_red(t_cmd **cmd, char **ps);
+
+/*	here_doc.c	*/
+void					ft_here_doc(t_cmd **cmd, char **ps);
 
 /*	echo.c	*/
 void					ft_echo(t_ecmd *ecmd);

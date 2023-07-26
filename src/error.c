@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:56:02 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:15:13 by jose             ###   ########.fr       */
+/*   Updated: 2023/07/03 01:26:03 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ void	ft_error(int err, char *cmd, char *msg_err)
 	int		exit_code;
 	char	*str;
 
+	str = NULL;
 	exit_code = EXIT_FAILURE;
-	str = ft_make_msg_err(cmd, msg_err);
-	write (STDERR_FILENO, str, ft_strlen(str));
+	if (msg_err)
+		str = ft_make_msg_err(cmd, msg_err);
+	if (msg_err)
+		write (STDERR_FILENO, str, ft_strlen(str));
 	(free(str), ft_free_ginf(true));
 	if (err == EXECVE_FAILED)
 		exit_code = 127;
@@ -46,6 +49,8 @@ void	ft_error(int err, char *cmd, char *msg_err)
 		exit_code = 125;
 	else if (err == UNSET_FAILED)
 		exit_code = 2;
+	else if (err == SIGINT)
+		exit_code = 130;
 	exit(exit_code);
 }
 

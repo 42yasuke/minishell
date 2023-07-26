@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 02:12:07 by jose             ###   ########.fr       */
+/*   Updated: 2023/07/25 16:25:00 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ void	ft_exec_manager(char *line, char **envp)
 	pid = ft_fork();
 	if (!pid)
 	{
+		g_inf->is_child_process = true;
 		cmd = ft_parsecmd(line, envp);
 		g_inf->top = cmd;
+		if (g_inf->here_doc_quit)
+			(ft_free_ginf(true), exit(130));
 		ft_runcmd(cmd);
 	}
 	waitpid(pid, &sta, 0);

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/05/31 20:25:21 by jose             ###   ########.fr       */
+/*   Updated: 2023/07/26 14:13:46 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,45 @@ t_ginf	*g_inf = NULL;
 
 void	ft_sigint_handler(int sig)
 {
+	int	dev_null;
+
 	(void)sig;
-	write(STDIN_FILENO, "\n", 1);
-	rl_clear_history();
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	dev_null = 0;
+	if (!g_inf->is_child_process)
+	{
+		write(STDIN_FILENO, "\n", 1);
+		rl_clear_history();
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else if (g_inf->here_doc)
+	{
+		dev_null = open("/dev/null", O_RDWR);
+		g_inf->here_doc_quit = true;
+		g_inf->tmp_stdin = dup(STDIN_FILENO);
+		(dup2(dev_null, STDIN_FILENO), close(dev_null));
+	}
 }
 
 void	ft_sigquit_handler(int sig)
 {
 	(void)sig;
-	(ft_printf("\nexit\n"), exit(EXIT_SUCCESS));
+	if (ft_strlen(rl_line_buffer))
+	{
+		if (!g_inf->is_child_process)
+			rl_replace_line(TCHAO, 1);
+	}
 }
 
 static void	ft_main_suite(char *line, char **envp)
 {
+	if (!ft_verif_cmd(line))
+	{
+		write(STDERR_FILENO, "minishell: error redirection or pipe\n", 38);
+		g_inf->exit_code = 2;
+		return ;
+	}
 	ft_init_ginf(envp, false);
 	line = ft_sd_quote_manager(line);
 	g_inf->line = line;
@@ -47,6 +70,7 @@ int	main(int ac, char **av, char **envp)
 	char	*line;
 
 	(void)av;
+	rl_catch_signals = 0;
 	if (ac > 1)
 		ft_error(BAD_PARAMETERS, "parameters", "bad usage");
 	signal(SIGINT, ft_sigint_handler);
@@ -55,7 +79,7 @@ int	main(int ac, char **av, char **envp)
 	while (true)
 	{
 		line = readline("minishell$ ");
-		if (!line)
+		if (!line || !ft_strncmp(line, TCHAO, ft_strlen(TCHAO)))
 			break ;
 		while (line && ft_is_whitespace(*line))
 			line++;
