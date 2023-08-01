@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdquote3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:05:41 by jose             ###   ########.fr       */
+/*   Updated: 2023/08/01 16:30:13 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	ft_quote(char *line, char **tab)
 {
 	char	**tab2;
 
+	tab2 = NULL;
 	if (!ft_is_closed(line))
 		ft_error(SDQUOTE_FAILED, "sdquote", "not closed");
 	else
