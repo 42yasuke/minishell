@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/08/03 12:24:02 by jose             ###   ########.fr       */
+/*   Updated: 2023/08/03 18:10:45 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	ft_exec_manager(char *line, char **envp)
 
 	sta = 0;
 	pid = ft_fork();
+	g_inf->is_child_process = true;
 	if (!pid)
 	{
-		g_inf->is_child_process = true;
 		cmd = ft_parsecmd(line, envp);
 		g_inf->top = cmd;
 		if (g_inf->here_doc_quit)
@@ -60,6 +60,7 @@ void	ft_exec_manager(char *line, char **envp)
 		ft_runcmd(cmd);
 	}
 	waitpid(pid, &sta, 0);
+	g_inf->is_child_process = false;
 	if (WIFEXITED(sta))
 		g_inf->exit_code = WEXITSTATUS(sta);
 	else if (WIFSIGNALED(sta))

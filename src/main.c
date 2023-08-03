@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/08/01 17:01:42 by jralph           ###   ########.fr       */
+/*   Updated: 2023/08/03 17:55:45 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	ft_sigint_handler(int sig)
 		g_inf->tmp_stdin = dup(STDIN_FILENO);
 		(dup2(dev_null, STDIN_FILENO), close(dev_null));
 	}
+	else
+		write(STDIN_FILENO, "\n", 1);
 }
 
 void	ft_sigquit_handler(int sig)
