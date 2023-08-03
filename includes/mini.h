@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/07/26 14:29:38 by marvin           ###   ########.fr       */
+/*   Updated: 2023/08/03 12:23:23 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 # define MAXARG 100
 # define TCHAO "Au revoir, à la revoyure, bon voyage, arrivederci, sayonara"
+# define DI "/dev/stdin"
+# define DO "/dev/stdout"
 
 /* error's macro	*/
 # define BAD_PARAMETERS 0

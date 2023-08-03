@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/07/25 16:25:00 by jose             ###   ########.fr       */
+/*   Updated: 2023/08/03 12:24:02 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ static void	ft_exec(t_ecmd *ecmd)
 
 static void	ft_redir(t_rcmd *rcmd)
 {
-	close(rcmd->fd);
-	if (open(rcmd->file, rcmd->mode, 0644) < 0)
-		ft_error(OPEN_FAILED, "execve", strerror(errno));
+	if (ft_strncmp(rcmd->file, DI, 11) && ft_strncmp(rcmd->file, DO, 12))
+	{
+		close(rcmd->fd);
+		if (open(rcmd->file, rcmd->mode, 0644) < 0)
+			ft_error(OPEN_FAILED, "execve", strerror(errno));
+	}
 	ft_runcmd(rcmd->cmd);
 }
 
