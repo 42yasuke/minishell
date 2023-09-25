@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:28:41 by jose              #+#    #+#             */
-/*   Updated: 2023/07/25 20:23:27 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/25 18:44:15 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,17 @@ static void	ft_here_we_go(char *limiter, char *file_name)
 	close(fd_ret);
 }
 
-static void	ft_infile_red_else(char **ps)
-{
-	char	*infile;
-
-	infile = ft_strchr(*ps, '<');
-	infile--;
-	*infile = '\0';
-}
-
 void	ft_here_doc(t_cmd **cmd, char **ps)
 {
-	char	*infile;
 	char	*limiter;
+	char	*file;
 
-	infile = ft_strchr(*ps, '<');
-	if (infile && g_inf->interpret)
-	{
-		infile += 2;
-		ft_peek(&infile);
-		limiter = infile;
-		while (*infile && !ft_is_whitespace(*infile))
-			infile++;
-		if (*infile)
-		{
-			*infile = '\0';
-			infile++;
-		}
-		if (**ps == '<')
-			*ps = infile;
-		else
-			ft_infile_red_else(ps);
-		ft_here_we_go(limiter, "/tmp/.h_d");
-		*cmd = ft_redircmd(*cmd, "/tmp/.h_d", O_RDONLY, STDIN_FILENO);
-	}
+	file = ft_strdup("/tmp/.h_d");
+	if (!file)
+		ft_error(MALLOC_FAILED, "ft_strdup", "malloc failled");
+	limiter = ft_give_me_file_name(*ps, REDIN);
+	ft_here_we_go(limiter, file);
+	*cmd = ft_redircmd(*cmd, file, O_RDONLY, STDIN_FILENO);
+	ft_make_me_point_on_cmd(*ps, REDIN);
+	free(limiter);
 }

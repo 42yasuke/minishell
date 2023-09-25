@@ -5,122 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 22:45:33 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:05:52 by jose             ###   ########.fr       */
+/*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
+/*   Updated: 2023/09/20 00:49:03 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static char	*ft_update_value(char *str)
+static void	ft_remove_sdquote(char *line, char sdq)
 {
-	char	*tmp;
+	char	*quote;
+	int		i;
 
-	tmp = NULL;
-	if (ft_strlen(str) <= 1)
-		return (str);
-	if (!ft_strncmp(str, "$?", ft_strlen(str)))
+	quote = ft_strchr(line, sdq);
+	while (quote)
 	{
-		tmp = str;
-		str = ft_itoa(g_inf->exit_code);
-	}
-	else
-	{
-		tmp = str;
-		str = ft_strdup(getenv(ft_strchr(str, '$') + 1));
-	}
-	return (free(tmp), str);
-}
-
-static char	*ft_bf_str(char **tab, int i)
-{
-	char	*bf;
-	int		j;
-	int		is_d;
-
-	j = -1;
-	is_d = false;
-	bf = ft_strdup(tab[i]);
-	if (!bf)
-		ft_error(MALLOC_FAILED, "bf", "malloc failed");
-	while (bf[++j])
-	{
-		if (bf[j] == '$')
+		i = -1;
+		while (++i < 2)
 		{
-			if (!j)
-				return (free(bf), NULL);
-			is_d = true;
+			ft_memmove(quote, quote + 1, ft_strlen(quote + 1));
+			quote = ft_strchr(line, sdq);
 		}
-		if (is_d)
-			bf[j] = '\0';
 	}
-	return (bf);
 }
 
-static char	*ft_nenv_str(char **tab, int i, int *j2)
+char	*ft_sd_quote_manager(char *line)
 {
-	char	*name_env;
-	int		j;
+	char	*new_line;
 
-	name_env = ft_strchr(tab[i], '$');
-	name_env = ft_strdup(name_env);
-	if (name_env[1] == '?')
-		return (name_env[2] = '\0', *j2 = 2, name_env);
-	if (!name_env)
-		ft_error(MALLOC_FAILED, "name_env", "malloc failed");
-	j = -1;
-	*j2 = -1;
-	while (name_env[++j])
-	{
-		if (*j2 == -1 && ft_is_whitespace(name_env[j]))
-			*j2 = j;
-		if (*j2 != -1 && j >= *j2)
-			name_env[j] = '\0';
-	}
-	return (name_env);
-}
-
-static char	*ft_af_str(char **tab, int i, int j2)
-{
-	char	*af;
-
-	af = ft_strchr(tab[i], '$');
-	af = ft_strdup(af);
-	if (j2 != -1)
-		af = ft_memmove(af, af + j2, ft_strlen(af + j2) + 1);
-	else
-	{
-		free(af);
-		af = NULL;
-	}
-	return (af);
-}
-
-void	ft_update_tab(char **tab, int i)
-{
-	char	*name_env;
-	char	*bf;
-	char	*af;
-	int		j2;
-	char	*tmp;
-
-	bf = ft_bf_str(tab, i);
-	name_env = ft_nenv_str(tab, i, &j2);
-	name_env = ft_update_value(name_env);
-	af = ft_af_str(tab, i, j2);
-	if (bf)
-	{
-		tmp = name_env;
-		name_env = ft_strjoin(bf, name_env);
-		(free(bf), free(tmp));
-	}
-	if (af)
-	{
-		tmp = name_env;
-		name_env = ft_strjoin(name_env, af);
-		(free(af), free(tmp));
-	}
-	tmp = tab[i];
-	tab[i] = name_env;
-	free(tmp);
+	new_line = ft_replace_special_chraracter(line);
+	ft_remove_useless_space_in_export_cmd(new_line);
+	ft_remove_sdquote(new_line, SQ);
+	ft_remove_sdquote(new_line, DQ);
+	return (new_line);
 }

@@ -3,80 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   sdquote3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/08/01 16:37:32 by jralph           ###   ########.fr       */
+/*   Created: 2023/08/19 12:18:36 by jose              #+#    #+#             */
+/*   Updated: 2023/09/03 08:28:46 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	ft_cpy_str(char **tab, char **tab2)
+static void	ft_peek2(char **ps)
 {
-	int	i;
+	char	*s;
 
-	i = -1;
-	while (tab2[++i])
+	s = *ps;
+	if (*s && ft_isalpha(*s))
 	{
-		tab[i] = ft_strdup(tab2[i]);
-		if (!tab[i])
-			(ft_free_all(tab2), ft_free_all(tab), ft_error(MALLOC_FAILED,
-					"tab[i]", "malloc failed"));
+		while (*s && ft_isalnum(*s))
+			s++;
+	}
+	else if (*s && (*s == '?' || ft_isdigit(*s)))
+		s++;
+	*ps = s;
+}
+
+static char	*ft_stick_str(char *bf_var, char *var_denv, char *af_var)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	var_denv = ft_update_value(var_denv);
+	tmp = ft_strjoin(bf_var, var_denv);
+	if (!tmp)
+		return (free(var_denv), free(bf_var), NULL);
+	tmp2 = ft_strjoin(tmp, af_var);
+	return (free(tmp), free(var_denv), free(bf_var), tmp2);
+}
+
+static void	ft_find_n_replace_var_if(char **tmp_chr, char **tmp)
+{
+	if (**tmp_chr)
+	{
+		*tmp = ft_strdup(*tmp_chr);
+		**tmp_chr = '\0';
+		*tmp_chr = *tmp;
 	}
 }
 
-static void	ft_no_quote(char *line, char **tab)
+char	*ft_find_n_replace_var(char *line)
 {
-	char	**tab2;
-
-	tab2 = ft_split(line, ' ');
-	ft_cpy_str(tab, tab2);
-	ft_free_all(tab2);
-	ft_replace_env(tab);
-}
-
-static void	ft_quote(char *line, char **tab)
-{
-	char	**tab2;
-
-	tab2 = NULL;
-	if (!ft_is_closed(line))
-		ft_error(SDQUOTE_FAILED, "sdquote", "not closed");
-	else
-	{
-		if (ft_who_englobe(line) == SQUAOTE)
-		{
-			tab2 = ft_split(line, SQUAOTE);
-			ft_cpy_str(tab, tab2);
-		}
-		else
-		{
-			tab2 = ft_split(line, DQUAOTE);
-			ft_cpy_str(tab, tab2);
-			ft_replace_env(tab);
-		}
-	}
-	ft_free_all(tab2);
-}
-
-char	*ft_sd_quote_manager(char *line)
-{
-	char	**tab;
 	char	*new_line;
-	int		i;
+	char	*tmp_chr;
+	char	*var_denv;
+	char	*tmp;
 
-	i = -1;
-	tab = malloc(sizeof(*tab) * (MAXARG + 1));
-	if (!tab)
-		ft_error(MALLOC_FAILED, "tab", "malloc failed");
-	while (++i < MAXARG + 1)
-		tab[i] = NULL;
-	if (ft_there_is_sdquote(line))
-		ft_quote(line, tab);
-	else
-		ft_no_quote(line, tab);
-	g_inf->interpret = !ft_there_is_sdquote(line);
-	new_line = ft_merge_tab(tab, !ft_there_is_sdquote(line));
-	return (free(line), ft_free_all(tab), new_line);
+	tmp = NULL;
+	new_line = ft_strdup(line);
+	if (!new_line)
+		ft_error(MALLOC_FAILED, "ft_strdup", "malloc_failled");
+	tmp_chr = ft_strchr(new_line, DOLLAR);
+	while (tmp_chr)
+	{
+		*tmp_chr = '\0';
+		tmp_chr++;
+		var_denv = tmp_chr;
+		ft_peek2(&tmp_chr);
+		ft_find_n_replace_var_if(&tmp_chr, &tmp);
+		new_line = ft_stick_str(new_line, var_denv, tmp_chr);
+		tmp_chr = ft_strchr(new_line, DOLLAR);
+		free(tmp);
+		tmp = NULL;
+	}
+	return (new_line);
 }

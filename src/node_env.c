@@ -6,62 +6,46 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:04 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:17:38 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/19 23:58:28 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	ft_range_lst(t_lenv *lst_env, char **envp)
+static void	ft_add_guigui(char *env_name, char *ret, int flag)
 {
-	int		i;
-	t_lenv	*tmp;
-	t_lenv	*save;
+	int	i;
+	int	j;
 
-	i = -1;
-	while (envp[++i])
+	i = 0;
+	j = 0;
+	while (env_name[i])
 	{
-		tmp = lst_env;
-		save = NULL;
-		while (tmp)
-		{
-			if (!save && tmp->id == -1)
-				save = tmp;
-			else if (tmp->id == -1 && ft_strncmp(save->env_name, tmp->env_name,
-					ft_strlen(save->env_name)) > 0)
-				save = tmp;
-			tmp = tmp->next;
-		}
-		save->id = i;
-	}
-}
-
-t_lenv	*ft_add_nenv(t_lenv *lst_env, int i, char **envp)
-{
-	t_lenv	*tmp;
-
-	tmp = malloc(sizeof(*tmp));
-	if (!tmp)
-		(ft_free_lst(lst_env), ft_error(MALLOC_FAILED, "tmp", "malloc failed"));
-	tmp->env_name = envp[i];
-	tmp->id = -1;
-	tmp->next = NULL;
-	return (tmp);
-}
-
-static void	ft_make_lst(t_lenv *lst_env, char **envp)
-{
-	t_lenv	*tmp;
-	int		i;
-
-	i = 1;
-	tmp = lst_env;
-	while (envp[i])
-	{
-		tmp->next = ft_add_nenv(lst_env, i, envp);
-		tmp = tmp->next;
+		ret[j] = env_name[i];
 		i++;
+		j++;
+		if (env_name[i - 1] == '=' && !flag)
+		{
+			ret[j] = '"';
+			flag = true;
+			j++;
+		}
 	}
+	ret[j] = '"';
+	ret[j + 1] = '\0';
+}
+
+char	*ft_add_guigui_on_env_name(char *env_name)
+{
+	char	*ret;
+
+	if (!ft_strchr(env_name, '='))
+		return (ft_strdup(env_name));
+	ret = malloc(sizeof(*ret) * (ft_strlen(env_name) + 2 + 1));
+	if (!ret)
+		ft_error(MALLOC_FAILED, "ret", "malloc failed");
+	ft_add_guigui(env_name, ret, false);
+	return (ret);
 }
 
 t_lenv	*ft_get_node(t_lenv *lst_env, int id)
@@ -76,13 +60,4 @@ t_lenv	*ft_get_node(t_lenv *lst_env, int id)
 		tmp = tmp->next;
 	}
 	return (NULL);
-}
-
-void	ft_init_lst(t_lenv *lst_env, char **envp)
-{
-	lst_env->env_name = envp[0];
-	lst_env->id = -1;
-	lst_env->next = NULL;
-	if (envp[0])
-		(ft_make_lst(lst_env, envp), ft_range_lst(lst_env, envp));
 }

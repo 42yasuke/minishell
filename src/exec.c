@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/08/03 18:10:45 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/24 20:10:34 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ static void	ft_exec(t_ecmd *ecmd)
 {
 	if (ecmd->is_builtin)
 		ft_built_it(ecmd);
+	else if (!ecmd->argv[0])
+		(ft_free_ginf(true), exit(EXIT_SUCCESS));
 	else
 		execve(ecmd->path, ecmd->argv, ecmd->env);
+	if (!access(ecmd->path, F_OK) && access(ecmd->path, X_OK))
+		ft_error(PERMISSION_DENIED, "execve", strerror(errno));
 	ft_error(EXECVE_FAILED, "execve", strerror(errno));
 }
 

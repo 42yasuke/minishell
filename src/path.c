@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:23:18 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:21:07 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/19 20:48:02 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static char	*ft_get_path(char *cmd)
 	char	*ret;
 	char	*cmd_to_test;
 
-	path_envp = getenv("PATH");
+	path_envp = ft_getenv("PATH");
 	if (!path_envp)
-		return (NULL);
+		return (cmd);
 	mypaths = ft_split(path_envp, ':');
 	i = 0;
 	ret = cmd;

@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 23:25:21 by jralph            #+#    #+#             */
-/*   Updated: 2023/09/25 17:44:48 by jose             ###   ########.fr       */
+/*   Created: 2023/09/09 10:14:59 by jose              #+#    #+#             */
+/*   Updated: 2023/09/09 10:15:16 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{	
-	size_t	i;
+void	ft_env(t_ecmd *ecmd)
+{
+	int	i;
 
-	if (src < dest)
+	i = -1;
+	if (ecmd->argv[1])
 	{
-		while (n--)
-			((char *)dest)[n] = ((char *)src)[n];
+		if (ecmd->argv[1][0] == '-')
+			ft_error(ENV_FAILED, "env", "invalid option");
+		else
+			ft_error(EXECVE_FAILED, "env", "invalid args");
 	}
-	else
-	{
-		i = 0;
-		while (i < n && ((char *)src)[i])
-		{
-			((char *)dest)[i] = ((char *)src)[i];
-			i++;
-		}
-		while (((char *)dest)[i])
-		{
-			((char *)dest)[i] = '\0';
-			i++;
-		}
-	}
-	return (dest);
+	while (g_inf->env[++i])
+		ft_printf("%s\n", g_inf->env[i]);
+	(ft_free_ginf(true), exit(EXIT_SUCCESS));
 }

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/08/03 17:55:45 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/19 19:01:04 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,20 @@ void	ft_sigquit_handler(int sig)
 
 static void	ft_main_suite(char *line, char **envp)
 {
-	if (!ft_verif_cmd(line))
-	{
-		write(STDERR_FILENO, "minishell: error redirection or pipe\n", 38);
-		g_inf->exit_code = 2;
+	if (!ft_verif_line(line, true))
 		return ;
-	}
 	ft_init_ginf(envp, false);
 	line = ft_sd_quote_manager(line);
 	g_inf->line = line;
-	if (ft_is_builtin_no_pipe(line))
-		ft_builtin_no_pipe(line, g_inf->env);
-	else
-		ft_exec_manager(line, g_inf->env);
+	if (!ft_verif_line(line, false))
+		return (ft_free_ginf(false));
+	if (line)
+	{
+		if (!ft_strchr(line, PIPE) && ft_is_builtin_no_pipe(line))
+			ft_builtin_no_pipe(line, g_inf->env);
+		else
+			ft_exec_manager(line, g_inf->env);
+	}
 	ft_free_ginf(false);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 16:43:51 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:05:48 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/18 13:52:49 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,94 +17,64 @@ int	ft_there_is_sdquote(char *line)
 	char	*sq;
 	char	*dq;
 
-	sq = ft_strchr(line, SQUAOTE);
-	dq = ft_strchr(line, DQUAOTE);
+	sq = ft_strchr(line, SQUOTE);
+	dq = ft_strchr(line, DQUOTE);
 	if (sq || dq)
 		return (true);
 	return (false);
 }
 
-int	ft_who_englobe(char *line)
+int	ft_get_quote(char *line)
 {
 	char	*sq;
 	char	*dq;
 
-	sq = ft_strchr(line, SQUAOTE);
-	dq = ft_strchr(line, DQUAOTE);
+	sq = ft_strchr(line, SQUOTE);
+	dq = ft_strchr(line, DQUOTE);
 	if (sq && dq)
 	{
-		if (ft_strchr(line, SQUAOTE) < ft_strchr(line, DQUAOTE))
-			return (SQUAOTE);
-		return (DQUAOTE);
+		if (sq < dq)
+			return (SQUOTE);
+		return (DQUOTE);
 	}
 	else if (sq)
-		return (SQUAOTE);
-	return (DQUAOTE);
+		return (SQUOTE);
+	return (DQUOTE);
 }
 
 int	ft_is_closed(char *line)
 {
-	int	i;
-	int	scount;
-	int	dcount;
+	char	*new_line;
+	char	*tmp;
+	int		quote;
 
-	i = -1;
-	scount = 0;
-	dcount = 0;
-	while (line[++i])
+	new_line = ft_strdup(line);
+	if (!new_line)
+		ft_error(MALLOC_FAILED, "ft_strdup", strerror(errno));
+	tmp = new_line;
+	while (tmp && ft_there_is_sdquote(tmp))
 	{
-		if (line[i] == SQUAOTE)
-			scount++;
-		if (line[i] == DQUAOTE)
-			dcount++;
-	}
-	if (scount % 2 && ft_who_englobe(line) == SQUAOTE)
-		return (false);
-	else if (dcount % 2 && ft_who_englobe(line) == DQUAOTE)
-		return (false);
-	return (true);
-}
-
-void	ft_replace_env(char **tab)
-{
-	int	i;
-
-	i = -1;
-	if (!tab)
-		return ;
-	while (tab[++i])
-	{
-		if (ft_strchr(tab[i], '$'))
+		quote = ft_get_quote(tmp);
+		tmp = ft_strchr(tmp, quote);
+		if (tmp)
 		{
-			ft_update_tab(tab, i);
-			i--;
+			tmp++;
+			tmp = ft_strchr(tmp, quote);
+			if (!tmp)
+				return (free(new_line), false);
 		}
+		tmp++;
 	}
+	return (free(new_line), true);
 }
 
-char	*ft_merge_tab(char **tab, int spaced)
+char	*ft_update_value(char *str)
 {
-	char	*line;
-	int		nbr_char;
-	int		i;
-	int		j;
-
-	i = -1;
-	nbr_char = 0;
-	while (tab[++i])
-		nbr_char += ft_strlen(tab[i]);
-	line = malloc(sizeof(*line) * (nbr_char + i));
-	if (!line)
-		ft_error(MALLOC_FAILED, "line", "malloc failed");
-	nbr_char = 0;
-	i = -1;
-	while (tab[++i])
-	{
-		j = -1;
-		while (tab[i][++j])
-			line[nbr_char++] = tab[i][j];
-		if (spaced && tab[i + 1])
-			line[nbr_char++] = ' ';
-	}
-	return (line[nbr_char] = '\0', line);
+	if (!ft_strlen(str))
+		return (ft_strdup(str));
+	if (!ft_strncmp(str, "?", ft_strlen(str)))
+		str = ft_itoa(g_inf->exit_code);
+	else
+		str = ft_strdup(ft_getenv(str));
+	return (str);
 }

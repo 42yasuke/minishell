@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   chr_var_denv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 23:25:21 by jralph            #+#    #+#             */
-/*   Updated: 2023/09/25 17:44:48 by jose             ###   ########.fr       */
+/*   Created: 2023/09/02 09:07:42 by jose              #+#    #+#             */
+/*   Updated: 2023/09/03 08:02:52 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{	
-	size_t	i;
+char	*ft_strchr_var(char *line)
+{
+	char	*var_denv;
 
-	if (src < dest)
+	var_denv = ft_strchr(line, DOLLAR);
+	while (var_denv)
 	{
-		while (n--)
-			((char *)dest)[n] = ((char *)src)[n];
+		var_denv++;
+		if (*var_denv && (ft_isalnum(*var_denv) || *var_denv == '?'))
+			return (var_denv--, ft_strchr(var_denv, DOLLAR));
+		var_denv = ft_strchr(var_denv, DOLLAR);
 	}
-	else
-	{
-		i = 0;
-		while (i < n && ((char *)src)[i])
-		{
-			((char *)dest)[i] = ((char *)src)[i];
-			i++;
-		}
-		while (((char *)dest)[i])
-		{
-			((char *)dest)[i] = '\0';
-			i++;
-		}
-	}
-	return (dest);
+	return (NULL);
 }

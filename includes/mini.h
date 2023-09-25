@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/08/03 12:23:23 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/25 16:51:38 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,26 @@
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <dirent.h>
 
 /*	node type's macros	*/
 # define EXEC 1
 # define PIPE 2
 # define REDIR 3
+# define REDIN 4
+# define REDOUT 5
+# define DOLLAR 6
+# define SQ 7
+# define DQ 8
+# define SPACE_TO_CUT 9
+# define SQUOTE 39
+# define DQUOTE 34
 
 # define MAXARG 100
 # define TCHAO "Au revoir, à la revoyure, bon voyage, arrivederci, sayonara"
 # define DI "/dev/stdin"
 # define DO "/dev/stdout"
+# define BACK_SLASH 92
 
 /* error's macro	*/
 # define BAD_PARAMETERS 0
@@ -53,6 +63,7 @@
 # define UNSET_FAILED 14
 # define SDQUOTE_FAILED 15
 # define ENV_FAILED 16
+# define PERMISSION_DENIED 17
 
 /*	builtin's macro	*/
 # define CD 1
@@ -62,8 +73,6 @@
 # define UNSET 5
 # define ENV 6
 # define EXIT 7
-# define SQUAOTE 39
-# define DQUAOTE 34
 
 typedef struct s_lenv
 {
@@ -91,7 +100,6 @@ typedef struct s_redircmd
 	int					type;
 	struct s_cmd		*cmd;
 	char				*file;
-	char				*efile;
 	int					mode;
 	int					fd;
 }						t_rcmd;
@@ -109,11 +117,11 @@ typedef struct s_ginf
 	int					exit_code;
 	char				*line;
 	char				**env;
-	int					interpret;
 	int					is_child_process;
 	int					here_doc_quit;
 	int					here_doc;
 	int					tmp_stdin;
+	char				**lst_env;
 }						t_ginf;
 
 typedef long long int	t_ll;
@@ -125,57 +133,59 @@ extern t_ginf			*g_inf;
 void					ft_error(int err, char *cmd, char *msg_err);
 void					ft_error2(char *cmd, char *msg_err, int err);
 
-/*	builtin.c	*/
-int						ft_is_builtin(char *line);
-void					ft_built_it(t_ecmd *ecmd);
+/*	ft_cd.c	*/
+void					ft_cd_no_pipe(char *line);
 void					ft_cd(t_ecmd *ecmd);
+
+/*	ft_pwd.c	*/
 void					ft_pwd(t_ecmd *ecmd);
 
-/*	builtin2.c	*/
-void					ft_export(t_ecmd *ecmd);
-void					ft_unset(t_ecmd *ecmd);
-void					ft_env(t_ecmd *ecmd);
+/*	ft_exit.c	*/
+void					ft_exit_no_pipe(char *line);
 void					ft_exit(t_ecmd *t_ecmd);
 
-/*	buitin3.c	*/
-void					ft_builtin_no_pipe(char *line, char **envp);
-void					ft_export_no_pipe(char *line, char **envp);
-
-/*	builtin4.c	*/
-int						ft_verif_numeric_arg(char **tmp);
-int						ft_verif_numeric_arg2(char **tmp);
-void					ft_exit_no_pipe(char *line);
-int						ft_is_builtin_no_pipe(char *line);
-
-/*	node_env.c	*/
-t_lenv					*ft_get_node(t_lenv *lst_env, int id);
-void					ft_init_lst(t_lenv *lst_env, char **envp);
-t_lenv					*ft_add_nenv(t_lenv *lst_env, int i, char **envp);
-
-/*	node_env2.c	*/
-void					ft_export_with_args(char *str, char **envp);
-void					ft_unset_with_args(t_ecmd *ecmd);
-
-/*	utils.c	*/
-int						ft_is_whitespace(int c);
-void					ft_cd_no_pipe(char *line);
-pid_t					ft_fork(void);
-void					ft_unset_no_pipe(char *line, char **envp);
-
-/*	utils2.c	*/
-char					*ft_rm_ws_until_es(char *s, char *es);
-void					ft_peek(char **ps);
-char					**ft_cpy_envp(char **envp);
-int						ft_nb_str(char **envp);
-
-/*	utils3.c	*/
-void					ft_init_ginf(char **envp, int init_all);
+/*	ft_exit_utils.c	*/
 t_ll					ft_atoll(const char *nptr);
 int						ft_compare_to_llmax_and_llmin(char *nbr);
 int						ft_rest_of_div(t_ll dd, int d);
 
-/*	utils4.c	*/
-int						ft_verif_cmd(char *line);
+/*	ft_env.c	*/
+void					ft_env(t_ecmd *ecmd);
+
+/*	ft_unset.c */
+void					ft_unset_no_pipe(char *line, char **envp);
+void					ft_unset(t_ecmd *ecmd);
+
+/*	builtin.c	*/
+int						ft_is_builtin(char *line);
+void					ft_built_it(t_ecmd *ecmd);
+int						ft_is_builtin_no_pipe(char *line);
+void					ft_builtin_no_pipe(char *line, char **envp);
+
+/*	ft_export.c	*/
+void					ft_export_no_pipe(char *line);
+void					ft_export(t_ecmd *ecmd);
+
+/*	ft_export_utils.c	*/
+int						ft_analyse(char *str);
+
+/*	ft_update_env.c	*/
+void					ft_update_env_n_lst_env(char *str);
+char					*ft_getenv(char *str);
+char					*ft_get(char *str);
+
+/*	ft_export_remove_space.c	*/
+void					ft_remove_useless_space_in_export_cmd(char *line);
+
+/*	node_env.c	*/
+t_lenv					*ft_get_node(t_lenv *lst_env, int id);
+char					*ft_add_guigui_on_env_name(char *env_name);
+
+/*	utils.c	*/
+int						ft_is_whitespace(int c);
+pid_t					ft_fork(void);
+void					ft_peek(char **ps);
+int						ft_nb_str(char **envp);
 
 /*	exec.c	*/
 void					ft_exec_manager(char *line, char **envp);
@@ -193,30 +203,35 @@ t_cmd					*ft_execcmd(char **envp);
 t_cmd					*ft_redircmd(t_cmd *subcmd, char *file, int mode,
 							int fd);
 
+/*	init_ginf.c	*/
+void					ft_range_lst(char **lst_env);
+void					ft_init_ginf(char **envp, int init_all);
+
 /*	path.c	*/
 void					ft_getpath_n_builtin(t_ecmd *ecmd);
 
 /*	free.c	*/
 void					ft_free_all(char **str);
-void					ft_free_lst(t_lenv *lst_env);
 void					ft_free_cmd(t_cmd *cmd);
 void					ft_free_ginf(int free_all);
 
 /*	sdquote.c	*/
 int						ft_there_is_sdquote(char *line);
-int						ft_who_englobe(char *line);
+int						ft_get_quote(char *line);
 int						ft_is_closed(char *line);
-void					ft_replace_env(char **tab);
-char					*ft_merge_tab(char **tab, int spaced);
+char					*ft_update_value(char *str);
 
 /*	sdquote2.c	*/
-void					ft_update_tab(char **tab, int i);
-
-/*	sdquote3.c	*/
 char					*ft_sd_quote_manager(char *line);
 
-/*	export.c	*/
-int						ft_analyse(char *str);
+/*	sdquote3.c	*/
+char					*ft_find_n_replace_var(char *line);
+
+/*	chr_var_denv.c	*/
+char					*ft_strchr_var(char *line);
+
+/*	replace.c	*/
+char					*ft_replace_special_chraracter(char *line);
 
 /*	ft_illtoa.c	*/
 char					*ft_illtoa(t_ll n);
@@ -225,13 +240,24 @@ char					*ft_illtoa(t_ll n);
 void					ft_infile_red(t_cmd **cmd, char **ps);
 void					ft_outfile_red(t_cmd **cmd, char **ps);
 
+/*	redir_utils.c	*/
+int						ft_is_it_a_double_red(char *str, int red);
+char					*ft_give_me_file_name(char *str, int red);
+void					ft_make_me_point_on_cmd(char *str, int red);
+
 /*	here_doc.c	*/
 void					ft_here_doc(t_cmd **cmd, char **ps);
 
-/*	echo.c	*/
+/*	ft_echo.c	*/
 void					ft_echo(t_ecmd *ecmd);
 
 /*	ft_pipe.c	*/
 void					ft_pipe(t_pcmd *pcmd);
+
+/*	ft_verif_line.c	*/
+int						ft_verif_line(char *line, int flag);
+
+/*	ft_verif_cmd.c	*/
+int						ft_verif_cmd(char *line);
 
 #endif

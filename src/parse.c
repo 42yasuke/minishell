@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/07/26 14:30:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:48:49 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd	*ft_parsecmd(char *line, char **envp)
 {
 	t_cmd	*cmd;
 
-	if (ft_strchr(line, '|') && g_inf->interpret)
+	if (ft_strchr(line, PIPE))
 		cmd = ft_parsepipe(&line, envp);
 	else
 	{
@@ -31,7 +31,7 @@ t_cmd	*ft_parsepipe(char **ps, char **envp)
 	t_cmd	*cmd;
 	char	*tmp;
 
-	tmp = ft_strchr(*ps, '|');
+	tmp = ft_strchr(*ps, PIPE);
 	if (tmp)
 	{
 		*tmp = '\0';
@@ -48,12 +48,9 @@ t_cmd	*ft_parsepipe(char **ps, char **envp)
 
 t_cmd	*ft_parseredir(t_cmd *cmd, char **ps)
 {
-	char	*infile;
-
-	infile = ft_strchr(*ps, '<');
-	if (infile)
+	if (ft_strchr(*ps, REDIN))
 	{
-		if (infile[1] == '<')
+		if (ft_is_it_a_double_red(*ps, REDIN))
 			ft_here_doc(&cmd, ps);
 		else
 			ft_infile_red(&cmd, ps);
@@ -70,7 +67,7 @@ t_cmd	*ft_parseexec(char **ps, char **envp)
 	ret = ft_execcmd(envp);
 	ecmd = (t_ecmd *)ret;
 	ret = ft_parseredir(ret, ps);
-	ecmd->argv = ft_split(*ps, ' ');
+	ecmd->argv = ft_split(*ps, SPACE_TO_CUT);
 	ft_getpath_n_builtin(ecmd);
 	return (ret);
 }

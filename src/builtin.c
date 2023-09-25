@@ -6,60 +6,67 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/06/01 01:07:02 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/21 18:43:25 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	ft_cd(t_ecmd *ecmd)
+int	ft_is_builtin_no_pipe(char *line)
 {
-	if (ecmd->argv[1])
+	int	is_builtin;
+
+	is_builtin = (!ft_strncmp(line, "cd", 2) || !ft_strncmp(line, "export", 6));
+	if (!is_builtin)
 	{
-		if (ecmd->argv[2])
-			ft_error(CD_FAILED, "cd", "too many arguments");
-		if (chdir(ecmd->argv[1]))
-			ft_error(CD_FAILED, "cd", strerror(errno));
-		else
-			(ft_free_ginf(true), exit(EXIT_SUCCESS));
+		is_builtin = !ft_strncmp(line, "unset", 5);
+		if (!is_builtin)
+			is_builtin = !ft_strncmp(line, "exit", 4);
 	}
-	ft_error(CD_FAILED, "cd", "only relative or absolu path");
+	return (is_builtin);
 }
 
-void	ft_pwd(t_ecmd *ecmd)
+void	ft_builtin_no_pipe(char *line, char **envp)
 {
-	char	*path;
-
-	if (ecmd->argv[1])
+	if (!ft_strchr(line, PIPE))
 	{
-		if (ecmd->argv[2])
-			ft_error(PWD_FAILED, "pwd", "invalid argument");
-		if (ecmd->argv[1][0] == '-')
-			ft_error(PWD_FAILED, "pwd", "option unknown");
+		if (!ft_strncmp(line, "cd", 2))
+			ft_cd_no_pipe(line);
+		else if (!ft_strncmp(line, "export", 6))
+			ft_export_no_pipe(line);
+		else if (!ft_strncmp(line, "unset", 5))
+			ft_unset_no_pipe(line, envp);
+		else if (!ft_strncmp(line, "exit", 4))
+			ft_exit_no_pipe(line);
 	}
-	path = getcwd(NULL, 0);
-	if (!path)
-		ft_error(PWD_FAILED, "pwd", strerror(errno));
-	ft_printf("%s\n", path);
-	(ft_free_ginf(true), free(path), exit(EXIT_SUCCESS));
+}
+
+static int	ft_is_builtin2(char *line, char *builtin, int ret)
+{
+	int	diff;
+
+	diff = ft_strncmp(line, builtin, ft_strlen(line));
+	if (!diff || diff == SPACE_TO_CUT || diff == ' ')
+		return (ret);
+	return (false);
 }
 
 int	ft_is_builtin(char *line)
 {
 	if (!ft_strncmp(line, "cd", 2))
-		return (CD);
+		return (ft_is_builtin2(line, "cd", CD));
 	if (!ft_strncmp(line, "echo", 4))
-		return (ECHO);
+		return (ft_is_builtin2(line, "echo", ECHO));
 	if (!ft_strncmp(line, "pwd", 3))
-		return (PWD);
+		return (ft_is_builtin2(line, "pwd", PWD));
 	if (!ft_strncmp(line, "export", 6))
-		return (EXPORT);
+		return (ft_is_builtin2(line, "export", EXPORT));
 	if (!ft_strncmp(line, "unset", 5))
-		return (UNSET);
+		return (ft_is_builtin2(line, "unset", UNSET));
 	if (!ft_strncmp(line, "env", 3))
-		return (ENV);
+		return (ft_is_builtin2(line, "env", ENV));
 	if (!ft_strncmp(line, "exit", 4))
-		return (EXIT);
+		return (ft_is_builtin2(line, "exit", EXIT));
 	return (false);
 }
 

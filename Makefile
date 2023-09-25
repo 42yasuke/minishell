@@ -6,7 +6,7 @@
 #    By: jose <jose@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/28 20:06:58 by jose              #+#    #+#              #
-#    Updated: 2023/07/26 13:12:16 by jose             ###   ########.fr        #
+#    Updated: 2023/09/25 11:51:26 by jose             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,29 +21,28 @@ RM = rm -f
 C_FILES =	main.c \
 			error.c \
 			builtin.c \
-			builtin2.c \
-			builtin3.c \
-			builtin4.c \
+			ft_cd.c ft_pwd.c ft_env.c ft_unset.c ft_echo.c \
+			ft_export.c ft_export_utils.c \
+			ft_export_remove_space.c \
+			ft_update_env.c \
+			ft_exit.c ft_exit_utils.c \
 			utils.c \
-			utils2.c \
-			utils3.c \
-			utils4.c \
 			exec.c \
 			parse.c \
-			init.c \
+			init.c init_ginf.c \
 			path.c \
 			free.c \
 			node_env.c \
-			node_env2.c \
 			sdquote.c \
 			sdquote2.c \
 			sdquote3.c \
-			export.c \
 			ft_illtoa.c \
-			redir.c \
+			redir.c redir_utils.c \
 			here_doc.c \
-			echo.c \
-			ft_pipe.c
+			ft_pipe.c \
+			ft_verif_line.c ft_verif_cmd.c \
+			replace.c \
+			chr_var_denv.c
 
 SRC = $(addprefix src/, $(C_FILES))
 
@@ -76,3 +75,6 @@ fclean : clean
 re : fclean all
 
 .PHONY : all fclean clean re
+
+prog : all clean
+		clear
