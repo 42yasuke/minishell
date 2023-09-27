@@ -1,1 +1,0 @@
-valgrind --suppressions=/home/jose/C/mini/ignore_these_leaks.supp --trace-children=yes --leak-check=full --track-fds=yes --show-leak-kinds=all ./minishell
