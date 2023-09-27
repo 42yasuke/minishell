@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/09/26 20:59:27 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/27 13:21:20 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av, char **envp)
 	while (true)
 	{
 		line = readline("minishell$ ");
-		if (!line || !ft_strncmp(line, TCHAO, ft_strlen(TCHAO)))
+		if (!line)
 			break ;
 		while (line && ft_is_whitespace(*line))
 			line++;

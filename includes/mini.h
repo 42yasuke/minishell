@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/09/26 22:35:45 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/27 13:21:11 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 # define DQUOTE 34
 
 # define MAXARG 100
-# define TCHAO "Au revoir, à la revoyure, bon voyage, arrivederci, sayonara"
 # define DI "/dev/stdin"
 # define DO "/dev/stdout"
 # define BACK_SLASH 92
