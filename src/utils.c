@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/09/25 11:52:37 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/01 19:17:00 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	ft_is_whitespace(int c)
 	return (c == 32);
 }
 
-pid_t	ft_fork(void)
+pid_t	ft_fork(t_ginf *ginf)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
-		ft_error(FORK_FAILED, "fork", strerror(errno));
+		ft_error(ERROR, "fork", strerror(errno), ginf);
 	return (pid);
 }
 
@@ -41,7 +41,7 @@ void	ft_peek(char **ps)
 	char	*s;
 
 	s = *ps;
-	while (*s && ft_is_whitespace(*s))
+	while (*s && (ft_is_whitespace(*s) || *s == SPACE_TO_CUT))
 		s++;
 	*ps = s;
 }
@@ -54,4 +54,14 @@ int	ft_nb_str(char **envp)
 	while (envp[i])
 		i++;
 	return (i);
+}
+
+int	ft_is_env_empty(char **envp)
+{
+	int	is_empty;
+
+	is_empty = !envp || (envp && !*envp);
+	if (!is_empty)
+		is_empty = !getenv("PATH") || !getenv("HOME") || !getenv("USER");
+	return (is_empty);
 }

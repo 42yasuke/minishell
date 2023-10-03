@@ -6,13 +6,13 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:14:59 by jose              #+#    #+#             */
-/*   Updated: 2023/09/09 10:15:16 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/30 11:47:33 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	ft_env(t_ecmd *ecmd)
+void	ft_env(t_ecmd *ecmd, t_ginf *ginf)
 {
 	int	i;
 
@@ -20,11 +20,11 @@ void	ft_env(t_ecmd *ecmd)
 	if (ecmd->argv[1])
 	{
 		if (ecmd->argv[1][0] == '-')
-			ft_error(ENV_FAILED, "env", "invalid option");
+			ft_error(ENV_FAILED, "env", "invalid option", ginf);
 		else
-			ft_error(EXECVE_FAILED, "env", "invalid args");
+			ft_error(EXECVE_FAILED, "env", "invalid args", ginf);
 	}
-	while (g_inf->env[++i])
-		ft_printf("%s\n", g_inf->env[i]);
-	(ft_free_ginf(true), exit(EXIT_SUCCESS));
+	while (ginf->env[++i])
+		ft_printf("%s\n", ginf->env[i]);
+	(ft_free_ginf(ginf, true), exit(EXIT_SUCCESS));
 }

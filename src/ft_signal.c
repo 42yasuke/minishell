@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 20:25:09 by jose              #+#    #+#             */
-/*   Updated: 2023/09/26 20:53:47 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 04:10:10 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_ignore_these_signals(void)
 
 void	ft_make_attention_these_signals(void)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, ft_sigint_handler);
+	signal(SIGQUIT, ft_sigquit_handler);
 }
 
 void	ft_sigint_handler(int sig)
@@ -30,23 +30,21 @@ void	ft_sigint_handler(int sig)
 
 	(void)sig;
 	dev_null = 0;
-	if (!g_inf->is_child_process)
+	if (g_exit_code == HERE_DOC)
+	{
+		dev_null = open("/dev/null", O_RDWR);
+		g_exit_code = HERE_DOC_SIGINT;
+		(dup2(dev_null, STDIN_FILENO), close(dev_null));
+	}
+	else
 	{
 		write(STDIN_FILENO, "\n", 1);
 		rl_clear_history();
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_exit_code = 130;
 	}
-	else if (g_inf->here_doc)
-	{
-		dev_null = open("/dev/null", O_RDWR);
-		g_inf->here_doc_quit = true;
-		g_inf->tmp_stdin = dup(STDIN_FILENO);
-		(dup2(dev_null, STDIN_FILENO), close(dev_null));
-	}
-	else
-		write(STDIN_FILENO, "\n", 1);
 }
 
 void	ft_sigquit_handler(int sig)

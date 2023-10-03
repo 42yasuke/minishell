@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:26:04 by jose              #+#    #+#             */
-/*   Updated: 2023/09/19 23:58:28 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/01 17:37:15 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,7 @@ char	*ft_add_guigui_on_env_name(char *env_name)
 		return (ft_strdup(env_name));
 	ret = malloc(sizeof(*ret) * (ft_strlen(env_name) + 2 + 1));
 	if (!ret)
-		ft_error(MALLOC_FAILED, "ret", "malloc failed");
+		ft_error(ERROR, "ret", "malloc failed", NULL);
 	ft_add_guigui(env_name, ret, false);
 	return (ret);
-}
-
-t_lenv	*ft_get_node(t_lenv *lst_env, int id)
-{
-	t_lenv	*tmp;
-
-	tmp = lst_env;
-	while (tmp)
-	{
-		if (tmp->id == id)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/09/25 11:47:02 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/30 20:53:38 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,19 @@ void	ft_free_cmd(t_cmd *cmd)
 	}
 }
 
-void	ft_free_ginf(int free_all)
+void	ft_free_ginf(t_ginf *ginf, int free_all)
 {
-	if (g_inf)
+	if (ginf)
 	{
-		free(g_inf->line);
-		g_inf->line = NULL;
-		if (g_inf->top)
-			ft_free_cmd(g_inf->top);
+		free(ginf->line);
+		ginf->line = NULL;
+		if (ginf->top)
+			ft_free_cmd(ginf->top);
 		if (free_all)
 		{
-			ft_free_all(g_inf->env);
-			ft_free_all(g_inf->lst_env);
-			free(g_inf);
-			g_inf = NULL;
+			ft_free_all(ginf->env);
+			ft_free_all(ginf->lst_env);
+			free(ginf);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:56:02 by jose              #+#    #+#             */
-/*   Updated: 2023/09/24 10:27:59 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/30 13:44:12 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,37 +29,26 @@ static char	*ft_make_msg_err(char *cmd, char *msg_err)
 	return (free(tmp), ret);
 }
 
-void	ft_error(int err, char *cmd, char *msg_err)
+void	ft_error(int err, char *cmd, char *msg_err, t_ginf *ginf)
 {
-	int		exit_code;
 	char	*str;
 
 	str = NULL;
-	exit_code = EXIT_FAILURE;
+	g_exit_code = err;
 	if (msg_err)
 		str = ft_make_msg_err(cmd, msg_err);
 	if (msg_err)
 		write (STDERR_FILENO, str, ft_strlen(str));
-	(free(str), ft_free_ginf(true));
-	if (err == EXECVE_FAILED)
-		exit_code = 127;
-	else if (err == EXIT_FAILED || err == UNSET_FAILED)
-		exit_code = 2;
-	else if (err == ENV_FAILED)
-		exit_code = 125;
-	else if (err == SIGINT)
-		exit_code = 130;
-	else if (err == PERMISSION_DENIED)
-		exit_code = 126;
-	exit(exit_code);
+	(free(str), ft_free_ginf(ginf, true));
+	exit(g_exit_code);
 }
 
-void	ft_error2(char *cmd, char *msg_err, int err)
+void	ft_error2(int err, char *cmd, char *msg_err)
 {
 	char	*tmp;
 
 	tmp = ft_make_msg_err(cmd, msg_err);
 	write (STDERR_FILENO, tmp, ft_strlen(tmp));
 	free(tmp);
-	g_inf->exit_code = err;
+	g_exit_code = err;
 }

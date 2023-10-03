@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:59:02 by jose              #+#    #+#             */
-/*   Updated: 2023/09/26 20:38:16 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/01 17:38:20 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	**ft_cpy_envp(char **envp)
 
 	env = malloc(sizeof(*env) * (MAXARG + 1));
 	if (!env)
-		ft_error(MALLOC_FAILED, "env", "malloc failed");
+		ft_error(ERROR, "env", "malloc failed", NULL);
 	i = -1;
 	while (++i < MAXARG + 1)
 		env[i] = NULL;
@@ -50,7 +50,7 @@ static char	**ft_cpy_envp(char **envp)
 	{
 		env[i] = ft_strdup(envp[i]);
 		if (!env[i])
-			(ft_free_all(env), ft_error(MALLOC_FAILED, "env", "malloc failed"));
+			(ft_free_all(env), ft_error(ERROR, "env", "malloc failed", NULL));
 	}
 	return (env);
 }
@@ -62,7 +62,7 @@ static char	**ft_init_lst(char **envp)
 
 	export = malloc(sizeof(*export) * (MAXARG + 1));
 	if (!export)
-		ft_error(MALLOC_FAILED, "export", "malloc failded");
+		ft_error(ERROR, "export", "malloc failded", NULL);
 	i = -1;
 	while (++i < MAXARG + 1)
 		export[i] = NULL;
@@ -72,23 +72,22 @@ static char	**ft_init_lst(char **envp)
 	return (export);
 }
 
-void	ft_init_ginf(char **envp, int init_all)
+void	ft_reset_ginf(t_ginf *ginf)
 {
-	if (!envp || (envp && !*envp))
-		ft_error(MALLOC_FAILED, "env", "empty");
-	if (init_all)
-	{
-		g_inf = malloc(sizeof(*g_inf));
-		if (!g_inf)
-			ft_error(MALLOC_FAILED, "g_inf", "malloc failed");
-		g_inf->env = ft_cpy_envp(envp);
-		g_inf->lst_env = ft_init_lst(envp);
-		g_inf->exit_code = 0;
-	}
-	g_inf->line = NULL;
-	g_inf->top = NULL;
-	g_inf->is_child_process = false;
-	g_inf->here_doc_quit = false;
-	g_inf->here_doc = false;
-	g_inf->tmp_stdin = -1;
+	ginf->line = NULL;
+	ginf->top = NULL;
+}
+
+void	ft_init_ginf(t_ginf *ginf, char **envp)
+{
+	ginf->line = NULL;
+	ginf->top = NULL;
+	ginf->env = NULL;
+	ginf->lst_env = NULL;
+	if (ft_is_env_empty(envp))
+		ft_error(ERROR, "env", "empty", ginf);
+	ginf->env = ft_cpy_envp(envp);
+	ginf->lst_env = ft_init_lst(envp);
+	g_exit_code = 0;
+	ft_reset_ginf(ginf);
 }

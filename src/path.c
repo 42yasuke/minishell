@@ -6,13 +6,13 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:23:18 by jose              #+#    #+#             */
-/*   Updated: 2023/09/19 20:48:02 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/30 14:32:50 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static char	*ft_get_path(char *cmd)
+static char	*ft_get_path(char *cmd, char **env)
 {
 	char	*path_envp;
 	char	**mypaths;
@@ -20,7 +20,7 @@ static char	*ft_get_path(char *cmd)
 	char	*ret;
 	char	*cmd_to_test;
 
-	path_envp = ft_getenv("PATH");
+	path_envp = ft_getenv("PATH", env);
 	if (!path_envp)
 		return (cmd);
 	mypaths = ft_split(path_envp, ':');
@@ -43,5 +43,5 @@ static char	*ft_get_path(char *cmd)
 void	ft_getpath_n_builtin(t_ecmd *ecmd)
 {
 	ecmd->is_builtin = ft_is_builtin(ecmd->argv[0]);
-	ecmd->path = ft_get_path(ecmd->argv[0]);
+	ecmd->path = ft_get_path(ecmd->argv[0], ecmd->env);
 }

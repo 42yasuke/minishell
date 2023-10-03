@@ -6,23 +6,23 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:02:12 by jose              #+#    #+#             */
-/*   Updated: 2023/09/19 23:40:37 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/30 20:40:36 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	ft_export_no_args(void)
+static void	ft_export_no_args(t_ginf *ginf)
 {
 	int		i;
 
 	i = -1;
-	ft_range_lst(g_inf->lst_env);
-	while (g_inf->lst_env[++i])
-		ft_printf("export %s\n", g_inf->lst_env[i]);
+	ft_range_lst(ginf->lst_env);
+	while (ginf->lst_env[++i])
+		ft_printf("export %s\n", ginf->lst_env[i]);
 }
 
-void	ft_export_no_pipe(char *line)
+void	ft_export_no_pipe(char *line, t_ginf* ginf)
 {
 	char	**tmp;
 	int		i;
@@ -34,30 +34,30 @@ void	ft_export_no_pipe(char *line)
 		while (tmp[++i])
 		{
 			if (ft_analyse(tmp[i]))
-				ft_update_env_n_lst_env(tmp[i]);
+				ft_update_env_n_lst_env(tmp[i], ginf);
 		}
 	}
 	else
-		ft_export_no_args();
+		ft_export_no_args(ginf);
 	ft_free_all(tmp);
 }
 
-void	ft_export(t_ecmd *ecmd)
+void	ft_export(t_ecmd *ecmd, t_ginf *ginf)
 {
 	int	i;
 
 	i = 0;
-	g_inf->exit_code = EXIT_SUCCESS;
+	g_exit_code = EXIT_SUCCESS;
 	if (ecmd->argv[1])
 	{
 		while (ecmd->argv[++i])
 		{
 			if (ft_analyse(ecmd->argv[i]))
-				ft_update_env_n_lst_env(ecmd->argv[i]);
+				ft_update_env_n_lst_env(ecmd->argv[i], ginf);
 		}
 	}
 	else
-		ft_export_no_args();
-	i = g_inf->exit_code;
-	(ft_free_ginf(true), exit(i));
+		ft_export_no_args(ginf);
+	i = g_exit_code;
+	(ft_free_ginf(ginf, true), exit(i));
 }

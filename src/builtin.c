@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/09/21 18:43:25 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/30 20:36:28 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ int	ft_is_builtin_no_pipe(char *line)
 	return (is_builtin);
 }
 
-void	ft_builtin_no_pipe(char *line, char **envp)
+void	ft_builtin_no_pipe(char *line, t_ginf *ginf)
 {
 	if (!ft_strchr(line, PIPE))
 	{
 		if (!ft_strncmp(line, "cd", 2))
-			ft_cd_no_pipe(line);
+			ft_cd_no_pipe(line, ginf);
 		else if (!ft_strncmp(line, "export", 6))
-			ft_export_no_pipe(line);
+			ft_export_no_pipe(line, ginf);
 		else if (!ft_strncmp(line, "unset", 5))
-			ft_unset_no_pipe(line, envp);
+			ft_unset_no_pipe(line, ginf);
 		else if (!ft_strncmp(line, "exit", 4))
-			ft_exit_no_pipe(line);
+			ft_exit_no_pipe(line, ginf);
 	}
 }
 
@@ -70,9 +70,9 @@ int	ft_is_builtin(char *line)
 	return (false);
 }
 
-void	ft_built_it(t_ecmd *ecmd)
+void	ft_built_it(t_ecmd *ecmd, t_ginf *ginf)
 {
-	void	(*built_in[7])(t_ecmd *);
+	void	(*built_in[7])(t_ecmd *, t_ginf *);
 
 	built_in[0] = &ft_cd;
 	built_in[1] = &ft_pwd;
@@ -81,5 +81,5 @@ void	ft_built_it(t_ecmd *ecmd)
 	built_in[4] = &ft_unset;
 	built_in[5] = &ft_env;
 	built_in[6] = &ft_exit;
-	built_in[ft_is_builtin(ecmd->argv[0]) - 1](ecmd);
+	built_in[ft_is_builtin(ecmd->argv[0]) - 1](ecmd, ginf);
 }

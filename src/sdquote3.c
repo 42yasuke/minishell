@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:18:36 by jose              #+#    #+#             */
-/*   Updated: 2023/09/03 08:28:46 by jose             ###   ########.fr       */
+/*   Updated: 2023/09/30 14:38:21 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static void	ft_peek2(char **ps)
 	*ps = s;
 }
 
-static char	*ft_stick_str(char *bf_var, char *var_denv, char *af_var)
+static char	*ft_stick_str(char *bf_var, char *var_denv, char *af_var, char **env)
 {
 	char	*tmp;
 	char	*tmp2;
 
-	var_denv = ft_update_value(var_denv);
+	var_denv = ft_update_value(var_denv, env);
 	tmp = ft_strjoin(bf_var, var_denv);
 	if (!tmp)
 		return (free(var_denv), free(bf_var), NULL);
@@ -50,7 +50,7 @@ static void	ft_find_n_replace_var_if(char **tmp_chr, char **tmp)
 	}
 }
 
-char	*ft_find_n_replace_var(char *line)
+char	*ft_find_n_replace_var(char *line, char **env)
 {
 	char	*new_line;
 	char	*tmp_chr;
@@ -60,7 +60,7 @@ char	*ft_find_n_replace_var(char *line)
 	tmp = NULL;
 	new_line = ft_strdup(line);
 	if (!new_line)
-		ft_error(MALLOC_FAILED, "ft_strdup", "malloc_failled");
+		ft_error(ERROR, "ft_strdup", "malloc_failled", NULL);
 	tmp_chr = ft_strchr(new_line, DOLLAR);
 	while (tmp_chr)
 	{
@@ -69,7 +69,7 @@ char	*ft_find_n_replace_var(char *line)
 		var_denv = tmp_chr;
 		ft_peek2(&tmp_chr);
 		ft_find_n_replace_var_if(&tmp_chr, &tmp);
-		new_line = ft_stick_str(new_line, var_denv, tmp_chr);
+		new_line = ft_stick_str(new_line, var_denv, tmp_chr, env);
 		tmp_chr = ft_strchr(new_line, DOLLAR);
 		free(tmp);
 		tmp = NULL;

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 14:14:34 by jose              #+#    #+#             */
-/*   Updated: 2023/09/26 22:35:20 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/01 21:34:33 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	ft_replace_sdquote_char(char *line)
 	}
 }
 
-char	*ft_replace_special_chraracter(char *line)
+char	*ft_replace_special_chraracter(char *line, char **env)
 {
 	char	*ret;
 
@@ -75,7 +75,8 @@ char	*ft_replace_special_chraracter(char *line)
 	ft_replace_this_char(line, '<', REDIN);
 	ft_replace_this_char(line, '>', REDOUT);
 	ft_replace_this_char(line, ' ', SPACE_TO_CUT);
+	ft_replace_this_char(line, TABU, SPACE_TO_CUT);
 	ft_find_dollar_n_replace_it(line);
-	ret = ft_find_n_replace_var(line);
+	ret = ft_find_n_replace_var(line, env);
 	return (ft_replace_this_char(ret, ' ', SPACE_TO_CUT), ret);
 }
