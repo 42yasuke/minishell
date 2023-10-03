@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdquote3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:18:36 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 14:38:21 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:15:33 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	ft_peek2(char **ps)
 	*ps = s;
 }
 
-static char	*ft_stick_str(char *bf_var, char *var_denv, char *af_var, char **env)
+char	*ft_stick_str(char *bf_var, char *var_denv, char *af_var, char **env)
 {
 	char	*tmp;
 	char	*tmp2;

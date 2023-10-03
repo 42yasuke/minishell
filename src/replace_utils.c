@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 22:29:50 by jose              #+#    #+#             */
-/*   Updated: 2023/09/26 23:55:28 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:13:42 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	ft_double_dollar(char *dollar)
 	}
 }
 
-
 static int	ft_is_dollar_to_remove(char *str, char *dollar)
 {
 	int		remove_it;
@@ -29,10 +28,10 @@ static int	ft_is_dollar_to_remove(char *str, char *dollar)
 
 	tmp = dollar + 1;
 	remove_it = !ft_is_between_sdquote(str, dollar, DQ);
-	remove_it = remove_it && (*tmp == DQ || *tmp == SQ);
+	remove_it = (remove_it && (*tmp == DQ || *tmp == SQ));
 	if (dollar == str)
 		return (remove_it);
-	remove_it = remove_it && *(dollar - 1) != '$';
+	remove_it = (remove_it && *(dollar - 1) != '$');
 	return (remove_it);
 }
 
@@ -59,7 +58,7 @@ static int	ft_is_a_good_one(char *str, char *dollar)
 	int	is_good;
 
 	is_good = *(dollar + 1);
-	is_good = is_good && (ft_isalnum(is_good) || is_good == '?');
+	is_good = (is_good && (ft_isalnum(is_good) || is_good == '?'));
 	if (!is_good)
 		return (false);
 	return (ft_is_a_dollar_limiter(str, dollar));

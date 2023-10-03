@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:39:15 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 11:45:58 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:12:09 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	ft_is_double_red(char *str, int red)
 	return (false);
 }
 
-void	ft_infile_red(t_cmd **cmd, char **ps, t_ginf *ginf, int here_doc)
+void	ft_infile_red(t_cmd **cmd, char **ps, t_ginf *ginf, int hd)
 {
 	char	*file;
 
 	file = ft_give_me_file_name(*ps, REDIN, ginf);
-	if (here_doc)
+	if (hd)
 	{
 		free(file);
 		file = ft_strdup("/tmp/.h_d");

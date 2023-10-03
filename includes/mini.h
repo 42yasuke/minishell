@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 17:00:05 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/03 17:18:16 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@
 # define DI "/dev/stdin"
 # define DO "/dev/stdout"
 # define HERE_DOC 69
-# define HERE_DOC_SIGINT 70
+# define HD_SIGINT 70
 # define MSG_ERR_GETCWD "getcwd : cannot access parent directories"
-#define TABU 9
+# define TABU 9
 
 /* error's macro	*/
 # define BAD_PARAMETERS 0
-#define INVALID_OPTION 2
-#define ERROR 1
-#define ERROR2 2
+# define INVALID_OPTION 2
+# define ERROR 1
+# define ERROR2 2
 # define EXECVE_FAILED 127
 # define ENV_FAILED 125
 # define PERMISSION_DENIED 126
@@ -106,15 +106,15 @@ typedef struct s_ginf
 typedef long long int	t_ll;
 
 /*	ptr on execution tree	*/
-extern int			g_exit_code;
+extern int				g_exit_code;
 
 /*	error.c	*/
-void					ft_error(int err, char *cmd, char *msg_err, t_ginf *ginf);
+void					ft_error(int err, char *cmd, char *msg, t_ginf *ginf);
 void					ft_error2(int err, char *cmd, char *msg_err);
 
 /*	ft_cd.c	*/
 void					ft_cd_no_pipe(char *line, t_ginf *ginf);
-void					ft_cd(t_ecmd *ecmd,  t_ginf *ginf);
+void					ft_cd(t_ecmd *ecmd, t_ginf *ginf);
 
 /*	ft_pwd.c	*/
 void					ft_pwd(t_ecmd *ecmd, t_ginf *ginf);
@@ -222,7 +222,7 @@ char					*ft_illtoa(t_ll n);
 
 /*	redir.c	*/
 int						ft_is_double_red(char *str, int red);
-void					ft_infile_red(t_cmd **cmd, char **ps, t_ginf *ginf, int here_doc);
+void					ft_infile_red(t_cmd **c, char **ps, t_ginf *gf, int hd);
 void					ft_outfile_red(t_cmd **cmd, char **ps, t_ginf *ginf);
 
 /*	redir_utils.c	*/

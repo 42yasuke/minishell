@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 01:43:55 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:18:16 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_exec_manager(char *line, t_ginf *ginf)
 	{
 		cmd = ft_parsecmd(line, ginf);
 		ginf->top = cmd;
-		if (g_exit_code == HERE_DOC_SIGINT)
+		if (g_exit_code == HD_SIGINT)
 			(ft_free_ginf(ginf, true), exit(130));
 		ft_runcmd(cmd, ginf);
 	}

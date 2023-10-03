@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:02:12 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 20:40:36 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:14:14 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_export_no_args(t_ginf *ginf)
 		ft_printf("export %s\n", ginf->lst_env[i]);
 }
 
-void	ft_export_no_pipe(char *line, t_ginf* ginf)
+void	ft_export_no_pipe(char *line, t_ginf *ginf)
 {
 	char	**tmp;
 	int		i;

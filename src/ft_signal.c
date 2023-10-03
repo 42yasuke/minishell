@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 20:25:09 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 04:10:10 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:18:16 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_sigint_handler(int sig)
 	if (g_exit_code == HERE_DOC)
 	{
 		dev_null = open("/dev/null", O_RDWR);
-		g_exit_code = HERE_DOC_SIGINT;
+		g_exit_code = HD_SIGINT;
 		(dup2(dev_null, STDIN_FILENO), close(dev_null));
 	}
 	else

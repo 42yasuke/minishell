@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 11:50:44 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 14:30:53 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/03 17:17:17 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	ft_create_file(char *str, int red, t_ginf *ginf, char *ret)
 
 	if (*(str + 1) == red)
 		return ;
-	is_limiter = red == REDIN && str != ret && *(str - 1) == red;
+	is_limiter = (red == REDIN && str != ret && *(str - 1) == red);
 	tmp_free = ft_strdup(str);
 	if (!tmp_free)
 		ft_error(ERROR, "ft_create_file", "malloc failled", NULL);

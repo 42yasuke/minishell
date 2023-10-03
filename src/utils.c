@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/10/01 19:17:00 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:11:14 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	ft_is_env_empty(char **envp)
 {
 	int	is_empty;
 
-	is_empty = !envp || (envp && !*envp);
+	is_empty = (!envp || (envp && !*envp));
 	if (!is_empty)
-		is_empty = !getenv("PATH") || !getenv("HOME") || !getenv("USER");
+		is_empty = (!getenv("PATH") || !getenv("HOME") || !getenv("USER"));
 	return (is_empty);
 }

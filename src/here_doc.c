@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:28:41 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 11:57:26 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:21:50 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_no_use_limitter(char *limiter, int tmp_stdin)
 	tmp = str_err;
 	str_err = ft_strjoin(str_err, "\')\n");
 	write(STDERR_FILENO, str_err, ft_strlen(str_err));
-	if (g_exit_code == HERE_DOC_SIGINT && tmp_stdin != -1)
+	if (g_exit_code == HD_SIGINT && tmp_stdin != -1)
 		(dup2(tmp_stdin, STDIN_FILENO), close(tmp_stdin));
 	(free(str_err), free(tmp));
 }
@@ -50,7 +50,7 @@ static int	ft_open_it_goodly(char *file_name)
 	return (fd_ret);
 }
 
-static void	ft_here_we_go(char *limiter, char *file_name, int tmp_stdin, char **env)
+void	ft_here_we_go(char *limiter, char *file_name, int tmp_stdin, char **env)
 {
 	int		fd_ret;
 	char	*line;
@@ -59,7 +59,7 @@ static void	ft_here_we_go(char *limiter, char *file_name, int tmp_stdin, char **
 	write (STDOUT_FILENO, ">", 1);
 	line = get_next_line(STDIN_FILENO);
 	while (line && !(ft_strlen(line) == ft_strlen(limiter) + 1 && \
-	!ft_strncmp(line, limiter, ft_strlen(limiter))) && g_exit_code != HERE_DOC_SIGINT)
+	!ft_strncmp(line, limiter, ft_strlen(limiter))) && g_exit_code != HD_SIGINT)
 	{
 		ft_check_var_denv(&line, env);
 		(write (fd_ret, line, ft_strlen(line)), free(line));
@@ -82,7 +82,7 @@ void	ft_here_doc(char *limiter, char **env)
 	tmp_save = g_exit_code;
 	g_exit_code = HERE_DOC;
 	ft_here_we_go(limiter, "/tmp/.h_d", tmp_stdin, env);
-	if (g_exit_code != HERE_DOC_SIGINT)
+	if (g_exit_code != HD_SIGINT)
 	{
 		g_exit_code = tmp_save;
 		close(tmp_stdin);

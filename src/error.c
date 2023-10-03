@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:56:02 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 13:44:12 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:06:37 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ static char	*ft_make_msg_err(char *cmd, char *msg_err)
 	return (free(tmp), ret);
 }
 
-void	ft_error(int err, char *cmd, char *msg_err, t_ginf *ginf)
+void	ft_error(int err, char *cmd, char *msg, t_ginf *ginf)
 {
 	char	*str;
 
 	str = NULL;
 	g_exit_code = err;
-	if (msg_err)
-		str = ft_make_msg_err(cmd, msg_err);
-	if (msg_err)
+	if (msg)
+		str = ft_make_msg_err(cmd, msg);
+	if (msg)
 		write (STDERR_FILENO, str, ft_strlen(str));
 	(free(str), ft_free_ginf(ginf, true));
 	exit(g_exit_code);
