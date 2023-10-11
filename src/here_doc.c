@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:28:41 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 17:21:50 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/11 09:11:21 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static void	ft_no_use_limitter(char *limiter, int tmp_stdin)
 	str_err = ft_strjoin(str_err, limiter);
 	tmp = str_err;
 	str_err = ft_strjoin(str_err, "\')\n");
-	write(STDERR_FILENO, str_err, ft_strlen(str_err));
+	if (g_exit_code != HD_SIGINT)
+		write(STDERR_FILENO, str_err, ft_strlen(str_err));
+	else
+		write(STDERR_FILENO,"\n", 1);
 	if (g_exit_code == HD_SIGINT && tmp_stdin != -1)
 		(dup2(tmp_stdin, STDIN_FILENO), close(tmp_stdin));
 	(free(str_err), free(tmp));
@@ -78,6 +81,8 @@ void	ft_here_doc(char *limiter, char **env)
 	int		tmp_stdin;
 	int		tmp_save;
 
+	if (g_exit_code == HD_SIGINT)
+		return ;
 	tmp_stdin = dup(STDIN_FILENO);
 	tmp_save = g_exit_code;
 	g_exit_code = HERE_DOC;
