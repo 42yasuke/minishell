@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 12:28:41 by jose              #+#    #+#             */
-/*   Updated: 2023/10/14 22:17:32 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/14 23:48:32 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_no_use_limitter(char *limiter, int tmp_stdin)
 	if (g_exit_code != HD_SIGINT)
 		write(STDERR_FILENO, str_err, ft_strlen(str_err));
 	else
-		write(STDERR_FILENO,"\n", 1);
+		write(STDERR_FILENO, "\n", 1);
 	if (g_exit_code == HD_SIGINT && tmp_stdin != -1)
 		(dup2(tmp_stdin, STDIN_FILENO), close(tmp_stdin));
 	(free(str_err), free(tmp));

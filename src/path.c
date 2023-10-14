@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:23:18 by jose              #+#    #+#             */
-/*   Updated: 2023/10/14 22:54:56 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/14 23:15:54 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*ft_get_path(char *cmd, char **env)
 	mypaths = ft_split(path_envp, ':');
 	i = -1;
 	ret = cmd;
-	if (ret && !access(ret, X_OK))
+	if (ret && (!access(ret, X_OK) || *ret == '.'))
 		return (ft_free_all(mypaths), ret);
 	cmd_to_test = ft_strjoin("/", cmd);
 	while (mypaths[++i])
