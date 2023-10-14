@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verif_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:45:20 by jose              #+#    #+#             */
-/*   Updated: 2023/09/25 19:03:41 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/14 21:49:52 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ static int	ft_verif_cmd_suite(char *line)
 		return (false);
 	while (str)
 	{
+		if (ft_is_between_sdquote(line, str, 39) || \
+		ft_is_between_sdquote(line, str, 34))
+			return (true);
 		if (!ft_verif_pipe(str))
 			return (false);
 		str++;
@@ -69,6 +72,9 @@ int	ft_verif_cmd(char *line)
 	str = ft_strchr(line, '<');
 	while (str)
 	{
+		if (ft_is_between_sdquote(line, str, 39) || \
+		ft_is_between_sdquote(line, str, 34))
+			return (true);
 		if (!ft_verif_red(str, '<'))
 			return (false);
 		str++;
@@ -77,6 +83,9 @@ int	ft_verif_cmd(char *line)
 	str = ft_strchr(line, '>');
 	while (str)
 	{
+		if (ft_is_between_sdquote(line, str, 39) || \
+		ft_is_between_sdquote(line, str, 34))
+			return (true);
 		if (!ft_verif_red(str, '>'))
 			return (false);
 		str++;

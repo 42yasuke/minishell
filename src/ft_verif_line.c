@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_verif_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:45:13 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 20:41:49 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/14 21:14:31 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_verif_line(char *line, int flag)
 {
 	DIR	*dir_ptr;
 
-	if (!ft_verif_cmd(line))
+	if (flag && !ft_verif_cmd(line))
 	{
 		write(STDERR_FILENO, "minishell: error redirection or pipe\n", 38);
 		g_exit_code = 2;
