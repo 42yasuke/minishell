@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:04:00 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 20:50:51 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/14 20:12:06 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static int	ft_verif_numeric_arg(char **tmp, t_ginf *ginf)
+static int	ft_verif_numeric_arg(char **tmp, t_ginf *ginf, int free_tmp)
 {
 	int	i;
 
@@ -28,8 +28,11 @@ static int	ft_verif_numeric_arg(char **tmp, t_ginf *ginf)
 		if (!ft_isdigit(tmp[1][i]))
 		{
 			if (i || (tmp[1][i] != '+' && tmp[1][i] != '-'))
-				(ft_free_all(tmp), ft_error(ERROR2, "exit",
-						"numeric argument required", ginf));
+			{
+				if (free_tmp)
+					ft_free_all(tmp);
+				ft_error(ERROR2, "exit", "numeric argument required", ginf);
+			}
 		}
 	}
 	if (tmp[2])
@@ -59,7 +62,7 @@ void	ft_exit_no_pipe(char *line, t_ginf *ginf)
 	tmp = ft_split(line, SPACE_TO_CUT);
 	if (tmp[1])
 	{
-		quit = ft_verif_numeric_arg(tmp, ginf);
+		quit = ft_verif_numeric_arg(tmp, ginf, true);
 		if (quit)
 		{
 			i = ft_verif_numeric_arg2(tmp, ginf);
@@ -79,7 +82,7 @@ void	ft_exit(t_ecmd *ecmd, t_ginf *ginf)
 
 	if (ecmd->argv[1])
 	{
-		quit = ft_verif_numeric_arg(ecmd->argv, ginf);
+		quit = ft_verif_numeric_arg(ecmd->argv, ginf, false);
 		if (quit)
 		{
 			i = ft_verif_numeric_arg2(ecmd->argv, ginf);
