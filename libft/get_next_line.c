@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:10:16 by jralph            #+#    #+#             */
-/*   Updated: 2023/09/25 18:53:30 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/14 22:37:00 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ft_loop(char **stash, int fd)
 		if (!*stash)
 		{
 			*stash = NULL;
-			free(tmp);
+			(free(tmp), free(buf));
 			return ;
 		}
 		free(tmp);
@@ -103,9 +103,7 @@ char	*get_next_line(int fd)
 			free(stash);
 			return (NULL);
 		}
-		stash = ft_memmove(stash, ft_strchr(stash, '\n') + 1, \
-		ft_strlen(ft_strchr(stash, '\n')));
-		return (lines);
+		return (free(stash), stash = NULL, lines);
 	}
 	else if (stash && *stash)
 		return (ft_last_line(&stash));
