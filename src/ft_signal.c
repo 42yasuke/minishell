@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 20:25:09 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 17:18:16 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/15 12:55:39 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_sigint_handler(int sig)
 	else
 	{
 		write(STDIN_FILENO, "\n", 1);
-		rl_clear_history();
+		rl_end_of_history(0, 0);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
