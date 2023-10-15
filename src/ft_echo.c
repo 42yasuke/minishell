@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:34:14 by jose              #+#    #+#             */
-/*   Updated: 2023/10/01 12:19:57 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/15 13:52:20 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_analyse_option_n(char *str)
 		if (str[i] != 'n')
 			return (false);
 	}
-	return (true);
+	return (!(i == 1 && !str[i]));
 }
 
 static int	ft_find_start(char **argv)

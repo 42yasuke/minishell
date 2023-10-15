@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 11:24:15 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 10:22:09 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/15 13:42:11 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_analyse(char *str)
 {
 	if (!ft_strlen(str))
 		return (ft_error2(ERROR, "exoprt", "invalid arg"), false);
-	if (*str == '-')
+	if (*str == '-' && ft_strlen(str) > 1)
 		return (ft_error2(INVALID_OPTION, "exoprt", "invalid option"), false);
 	if (!ft_isalpha(*str) && *str != '_')
 		return (ft_error2(ERROR, "exoprt", "invalid arg"), false);

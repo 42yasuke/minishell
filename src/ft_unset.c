@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:16:57 by jose              #+#    #+#             */
-/*   Updated: 2023/10/15 12:08:56 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/15 13:43:03 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_analyse_unset(char *str)
 {
-	if (*str == '-')
+	if (*str == '-' && ft_strlen(str) > 1)
 		return (ft_error2(INVALID_OPTION, "unset", "invalid option"), false);
 	if (!ft_isalpha(*str) && *str != '_')
 		return (ft_error2(ERROR, "unset", "invalid arg"), false);
