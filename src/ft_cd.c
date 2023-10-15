@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 09:54:56 by jose              #+#    #+#             */
-/*   Updated: 2023/10/01 14:50:49 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/15 12:08:39 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_getenv_id(char **env, char *str)
 	while (env[++i])
 	{
 		diff = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
-		if (!ft_strncmp(str, env[i], diff))
+		if (!ft_strncmp(str, env[i], diff) && diff == ft_strlen(str))
 			return (i);
 	}
 	env[i] = ft_strjoin(str, "=");

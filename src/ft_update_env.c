@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 15:48:08 by jose              #+#    #+#             */
-/*   Updated: 2023/10/01 14:14:04 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/15 12:14:22 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_find_n_update_env_name_in_env(char **env, char *str, int lst)
 	while (env[++i])
 	{
 		diff = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
-		if (!ft_strncmp(str, env[i], diff))
+		if (!ft_strncmp(str, env[i], diff) && diff == ft_strlen(str))
 		{
 			tmp = env[i];
 			if (lst && ft_strchr(str, '='))
@@ -56,7 +56,7 @@ char	*ft_get(char *str, char **env)
 	while (env[++i])
 	{
 		diff = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
-		if (!ft_strncmp(str, env[i], diff))
+		if (!ft_strncmp(str, env[i], diff) && diff == ft_strlen(str))
 			return (env[i]);
 	}
 	return (NULL);
@@ -71,7 +71,7 @@ char	*ft_getenv(char *str, char **env)
 	while (env[++i])
 	{
 		diff = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
-		if (!ft_strncmp(str, env[i], diff) && !*(str + diff))
+		if (!ft_strncmp(str, env[i], diff) && diff == ft_strlen(str))
 			return (env[i] + diff + 1);
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:16:57 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 20:32:25 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/15 12:08:56 by jose             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_unset_with_args(char *str, char **envp)
 	while (envp[++i])
 	{
 		diff = ft_strlen(envp[i]) - ft_strlen(ft_strchr(envp[i], '='));
-		if (!ft_strncmp(str, envp[i], diff))
+		if (!ft_strncmp(str, envp[i], diff) && diff == ft_strlen(str))
 		{
 			free(envp[i]);
 			take_next = true;
