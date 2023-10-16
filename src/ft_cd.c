@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 09:54:56 by jose              #+#    #+#             */
-/*   Updated: 2023/10/15 12:08:39 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/16 12:21:10 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_cd_no_pipe(char *line, t_ginf *ginf)
 	tmp = ft_split(line, SPACE_TO_CUT);
 	if (tmp[1])
 	{
-		if (tmp[1][0] == '-')
+		if (tmp[1][0] == '-' && ft_strlen(tmp[1]) > 1)
 			ft_error2(INVALID_OPTION, "cd", "invalid option");
 		else if (tmp[2])
 			ft_error2(ERROR, "cd", "too many arguments");
@@ -98,7 +98,7 @@ void	ft_cd(t_ecmd *ecmd, t_ginf *ginf)
 
 	if (ecmd->argv[1])
 	{
-		if (ecmd->argv[1][0] == '-')
+		if (ecmd->argv[1][0] == '-' && ft_strlen(ecmd->argv[1]) > 1)
 			ft_error(INVALID_OPTION, "cd", "invalid option", ginf);
 		if (ecmd->argv[2])
 			ft_error(ERROR, "cd", "too many arguments", ginf);
