@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 17:18:53 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/16 12:24:59 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	main(int ac, char **av, char **envp)
 	static t_ginf	*ginf;
 
 	(void)av;
+	if (!isatty(STDIN_FILENO))
+		ft_error(ERROR2, "minishell", "stdin is not a tty\n", NULL);
 	ft_main_init_signal(ac);
 	ginf = malloc(sizeof(*ginf));
 	if (!ginf)
