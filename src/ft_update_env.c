@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_update_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 15:48:08 by jose              #+#    #+#             */
-/*   Updated: 2023/10/15 12:14:22 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/16 16:44:10 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_find_n_update_env_name_in_env(char **env, char *str, int lst)
 	while (env[++i])
 	{
 		diff = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
-		if (!ft_strncmp(str, env[i], diff) && diff == ft_strlen(str))
+		if (!ft_strncmp(str, env[i], diff))
 		{
 			tmp = env[i];
 			if (lst && ft_strchr(str, '='))
@@ -51,12 +51,14 @@ char	*ft_get(char *str, char **env)
 {
 	int		i;
 	size_t	diff;
+	size_t	diff2;
 
 	i = -1;
+	diff = ft_strlen(str) - ft_strlen(ft_strchr(str, '='));
 	while (env[++i])
 	{
-		diff = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
-		if (!ft_strncmp(str, env[i], diff) && diff == ft_strlen(str))
+		diff2 = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
+		if (!ft_strncmp(str, env[i], diff) && diff == diff2)
 			return (env[i]);
 	}
 	return (NULL);
@@ -66,12 +68,14 @@ char	*ft_getenv(char *str, char **env)
 {
 	int		i;
 	size_t	diff;
+	size_t	diff2;
 
 	i = -1;
+	diff = ft_strlen(str) - ft_strlen(ft_strchr(str, '='));
 	while (env[++i])
 	{
-		diff = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
-		if (!ft_strncmp(str, env[i], diff) && diff == ft_strlen(str))
+		diff2 = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
+		if (!ft_strncmp(str, env[i], diff) && diff == diff2)
 			return (env[i] + diff + 1);
 	}
 	return (NULL);

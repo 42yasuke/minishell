@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 09:54:56 by jose              #+#    #+#             */
-/*   Updated: 2023/10/16 12:21:10 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/16 16:38:52 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ static int	ft_getenv_id(char **env, char *str)
 {
 	int		i;
 	size_t	diff;
+	size_t	diff2;
 
 	i = -1;
+	diff = ft_strlen(str) - ft_strlen(ft_strchr(str, '='));
 	while (env[++i])
 	{
-		diff = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
-		if (!ft_strncmp(str, env[i], diff) && diff == ft_strlen(str))
+		diff2 = ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '='));
+		if (!ft_strncmp(str, env[i], diff) && diff == diff2)
 			return (i);
 	}
 	env[i] = ft_strjoin(str, "=");

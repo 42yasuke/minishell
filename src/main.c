@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/10/16 12:24:59 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/16 16:31:40 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_main_init_signal(int ac)
 static void	ft_main_suite(char *line, t_ginf *ginf)
 {
 	if (!ft_verif_line(line, true))
-		return ;
+		return (free(line));
 	ft_reset_ginf(ginf);
 	line = ft_sd_quote_manager(line, ginf->env);
 	ginf->line = line;
@@ -61,9 +61,10 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		while (line && ft_is_whitespace(*line))
 			line++;
-		if (!ft_strncmp(line, "", 1))
-			continue ;
-		(add_history(line), ft_main_suite(line, ginf));
+		if (*line)
+			(add_history(line), ft_main_suite(line, ginf));
+		else
+			free(line);
 	}
 	return (ft_printf("exit\n"), ft_free_ginf(ginf, true), EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:16:57 by jose              #+#    #+#             */
-/*   Updated: 2023/10/15 13:43:03 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/16 16:40:43 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ static int	ft_analyse_unset(char *str)
 static void	ft_unset_with_args(char *str, char **envp)
 {
 	size_t	diff;
+	size_t	diff2;
 	int		i;
 	int		take_next;
 
 	take_next = false;
 	i = -1;
+	diff = ft_strlen(str) - ft_strlen(ft_strchr(str, '='));
 	while (envp[++i])
 	{
-		diff = ft_strlen(envp[i]) - ft_strlen(ft_strchr(envp[i], '='));
-		if (!ft_strncmp(str, envp[i], diff) && diff == ft_strlen(str))
+		diff2 = ft_strlen(envp[i]) - ft_strlen(ft_strchr(envp[i], '='));
+		if (!ft_strncmp(str, envp[i], diff) && diff == diff2)
 		{
 			free(envp[i]);
 			take_next = true;

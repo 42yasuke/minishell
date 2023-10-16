@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/10/16 12:57:48 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/16 16:29:54 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ char	*ft_sd_quote_manager(char *line, char **env)
 	new_line = ft_replace_special_chraracter(line, env);
 	ft_remove_sdquote(new_line, SQ);
 	ft_remove_sdquote(new_line, DQ);
-	return (new_line);
+	return (free(line), new_line);
 }
