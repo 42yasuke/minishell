@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:56:02 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 17:06:37 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/16 12:52:36 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*ft_make_msg_err(char *cmd, char *msg_err)
 	char	*tmp;
 	char	*ret;
 
-	ret = ft_strjoin("minishel : ", cmd);
+	ret = ft_strjoin("minishell : ", cmd);
 	tmp = ret;
 	ret = ft_strjoin(ret, " : ");
 	free(tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdquote2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/10/01 12:51:08 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/16 12:57:48 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*ft_sd_quote_manager(char *line, char **env)
 	char	*new_line;
 
 	new_line = ft_replace_special_chraracter(line, env);
-	ft_remove_useless_space_in_export_cmd(new_line);
 	ft_remove_sdquote(new_line, SQ);
 	ft_remove_sdquote(new_line, DQ);
 	return (new_line);
