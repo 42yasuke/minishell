@@ -3,27 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:38:16 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 20:36:28 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/16 11:08:00 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+static int	ft_is_builtin2(char *line, char *builtin, int ret)
+{
+	int	diff;
+
+	diff = ft_strncmp(line, builtin, ft_strlen(line));
+	if (!diff || diff == SPACE_TO_CUT)
+		return (ret);
+	return (false);
+}
+
 int	ft_is_builtin_no_pipe(char *line)
 {
-	int	is_builtin;
-
-	is_builtin = (!ft_strncmp(line, "cd", 2) || !ft_strncmp(line, "export", 6));
-	if (!is_builtin)
-	{
-		is_builtin = !ft_strncmp(line, "unset", 5);
-		if (!is_builtin)
-			is_builtin = !ft_strncmp(line, "exit", 4);
-	}
-	return (is_builtin);
+	if (!ft_strncmp(line, "cd", 2))
+		return (ft_is_builtin2(line, "cd", CD));
+	else if (!ft_strncmp(line, "export", 6))
+		return (ft_is_builtin2(line, "export", EXPORT));
+	else if (!ft_strncmp(line, "unset", 5))
+		return (ft_is_builtin2(line, "unset", UNSET));
+	else if (!ft_strncmp(line, "exit", 4))
+		return (ft_is_builtin2(line, "exit", EXIT));
+	return (false);
 }
 
 void	ft_builtin_no_pipe(char *line, t_ginf *ginf)
@@ -39,16 +48,6 @@ void	ft_builtin_no_pipe(char *line, t_ginf *ginf)
 		else if (!ft_strncmp(line, "exit", 4))
 			ft_exit_no_pipe(line, ginf);
 	}
-}
-
-static int	ft_is_builtin2(char *line, char *builtin, int ret)
-{
-	int	diff;
-
-	diff = ft_strncmp(line, builtin, ft_strlen(line));
-	if (!diff || diff == SPACE_TO_CUT || diff == ' ')
-		return (ret);
-	return (false);
 }
 
 int	ft_is_builtin(char *line)

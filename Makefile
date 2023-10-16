@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jose <jose@student.42.fr>                  +#+  +:+       +#+         #
+#    By: jralph <jralph@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 17:26:42 by jralph            #+#    #+#              #
-#    Updated: 2023/10/15 11:54:57 by jose             ###   ########.fr        #
+#    Updated: 2023/10/16 10:35:36 by jralph           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,4 +81,4 @@ prog : all clean
 		clear
 
 leaks : prog
-		valgrind --suppressions=/home/jose/C/minishell/ignore_these_leaks.supp --trace-children=yes --leak-check=full --track-fds=yes --show-leak-kinds=all ./minishell
+		valgrind --suppressions=/mnt/nfs/homes/jralph/Desktop/minishell/ignore_these_leaks.supp --trace-children=yes --leak-check=full --track-fds=yes --show-leak-kinds=all ./minishell
