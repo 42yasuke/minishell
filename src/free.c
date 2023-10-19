@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 20:53:38 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/19 13:38:04 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_free_cmd(t_cmd *cmd)
 	{
 		ecmd = (t_ecmd *)cmd;
 		if (ecmd->path)
-			if (!access(ecmd->path, X_OK))
+			if (!access(ecmd->path, X_OK) && ecmd->path != ecmd->argv[0])
 				free(ecmd->path);
 		ft_free_all(ecmd->argv);
 		free(cmd);

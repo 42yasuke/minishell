@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 09:54:56 by jose              #+#    #+#             */
-/*   Updated: 2023/10/16 16:38:52 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/19 14:06:08 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_getenv_id(char **env, char *str)
 	return (i);
 }
 
-static void	ft_update_pwd_n_olpwd_vars(char **env, char *path, int is_env)
+static void	ft_update_pwd_n_olpwd(char **env, char *path, int is_env, char **e)
 {
 	int		id_old_pwd;
 	int		id_pwd;
@@ -41,14 +41,14 @@ static void	ft_update_pwd_n_olpwd_vars(char **env, char *path, int is_env)
 	if (is_env)
 		env[id_old_pwd] = ft_strjoin("OLDPWD=", ft_getenv("PWD", env));
 	else
-		env[id_old_pwd] = ft_add_guigui_on_env_name(ft_get("OLDPWD", env));
+		env[id_old_pwd] = ft_add_guigui_on_env_name(ft_get("OLDPWD", e));
 	free(tmp);
 	id_pwd = ft_getenv_id(env, "PWD");
 	tmp = env[id_pwd];
 	if (is_env)
 		env[id_pwd] = ft_strjoin("PWD=", path);
 	else
-		env[id_pwd] = ft_add_guigui_on_env_name(ft_get("PWD", env));
+		env[id_pwd] = ft_add_guigui_on_env_name(ft_get("PWD", e));
 	free(tmp);
 }
 
@@ -64,8 +64,8 @@ static void	ft_cd_verif_if_parents_dir_exists(t_ginf *ginf)
 		g_exit_code = EXIT_SUCCESS;
 	if (path)
 	{
-		ft_update_pwd_n_olpwd_vars(ginf->env, path, true);
-		ft_update_pwd_n_olpwd_vars(ginf->lst_env, path, false);
+		ft_update_pwd_n_olpwd(ginf->env, path, true, NULL);
+		ft_update_pwd_n_olpwd(ginf->lst_env, path, false, ginf->env);
 	}
 	free(path);
 }
