@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/10/16 16:31:40 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/19 15:12:53 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int	main(int ac, char **av, char **envp)
 		line = readline("minishell$ ");
 		if (!line)
 			break ;
-		while (line && ft_is_whitespace(*line))
-			line++;
 		if (*line)
 			(add_history(line), ft_main_suite(line, ginf));
 		else
