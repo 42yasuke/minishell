@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 16:56:02 by jose              #+#    #+#             */
-/*   Updated: 2023/10/16 12:52:36 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/20 16:25:47 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_error(int err, char *cmd, char *msg, t_ginf *ginf)
 		str = ft_make_msg_err(cmd, msg);
 	if (msg)
 		write (STDERR_FILENO, str, ft_strlen(str));
-	(free(str), ft_free_ginf(ginf, true));
+	(free(str), ft_free_ginf(ginf, true, NULL));
 	exit(g_exit_code);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 02:00:26 by jose              #+#    #+#             */
-/*   Updated: 2023/09/30 20:41:05 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/20 16:21:31 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_pipe_suite(int pid1, int pid2, t_ginf *ginf)
 	else if (WIFSIGNALED(sta))
 		g_exit_code = 128 + WTERMSIG(sta);
 	sta = g_exit_code;
-	(ft_free_ginf(ginf, true), exit(sta));
+	(ft_free_ginf(ginf, true, NULL), exit(sta));
 }
 
 void	ft_pipe(t_pcmd *pcmd, t_ginf *ginf)

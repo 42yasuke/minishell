@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:02:12 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 17:14:14 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/20 16:21:37 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ void	ft_export(t_ecmd *ecmd, t_ginf *ginf)
 	else
 		ft_export_no_args(ginf);
 	i = g_exit_code;
-	(ft_free_ginf(ginf, true), exit(i));
+	(ft_free_ginf(ginf, true, NULL), exit(i));
 }

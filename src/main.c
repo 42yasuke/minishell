@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/10/19 15:12:53 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/20 16:19:35 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_main_suite(char *line, t_ginf *ginf)
 	line = ft_sd_quote_manager(line, ginf->env);
 	ginf->line = line;
 	if (!ft_verif_line(line, false))
-		return (ft_free_ginf(ginf, false));
+		return (ft_free_ginf(ginf, false, NULL));
 	if (line)
 	{
 		if (!ft_strchr(line, PIPE) && ft_is_builtin_no_pipe(line))
@@ -38,7 +38,7 @@ static void	ft_main_suite(char *line, t_ginf *ginf)
 		else
 			ft_exec_manager(line, ginf);
 	}
-	ft_free_ginf(ginf, false);
+	ft_free_ginf(ginf, false, NULL);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -64,5 +64,5 @@ int	main(int ac, char **av, char **envp)
 		else
 			free(line);
 	}
-	return (ft_printf("exit\n"), ft_free_ginf(ginf, true), EXIT_SUCCESS);
+	return (ft_printf("exit\n"), ft_free_ginf(ginf, true, NULL), EXIT_SUCCESS);
 }

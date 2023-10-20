@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:34:14 by jose              #+#    #+#             */
-/*   Updated: 2023/10/15 13:52:20 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/20 16:25:18 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	ft_echo(t_ecmd *ecmd, t_ginf *ginf)
 	}
 	if (!is_n)
 		ft_printf("\n");
-	(ft_free_ginf(ginf, true), exit(EXIT_SUCCESS));
+	(ft_free_ginf(ginf, true, NULL), exit(EXIT_SUCCESS));
 }

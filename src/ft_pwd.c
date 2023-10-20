@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 09:57:12 by jose              #+#    #+#             */
-/*   Updated: 2023/10/15 13:54:50 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/20 16:21:26 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	ft_pwd(t_ecmd *ecmd, t_ginf *ginf)
 		ft_error(ERROR, "pwd", strerror(errno), ginf);
 	}
 	ft_printf("%s\n", path);
-	(ft_free_ginf(ginf, true), free(path), exit(EXIT_SUCCESS));
+	(ft_free_ginf(ginf, true, NULL), free(path), exit(EXIT_SUCCESS));
 }

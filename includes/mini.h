@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/10/15 12:08:15 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/20 16:59:11 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define EXECVE_FAILED 127
 # define ENV_FAILED 125
 # define PERMISSION_DENIED 126
+# define OPEN_FAILED 13
 
 /*	builtin's macro	*/
 # define CD 1
@@ -192,8 +193,8 @@ void					ft_getpath_n_builtin(t_ecmd *ecmd);
 
 /*	free.c	*/
 void					ft_free_all(char **str);
-void					ft_free_cmd(t_cmd *cmd);
-void					ft_free_ginf(t_ginf *ginf, int free_all);
+void					ft_free_cmd(t_cmd *cmd, t_cmd *except);
+void					ft_free_ginf(t_ginf *ginf, int free_all, t_cmd *cmd);
 
 /*	sdquote.c	*/
 int						ft_there_is_sdquote(char *line);
@@ -226,7 +227,7 @@ void					ft_infile_red(t_cmd **c, char **ps, t_ginf *gf, int hd);
 void					ft_outfile_red(t_cmd **cmd, char **ps, t_ginf *ginf);
 
 /*	redir_utils.c	*/
-char					*ft_give_me_file_name(char *str, int red, t_ginf *ginf);
+char					*ft_give_fn(char *st, int red, t_ginf *ginf, t_cmd **c);
 void					ft_make_me_point_on_cmd(char *str, int red);
 
 /*	here_doc.c	*/

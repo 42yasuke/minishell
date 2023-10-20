@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:14:59 by jose              #+#    #+#             */
-/*   Updated: 2023/10/15 13:39:42 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/20 16:25:10 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_env(t_ecmd *ecmd, t_ginf *ginf)
 	}
 	while (ginf->env[++i])
 		ft_printf("%s\n", ginf->env[i]);
-	(ft_free_ginf(ginf, true), exit(EXIT_SUCCESS));
+	(ft_free_ginf(ginf, true, NULL), exit(EXIT_SUCCESS));
 }

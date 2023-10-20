@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/10/03 17:18:16 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/20 16:25:40 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_exec(t_ecmd *ecmd, t_ginf *ginf)
 	if (ecmd->is_builtin)
 		ft_built_it(ecmd, ginf);
 	else if (!ecmd->argv[0])
-		(ft_free_ginf(ginf, true), exit(EXIT_SUCCESS));
+		(ft_free_ginf(ginf, true, NULL), exit(EXIT_SUCCESS));
 	else
 		execve(ecmd->path, ecmd->argv, ecmd->env);
 	if (!access(ecmd->path, F_OK) && access(ecmd->path, X_OK))
@@ -59,7 +59,7 @@ void	ft_exec_manager(char *line, t_ginf *ginf)
 		cmd = ft_parsecmd(line, ginf);
 		ginf->top = cmd;
 		if (g_exit_code == HD_SIGINT)
-			(ft_free_ginf(ginf, true), exit(130));
+			(ft_free_ginf(ginf, true, NULL), exit(130));
 		ft_runcmd(cmd, ginf);
 	}
 	ft_ignore_these_signals();
