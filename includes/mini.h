@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/10/23 12:52:52 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 13:02:50 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ void					ft_getpath_n_builtin(t_ecmd *ecmd);
 
 /*	free.c	*/
 void					ft_free_all(char **str);
+void					ft_free_cmd(t_cmd *cmd);
 void					ft_free_ginf(t_ginf *ginf, int free_all);
 
 /*	sdquote.c	*/

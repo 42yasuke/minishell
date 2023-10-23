@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/10/23 12:52:45 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 13:02:35 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	ft_free_pcmd(t_cmd *cmd)
 	free(cmd);
 }
 
-static void	ft_free_cmd(t_cmd *cmd)
+void	ft_free_cmd(t_cmd *cmd)
 {
 	t_ecmd	*ecmd;
 	t_rcmd	*rcmd;
