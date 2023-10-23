@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:02:12 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 16:21:37 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 11:35:33 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_export_no_pipe(char *line, t_ginf *ginf)
 	char	**tmp;
 	int		i;
 
+	g_exit_code = EXIT_SUCCESS;
 	tmp = ft_split(line, SPACE_TO_CUT);
 	if (tmp[1])
 	{
