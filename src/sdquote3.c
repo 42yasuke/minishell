@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:18:36 by jose              #+#    #+#             */
-/*   Updated: 2023/10/23 13:37:29 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 14:04:39 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_peek2(char **ps)
 	char	*s;
 
 	s = *ps;
-	if (*s && ft_isalpha(*s))
+	if (*s && (ft_isalpha(*s) || *s == '_'))
 	{
 		while (*s && (ft_isalnum(*s) || *s == '_'))
 			s++;
