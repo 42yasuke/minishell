@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 02:00:26 by jose              #+#    #+#             */
-/*   Updated: 2023/10/23 11:51:55 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:54:15 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_pipe_suite(int pid1, int pid2, t_ginf *ginf)
 	else if (WIFSIGNALED(sta))
 		g_exit_code = 128 + WTERMSIG(sta);
 	sta = g_exit_code;
-	(ft_free_ginf(ginf, true, NULL), exit(sta));
+	(ft_free_ginf(ginf, true), exit(sta));
 }
 
 void	ft_pipe(t_pcmd *pcmd, t_ginf *ginf)

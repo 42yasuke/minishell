@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 09:54:56 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 16:25:24 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:53:26 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	ft_cd(t_ecmd *ecmd, t_ginf *ginf)
 		{
 			ft_cd_verif_if_parents_dir_exists(ginf);
 			i = g_exit_code;
-			(ft_free_ginf(ginf, true, NULL), exit(i));
+			(ft_free_ginf(ginf, true), exit(i));
 		}
 	}
 	ft_error(ERROR, "cd", "only relative or absolu path", ginf);

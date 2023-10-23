@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:34:14 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 16:25:18 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:53:32 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ void	ft_echo(t_ecmd *ecmd, t_ginf *ginf)
 	}
 	if (!is_n)
 		ft_printf("\n");
-	(ft_free_ginf(ginf, true, NULL), exit(EXIT_SUCCESS));
+	(ft_free_ginf(ginf, true), exit(EXIT_SUCCESS));
 }

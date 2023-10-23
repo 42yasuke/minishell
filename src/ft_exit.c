@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:04:00 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 17:08:16 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:53:59 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void	ft_exit_no_pipe(char *line, t_ginf *ginf)
 		if (quit)
 		{
 			i = ft_verif_numeric_arg2(tmp, ginf);
-			(ft_free_all(tmp), ft_free_ginf(ginf, true, NULL));
+			(ft_free_all(tmp), ft_free_ginf(ginf, true));
 			(ft_printf("exit\n"), exit(i));
 		}
 	}
 	ft_free_all(tmp);
 	if (quit)
-		(ft_free_ginf(ginf, true, NULL), ft_printf("exit\n"), exit(0));
+		(ft_free_ginf(ginf, true), ft_printf("exit\n"), exit(0));
 }
 
 void	ft_exit(t_ecmd *ecmd, t_ginf *ginf)
@@ -86,11 +86,11 @@ void	ft_exit(t_ecmd *ecmd, t_ginf *ginf)
 		if (quit)
 		{
 			i = ft_verif_numeric_arg2(ecmd->argv, ginf);
-			ft_free_ginf(ginf, true, NULL);
+			ft_free_ginf(ginf, true);
 			(ft_printf("exit\n"), exit(i));
 		}
 		i = g_exit_code;
-		(ft_free_ginf(ginf, true, NULL), exit(i));
+		(ft_free_ginf(ginf, true), exit(i));
 	}
-	(ft_free_ginf(ginf, true, NULL), ft_printf("exit\n"), exit(EXIT_SUCCESS));
+	(ft_free_ginf(ginf, true), ft_printf("exit\n"), exit(EXIT_SUCCESS));
 }

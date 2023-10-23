@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:36:35 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 17:06:19 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:52:45 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@ void	ft_free_all(char **str)
 	str = NULL;
 }
 
-static void	ft_free_pcmd(t_cmd *cmd, t_cmd *nop)
+static void	ft_free_pcmd(t_cmd *cmd)
 {
 	t_pcmd	*pcmd;
 
 	pcmd = (t_pcmd *)cmd;
-	ft_free_cmd(pcmd->left, nop);
-	ft_free_cmd(pcmd->right, nop);
+	ft_free_cmd(pcmd->left);
+	ft_free_cmd(pcmd->right);
 	free(cmd);
 }
 
-void	ft_free_cmd(t_cmd *cmd, t_cmd *except)
+static void	ft_free_cmd(t_cmd *cmd)
 {
 	t_ecmd	*ecmd;
 	t_rcmd	*rcmd;
 
-	if (!cmd || cmd == except)
+	if (!cmd)
 		return ;
 	if (cmd->type == EXEC)
 	{
@@ -55,20 +55,20 @@ void	ft_free_cmd(t_cmd *cmd, t_cmd *except)
 	else if (cmd->type == REDIR)
 	{
 		rcmd = (t_rcmd *)cmd;
-		(ft_free_cmd(rcmd->cmd, except), free(rcmd->file), free(cmd));
+		(ft_free_cmd(rcmd->cmd), free(rcmd->file), free(cmd));
 	}
 	else
-		ft_free_pcmd(cmd, except);
+		ft_free_pcmd(cmd);
 }
 
-void	ft_free_ginf(t_ginf *ginf, int free_all, t_cmd *except)
+void	ft_free_ginf(t_ginf *ginf, int free_all)
 {
 	if (ginf)
 	{
 		free(ginf->line);
 		ginf->line = NULL;
 		if (ginf->top)
-			ft_free_cmd(ginf->top, except);
+			ft_free_cmd(ginf->top);
 		if (free_all)
 		{
 			ft_free_all(ginf->env);
