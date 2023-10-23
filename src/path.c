@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 20:23:18 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 13:55:39 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 11:32:05 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*ft_get_path(char *cmd, char **env)
 	if (!path_envp || (cmd && (!access(cmd, X_OK))))
 		return (cmd);
 	ret = ft_loop(path_envp, cmd);
-	if (ret && ft_verif_strcmd(ret))
+	if (!ret || ft_verif_strcmd(ret))
 		(free(ret), ret = cmd);
 	return (ret);
 }
