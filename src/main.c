@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 12:58:52 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 16:19:35 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:22:36 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ int	main(int ac, char **av, char **envp)
 		else
 			free(line);
 	}
-	return (ft_printf("exit\n"), ft_free_ginf(ginf, true, NULL), EXIT_SUCCESS);
+	return (ft_printf("exit\n"), ft_free_ginf(ginf, true, NULL), g_exit_code);
 }

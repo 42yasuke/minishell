@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:12:55 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 16:25:40 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:03:31 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	ft_exec(t_ecmd *ecmd, t_ginf *ginf)
 
 static void	ft_redir(t_rcmd *rcmd, t_ginf *ginf)
 {
+	if (!rcmd->file)
+		(ft_free_ginf(ginf, true, NULL), exit(EXIT_FAILURE));
 	if (ft_strncmp(rcmd->file, DI, 11) && ft_strncmp(rcmd->file, DO, 12))
 	{
 		close(rcmd->fd);

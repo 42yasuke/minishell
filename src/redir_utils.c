@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 11:50:44 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 17:07:43 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:15:10 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ static void	ft_create_file(char *str, int red, t_ginf *ginf, char *ret)
 		free(ret);
 }
 
-char	*ft_give_fn(char *str, int red, t_ginf *ginf, t_cmd **cmd)
+char	*ft_give_fn(char *str, int red, t_ginf *ginf)
 {
 	char	*ret;
 	char	*tmp;
 	char	*last_tmp;
 
+	if (g_exit_code == OPEN_FAILED)
+		return (NULL);
 	ret = ft_strdup(str);
 	if (!ret)
 		ft_error(ERROR, "ft_strdup", "malloc failed", NULL);
@@ -105,13 +107,11 @@ char	*ft_give_fn(char *str, int red, t_ginf *ginf, t_cmd **cmd)
 		last_tmp = tmp;
 		ft_create_file(tmp, red, ginf, ret);
 		if (g_exit_code == OPEN_FAILED)
-			(ft_free_cmd(*cmd, NULL), \
-			ft_free_ginf(ginf, true, *cmd), exit(EXIT_FAILURE));
+			return (NULL);
 		tmp = ft_strchr(tmp + 1, red);
 	}
 	last_tmp++;
-	ft_peek(&last_tmp);
-	ft_memmove(ret, last_tmp, ft_strlen(last_tmp));
+	(ft_peek(&last_tmp), ft_memmove(ret, last_tmp, ft_strlen(last_tmp)));
 	tmp = ret;
 	while (*tmp && *tmp != SPACE_TO_CUT)
 		tmp++;

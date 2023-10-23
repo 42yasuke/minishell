@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/10/20 16:59:11 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/23 12:13:30 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void					ft_infile_red(t_cmd **c, char **ps, t_ginf *gf, int hd);
 void					ft_outfile_red(t_cmd **cmd, char **ps, t_ginf *ginf);
 
 /*	redir_utils.c	*/
-char					*ft_give_fn(char *st, int red, t_ginf *ginf, t_cmd **c);
+char					*ft_give_fn(char *st, int red, t_ginf *ginf);
 void					ft_make_me_point_on_cmd(char *str, int red);
 
 /*	here_doc.c	*/
