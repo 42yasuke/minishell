@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ginf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose <jose@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 11:59:02 by jose              #+#    #+#             */
-/*   Updated: 2023/10/01 17:38:20 by jose             ###   ########.fr       */
+/*   Updated: 2023/10/23 19:43:01 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_init_ginf(t_ginf *ginf, char **envp)
 	ginf->top = NULL;
 	ginf->env = NULL;
 	ginf->lst_env = NULL;
-	if (ft_is_env_empty(envp))
+	if (!envp || (envp && !*envp))
 		ft_error(ERROR, "env", "empty", ginf);
 	ginf->env = ft_cpy_envp(envp);
 	ginf->lst_env = ft_init_lst(envp);

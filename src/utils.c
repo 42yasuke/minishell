@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:47 by jose              #+#    #+#             */
-/*   Updated: 2023/10/19 13:33:29 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/24 10:24:03 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,22 @@ int	ft_nb_str(char **envp)
 	return (i);
 }
 
-int	ft_is_env_empty(char **envp)
+char	*ft_get_next_redir(char *line)
 {
-	return (!envp || (envp && !*envp));
+	char	*redin;
+	char	*redout;
+
+	redin = ft_strchr(line, REDIN);
+	redout = ft_strchr(line, REDOUT);
+	if (!redin && !redout)
+		return (NULL);
+	if (redin && redout)
+	{
+		if (redin < redout)
+			return (redin);
+		return (redout);
+	}
+	else if (redin)
+		return (redin);
+	return (redout);
 }

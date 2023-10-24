@@ -6,7 +6,7 @@
 #    By: jralph <jralph@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 17:26:42 by jralph            #+#    #+#              #
-#    Updated: 2023/10/16 10:35:36 by jralph           ###   ########.fr        #
+#    Updated: 2023/10/24 10:27:01 by jralph           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ C_FILES =	main.c \
 			sdquote2.c \
 			sdquote3.c \
 			ft_illtoa.c \
-			redir.c redir_utils.c \
+			redir.c redir_utils.c redir_utils2.c \
 			here_doc.c \
 			ft_pipe.c \
 			ft_verif_line.c ft_verif_cmd.c \
