@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/10/24 17:11:30 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/24 17:30:19 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ static void	ft_remove_sdquote(char *line, char sdq)
 		{
 			if (*quote == sdq && *(quote + 1) == sdq && !i)
 				change = true;
-			ft_memmove(quote, quote + 1, ft_strlen(quote + 1));
-			if (i == 1 && change)
+			if (!i)
+				ft_memmove(quote, quote + 1, ft_strlen(quote + 1));
+			else if (change)
 			{
 				change = false;
 				*quote = ' ';
 			}
+			else
+				ft_memmove(quote, quote + 1, ft_strlen(quote + 1));
 			quote = ft_strchr(line, sdq);
 		}
 	}
