@@ -6,38 +6,51 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/10/24 17:30:19 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/24 18:22:19 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+static void	ft_remove_sdquote_loop(char *line, char sdq, char *quote, int change)
+{
+	int		i;
+	char	*tmp;
+
+	i = -1;
+	tmp = quote;
+	while (++i < 2)
+	{
+		if (*tmp == sdq && *(tmp + 1) == sdq && !i)
+			change = true;
+		if (!i)
+			ft_memmove(tmp, tmp + 1, ft_strlen(tmp + 1));
+		else if (change)
+		{
+			if (!*(tmp + 1))
+				*tmp = ' ';
+			else
+				ft_memmove(tmp, tmp + 1, ft_strlen(tmp + 1));
+			if (*tmp == SPACE_TO_CUT)
+				*tmp = ' ';
+		}
+		else
+			ft_memmove(tmp, tmp + 1, ft_strlen(tmp + 1));
+		tmp = ft_strchr(line, sdq);
+	}
+}
+
 static void	ft_remove_sdquote(char *line, char sdq)
 {
 	char	*quote;
 	int		change;
-	int		i;
 
 	quote = ft_strchr(line, sdq);
-	change = false;
 	while (quote)
 	{
-		i = -1;
-		while (++i < 2)
-		{
-			if (*quote == sdq && *(quote + 1) == sdq && !i)
-				change = true;
-			if (!i)
-				ft_memmove(quote, quote + 1, ft_strlen(quote + 1));
-			else if (change)
-			{
-				change = false;
-				*quote = ' ';
-			}
-			else
-				ft_memmove(quote, quote + 1, ft_strlen(quote + 1));
-			quote = ft_strchr(line, sdq);
-		}
+		change = false;
+		ft_remove_sdquote_loop(line, sdq, quote, change);
+		quote = ft_strchr(line, sdq);
 	}
 }
 
