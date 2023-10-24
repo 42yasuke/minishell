@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:54:37 by jose              #+#    #+#             */
-/*   Updated: 2023/10/23 17:39:16 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/24 19:00:53 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_cmd	*ft_parsecmd(char *line, t_ginf *ginf)
 		cmd = ft_parsepipe(&line, ginf);
 	else
 	{
-		ft_peek(&line);
+		while (*line == SPACE_TO_CUT)
+			line++;
 		cmd = ft_parseexec(&line, ginf);
 	}
 	return (cmd);
