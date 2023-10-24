@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:02:12 by jose              #+#    #+#             */
-/*   Updated: 2023/10/23 12:54:06 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/24 14:16:53 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_export_no_pipe(char *line, t_ginf *ginf)
 		i = 0;
 		while (tmp[++i])
 		{
-			if (ft_analyse(tmp[i]))
+			if (ft_analyse_export(tmp[i]))
 				ft_update_env_n_lst_env(tmp[i], ginf);
 		}
 	}
@@ -53,7 +53,7 @@ void	ft_export(t_ecmd *ecmd, t_ginf *ginf)
 	{
 		while (ecmd->argv[++i])
 		{
-			if (ft_analyse(ecmd->argv[i]))
+			if (ft_analyse_export(ecmd->argv[i]))
 				ft_update_env_n_lst_env(ecmd->argv[i], ginf);
 		}
 	}

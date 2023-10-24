@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 11:50:44 by jose              #+#    #+#             */
-/*   Updated: 2023/10/24 11:28:16 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/24 13:49:26 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static void	ft_create_file(char *str, t_ginf *ginf, char *ret)
 	int		red;
 
 	red = *str;
-	is_limiter = (red == REDIN && str != ret && *(str + 1) == red);
-	is_append = (red == REDOUT && str != ret && *(str + 1) == red);
+	is_limiter = (red == REDIN && *(str + 1) == red);
+	is_append = (red == REDOUT && *(str + 1) == red);
 	tmp_free = ft_strdup(str);
 	ft_create_file_help(tmp_free, red);
 	if (is_limiter)
