@@ -6,13 +6,13 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/10/24 18:22:19 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/24 18:26:11 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static void	ft_remove_sdquote_loop(char *line, char sdq, char *quote, int change)
+static void	ft_remove_sdq_loop(char *line, char sdq, char *quote, int change)
 {
 	int		i;
 	char	*tmp;
@@ -49,7 +49,7 @@ static void	ft_remove_sdquote(char *line, char sdq)
 	while (quote)
 	{
 		change = false;
-		ft_remove_sdquote_loop(line, sdq, quote, change);
+		ft_remove_sdq_loop(line, sdq, quote, change);
 		quote = ft_strchr(line, sdq);
 	}
 }
