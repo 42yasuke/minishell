@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 11:50:44 by jose              #+#    #+#             */
-/*   Updated: 2023/10/24 10:48:33 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/24 11:28:16 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	ft_open_him(char *file_name, int red, int is_append)
 	if (red == REDIN)
 		fd = open(file_name, O_RDONLY);
 	else if (is_append)
-		fd = open(file_name, O_CREAT | O_WRONLY, 0644);
+		fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else
 		fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd != -1)
@@ -87,7 +87,8 @@ static char	*ft_create_all_files(char *ret, t_ginf *ginf)
 		if (tmp - last_tmp == 1 && *tmp == *last_tmp)
 			tmp = ft_get_next_redir(tmp + 1);
 	}
-	last_tmp++;
+	while (*last_tmp == REDIN || *last_tmp == REDOUT)
+		last_tmp++;
 	return (last_tmp);
 }
 
