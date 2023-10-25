@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:54:19 by jose              #+#    #+#             */
-/*   Updated: 2023/10/24 14:48:35 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/25 11:28:52 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define MAXARG 100
 # define DI "/dev/stdin"
 # define DO "/dev/stdout"
+# define TCHAO "hasta la vista baby\n"
 # define HERE_DOC 69
 # define HD_SIGINT 70
 # define MSG_ERR_GETCWD "getcwd : cannot access parent directories"

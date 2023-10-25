@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 10:34:14 by jose              #+#    #+#             */
-/*   Updated: 2023/10/23 12:53:32 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/25 12:09:45 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ static int	ft_find_start(char **argv)
 	return (i);
 }
 
+static int	ft_add_spaced(char	*str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (!(i && str[i - 1] == ' '));
+}
+
 static void	ft_loop(t_ecmd *ecmd, int start)
 {
 	int	i;
@@ -45,7 +55,7 @@ static void	ft_loop(t_ecmd *ecmd, int start)
 	while (ecmd->argv[++i])
 	{
 		ft_printf("%s", ecmd->argv[i]);
-		if (ecmd->argv[i + 1])
+		if (ecmd->argv[i + 1] && ft_add_spaced(ecmd->argv[i]))
 			ft_printf(" ");
 	}
 }
