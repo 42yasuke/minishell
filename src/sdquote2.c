@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 19:51:31 by jose              #+#    #+#             */
-/*   Updated: 2023/10/24 18:26:11 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/25 12:45:40 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ static void	ft_remove_sdq_loop(char *line, char sdq, char *quote, int change)
 			ft_memmove(tmp, tmp + 1, ft_strlen(tmp + 1));
 		else if (change)
 		{
-			if (!*(tmp + 1))
+			if (!*(tmp + 1) || *(tmp + 1) == SPACE_TO_CUT)
 				*tmp = ' ';
 			else
 				ft_memmove(tmp, tmp + 1, ft_strlen(tmp + 1));
-			if (*tmp == SPACE_TO_CUT)
-				*tmp = ' ';
 		}
 		else
 			ft_memmove(tmp, tmp + 1, ft_strlen(tmp + 1));
