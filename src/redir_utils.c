@@ -6,7 +6,7 @@
 /*   By: jralph <jralph@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 11:50:44 by jose              #+#    #+#             */
-/*   Updated: 2023/10/24 13:49:26 by jralph           ###   ########.fr       */
+/*   Updated: 2023/10/25 17:56:51 by jralph           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	ft_create_file(char *str, t_ginf *ginf, char *ret)
 		free(ret);
 }
 
-static char	*ft_create_all_files(char *ret, t_ginf *ginf)
+static char	*ft_create_all_files(char *ret, int red, t_ginf *ginf)
 {
 	char	*tmp;
 	char	*last_tmp;
@@ -87,6 +87,12 @@ static char	*ft_create_all_files(char *ret, t_ginf *ginf)
 		if (tmp - last_tmp == 1 && *tmp == *last_tmp)
 			tmp = ft_get_next_redir(tmp + 1);
 	}
+	tmp = ft_strchr(ret, red);
+	while (tmp)
+	{
+		last_tmp = tmp;
+		tmp = ft_strchr(tmp + 1, red);
+	}
 	while (*last_tmp == REDIN || *last_tmp == REDOUT)
 		last_tmp++;
 	return (last_tmp);
@@ -98,13 +104,12 @@ char	*ft_give_fn(char *str, int red, t_ginf *ginf)
 	char	*tmp;
 	char	*last_tmp;
 
-	(void)red;
 	if (g_exit_code == OPEN_FAILED)
 		return (NULL);
 	ret = ft_strdup(str);
 	if (!ret)
 		ft_error(ERROR, "ft_strdup", "malloc failed", NULL);
-	last_tmp = ft_create_all_files(ret, ginf);
+	last_tmp = ft_create_all_files(ret, red, ginf);
 	if (!last_tmp)
 		return (NULL);
 	(ft_peek(&last_tmp), ft_memmove(ret, last_tmp, ft_strlen(last_tmp)));
